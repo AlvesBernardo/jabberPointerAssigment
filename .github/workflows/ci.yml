@@ -25,9 +25,8 @@ jobs: #groups a set of actions that will be extecuted
     - name: Set up JDK 19
       uses: actions/setup-java@v4 #prepares java 
       with:
-          website: oracle.com
-          release: 19
-          version: 19.0.2
+          java-version: 21-ea # Specify the desired Java version
+          distribution: temurin # Specify the distribution as 'jdk' for Oracle JDK
 
     # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
@@ -35,7 +34,7 @@ jobs: #groups a set of actions that will be extecuted
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build
+      run: mvn -B package --file pom.xml
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
@@ -56,11 +55,11 @@ jobs: #groups a set of actions that will be extecuted
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    - uses: actions/setup-java@v4
       with:
-        java-version: '17'
-        distribution: 'temurin'
+        distribution: 'oracle'
+        java-version: '21'
+    - run: java -cp java HelloWorldApp
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
