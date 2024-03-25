@@ -59,7 +59,7 @@ jobs: #groups a set of actions that will be extecuted
       with:
         distribution: 'oracle'
         java-version: '21'
-    - run: java -cp java HelloWorldApp
+    - run: java -cp com.softwarequality.jabberpoint.HelloWorldApp
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
