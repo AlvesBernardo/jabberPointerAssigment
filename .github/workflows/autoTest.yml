@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight U
+
 jobs:
   test:
     runs-on: ubuntu-latest
