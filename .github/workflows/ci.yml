@@ -27,12 +27,13 @@ jobs: #groups a set of actions that will be extecuted
       with:
           java-version: 21-ea # Specify the desired Java version
           distribution: temurin # Specify the distribution as 'jdk' for Oracle JDK
-    - run: java -cp com.softwarequality.jabberpoint.HelloWorldApp
 
-             
 
     - name: Build with Gradle Wrapper
       run: mvn -B package --file pom.xml
+    - name: Run the hello world app
+      run: java -cp com.softwarequality.jabberpoint.HelloWorldApp
+
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
