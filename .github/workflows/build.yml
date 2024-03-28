@@ -1,4 +1,4 @@
-name: "Intergration into cordova"
+name: "Building the project making a jar file"
 
 on:
   push:
@@ -8,18 +8,21 @@ on:
   pull_request:
 
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-     -name: Use oxr463/setup-cordova
-     users: ./
-     with:
-       exec:  |
-         cordova create hello com.softwarequality.jabberpoint && \
-          cd hello && \
-          cordova platform add android && \
-          cordova build --no-telemetry && \
-          cp "$(find . -name '*.apk')" . 
+  - name: "Build maven project"
+    run: |
+      mvn -B package --file pom.xml -Dmaven.test.skip
+      mkdir staging && cp target/*.jar staging
 
+  - name: Set up cache for Maven
+    uses: actions/cache@v2
+    with:
+      path: ~/.m2
+      key: ${{ runner.os }}-m2-${{ hasFiles('**/pom.xml') }}
+      restore-keys: ${{ runner.os }}-m2
+
+  - name: Persist workflow data as artifacts
+    uses: actions/upload-artifact@v2
+    with:
+      name: github-actions-artifact
+      path: staging
 
