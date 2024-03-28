@@ -7,7 +7,7 @@ jobs:
   create_pull_request:
     runs-on: ubuntu-latest
     
-   steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -21,7 +21,7 @@ jobs:
           commit-message: "Cloud - Update available list"
           title: "Cloud - Update available list"
           body: "Cloud - Update available list. Last commit by ${{ steps.last_commit_author.outputs.author }}"
-          base: main
+          base: main-dev
           labels: automated-pr, Clouds & Regions
           branch: "cloud-update-$(date +%Y-%m-%d)"
           delete-branch: true
