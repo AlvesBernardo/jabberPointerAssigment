@@ -1,0 +1,25 @@
+name: "Intergration into cordova"
+
+on:
+  push:
+    branches:
+      -master
+      -'main-dev'
+  pull_request:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+     -name: Use oxr463/setup-cordova
+     users: ./
+     with:
+       exec:  |
+         cordova create hello com.softwarequality.jabberpoint && \
+          cd hello && \
+          cordova platform add android && \
+          cordova build --no-telemetry && \
+          cp "$(find . -name '*.apk')" . 
+
+
