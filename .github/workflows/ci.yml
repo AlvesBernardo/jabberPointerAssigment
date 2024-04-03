@@ -19,6 +19,7 @@ jobs: #groups a set of actions that will be extecuted
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      package: write
 
     steps:
     - uses: actions/checkout@v4 #predifened user selects an action under path action/ that will run a code 
@@ -31,8 +32,11 @@ jobs: #groups a set of actions that will be extecuted
 
     - name: Build with Maven Wrapper
       run: mvn -B package --file pom.xml
+    - name: Build with Maven
+      run: ./mvnw --batch-mode clean verify
     - name: Run the hello world app
-      run: java -cp com.softwarequality.jabberpoint.HelloWorldApp
+      run: java -cp ./src/main/java com.softwarequality.jabberpoint.HelloWorldApp
+
 
 
 

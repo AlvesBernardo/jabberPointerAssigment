@@ -1,13 +1,9 @@
 name: Java Tests
 
 on:
-  push:
-    branches:
-      - main
-
-on:
+  push: # Remove branch restriction
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight U
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
 
 jobs:
   test:
@@ -17,13 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      #setup java jdk21
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: 21-ea
-          distribution: temurin 
-    #create a maven cache package, this willd download any needed dependencies also
+          distribution: temurin
+
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:
