@@ -1,0 +1,71 @@
+package com.softwarequality.jabberpoint.slide;
+
+import java.awt.Color;
+import java.awt.Font;
+
+
+public class Style {
+	private static final int STYLE_COUNT = 5;
+	private static final int[] INDENTS = {0, 20, 50, 70, 90};
+	private static final Color[] COLORS = {Color.red, Color.blue, Color.black, Color.black, Color.black};
+	private static final int[] FONT_SIZES = {48, 40, 36, 30, 24};
+	private static final int[] LEADINGS = {20, 10, 10, 10, 10};
+	private static Style[] styles;
+	private static final String FONT_NAME = "Helvetica";
+
+	private final int indent;
+	private final Color color;
+	private final Font font;
+	private final int fontSize;
+	private final int leading;
+
+	public static void createStyles() {
+		styles = new Style[STYLE_COUNT];
+		for (int i = 0; i < STYLE_COUNT; i++) {
+			styles[i] = new Style(INDENTS[i], COLORS[i], FONT_SIZES[i], LEADINGS[i]);
+		}
+	}
+
+	public static Style getStyle(int level) {
+		int effectiveLevel = level < styles.length ? level : styles.length - 1;
+		return styles[effectiveLevel];
+	}
+
+	public Style(int indent, Color color, int fontSize, int leading) {
+		this.indent = indent;
+		this.color = color;
+		this.font = new Font(FONT_NAME, Font.BOLD, fontSize);
+		this.fontSize = fontSize;
+		this.leading = leading;
+	}
+
+	@Override
+	public String toString() {
+		return "["+ indent + "," + color + "; " + fontSize + " on " + leading +"]";
+	}
+
+	public Font getFont(float scale) {
+		return font.deriveFont(fontSize * scale);
+	}
+
+	// getters
+	public int getIndent() {
+		return indent;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public Font getFont() {
+		return font;
+	}
+
+	public int getFontSize() {
+		return fontSize;
+	}
+
+	public int getLeading() {
+		return leading;
+	}
+}
