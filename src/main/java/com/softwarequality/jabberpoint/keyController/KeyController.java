@@ -7,10 +7,12 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KeyController extends KeyAdapter {
+public class KeyController extends KeyAdapter
+{
     private final Map<Integer, Command> keyCommands = new HashMap<>();
 
-    public KeyController(PresentationFacade presentationFacade) {
+    public KeyController(PresentationFacade presentationFacade)
+    {
         keyCommands.put(KeyEvent.VK_PAGE_DOWN, new NextSlideCommand(presentationFacade));
         keyCommands.put(KeyEvent.VK_DOWN, new NextSlideCommand(presentationFacade));
         keyCommands.put(KeyEvent.VK_ENTER, new NextSlideCommand(presentationFacade));
@@ -23,9 +25,11 @@ public class KeyController extends KeyAdapter {
     }
 
     @Override
-    public void keyPressed(KeyEvent keyEvent) {
+    public void keyPressed(KeyEvent keyEvent)
+    {
         Command command = keyCommands.get(keyEvent.getKeyCode());
-        if (command != null) {
+        if (command != null)
+        {
             command.execute();
         }
     }

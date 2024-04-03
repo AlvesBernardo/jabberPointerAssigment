@@ -1,5 +1,6 @@
 package com.softwarequality.jabberpoint.keyController;
 
-public interface Command {
+public interface Command
+{
     void execute();
 }

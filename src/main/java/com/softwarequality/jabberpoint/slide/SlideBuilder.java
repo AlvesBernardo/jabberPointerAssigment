@@ -1,23 +1,28 @@
 package com.softwarequality.jabberpoint.slide;
 
-public class SlideBuilder {
+public class SlideBuilder
+{
     private final SlideImplementation slide;
 
-    public SlideBuilder() {
+    public SlideBuilder()
+    {
         slide = new SlideImplementation();
     }
 
-    public SlideBuilder withTitle(String title){
+    public SlideBuilder withTitle(String title)
+    {
         slide.setTitle(title);
         return this;
     }
 
-    public SlideBuilder appendItem(SlideItem slideItem){
+    public SlideBuilder appendItem(SlideItem slideItem)
+    {
         slide.appendItem(slideItem);
         return this;
     }
 
-    public Slide build() {
+    public Slide build()
+    {
         return slide;
     }
 }

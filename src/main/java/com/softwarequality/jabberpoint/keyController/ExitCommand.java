@@ -2,14 +2,17 @@ package com.softwarequality.jabberpoint.keyController;
 
 import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
-class ExitCommand implements Command {
+class ExitCommand implements Command
+{
     private final PresentationFacade presentation;
 
-    public ExitCommand(PresentationFacade pres) {
+    public ExitCommand(PresentationFacade pres)
+    {
         this.presentation = pres;
     }
 
-    public void execute() {
+    public void execute()
+    {
         presentation.exit();
     }
 }
