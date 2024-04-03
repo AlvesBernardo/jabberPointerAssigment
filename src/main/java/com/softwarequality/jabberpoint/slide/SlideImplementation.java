@@ -1,4 +1,7 @@
 package com.softwarequality.jabberpoint.slide;
+import com.softwarequality.jabberpoint.drawer.Drawer;
+import com.softwarequality.jabberpoint.drawer.DrawerFactory;
+
 import java.util.stream.Collectors;
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -48,15 +51,23 @@ public class SlideImplementation implements Slide {
     }
 
     @Override
-    public void draw(Graphics g, Rectangle area, ImageObserver view) {
+    public void draw(Graphics g, Rectangle area, ImageObserver observer) {
         float scale = getScale(area);
         int y = area.y;
+
         for (SlideComponent component : slideComponents) {
             if (component instanceof SlideItem) {
                 SlideItem slideItem = (SlideItem) component;
                 Style style = Style.getStyle(slideItem.getLevel());
-                slideItem.draw(area.x, y, scale, g, style, view);
-                y += slideItem.getBoundingBox(g, view, scale, style).height;
+
+                // Create the appropriate drawer for the item
+                Drawer drawer = DrawerFactory.createDrawer(slideItem);
+
+                // Draw the item using the drawer
+                drawer.draw(area.x, y, scale, g, style, observer);
+
+                // Adjust y for the next item
+                y += slideItem.getBoundingBox(g, observer, scale, style).height;
             }
         }
     }
