@@ -1,7 +1,7 @@
 package com.softwarequality.jabberpoint.slide;
 
 public class SlideBuilder {
-    private SlideImplementation slide;
+    private final SlideImplementation slide;
 
     public SlideBuilder() {
         slide = new SlideImplementation();

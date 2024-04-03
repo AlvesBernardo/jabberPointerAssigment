@@ -1,11 +1,12 @@
 package com.softwarequality.jabberpoint.keyController;
 
-import com.softwarequality.jabberpoint.Presentation;
+
+import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
 class NextSlideCommand implements Command {
-    private final Presentation presentation;
+    private final PresentationFacade presentation;
 
-    public NextSlideCommand(Presentation pres) {
+    public NextSlideCommand(PresentationFacade pres) {
         this.presentation = pres;
     }
 

@@ -3,8 +3,6 @@ package com.softwarequality.jabberpoint.slide;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
-import java.util.ArrayList;
-import java.util.List;
 
 public interface SlideComponent {
     Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style);
