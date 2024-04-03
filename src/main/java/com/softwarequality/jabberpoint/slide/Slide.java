@@ -14,7 +14,7 @@ public interface Slide
 
     int getSize();
 
-    void draw(Graphics g, Rectangle area, ImageObserver view);
+    void draw(Graphics graphics , Rectangle area, ImageObserver view);
 
     void add(SlideComponent slideComponent);
 

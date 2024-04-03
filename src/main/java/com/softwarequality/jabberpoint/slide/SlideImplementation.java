@@ -19,12 +19,12 @@ public class SlideImplementation implements Slide
 
     protected SlideImplementation()
     {
-        slideComponents = new ArrayList<>();
+        this.slideComponents = new ArrayList<>();
     }
 
     protected void appendItem(SlideComponent slideComponent)
     {
-        slideComponents.add(slideComponent);
+        this.slideComponents.add(slideComponent);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SlideImplementation implements Slide
     }
 
     @Override
-    public void draw(Graphics g, Rectangle area, ImageObserver observer)
+    public void draw(Graphics graphics, Rectangle area, ImageObserver observer)
     {
         float scale = getScale(area);
         int y = area.y;
@@ -75,10 +75,10 @@ public class SlideImplementation implements Slide
                 Drawer drawer = DrawerFactory.createDrawer(slideItem);
 
                 // Draw the item using the drawer
-                drawer.draw(area.x, y, scale, g, style, observer);
+                drawer.draw(area.x, y, scale, graphics, style, observer);
 
                 // Adjust y for the next item
-                y += slideItem.getBoundingBox(g, observer, scale, style).height;
+                y += slideItem.getBoundingBox(graphics, observer, scale, style).height;
             }
         }
     }

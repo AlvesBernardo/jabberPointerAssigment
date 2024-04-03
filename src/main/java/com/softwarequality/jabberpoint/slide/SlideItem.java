@@ -17,27 +17,27 @@ public abstract class SlideItem implements SlideComponent
 
     public void add(SlideComponent slideComponent)
     {
-        slideComponents.add(slideComponent);
+        this.slideComponents.add(slideComponent);
     }
 
     public void remove(SlideComponent slideComponent)
     {
-        slideComponents.remove(slideComponent);
+        this.slideComponents.remove(slideComponent);
     }
 
     public int getLevel()
     {
-        return level;
+        return this.level;
     }
 
     public List<SlideComponent> getSlideComponents()
     {
-        return slideComponents;
+        return this.slideComponents;
     }
 
     @Override
     public abstract Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style);
 
     @Override
-    public abstract void draw(int x, int y, float scale, Graphics g, Style style, ImageObserver observer);
+    public abstract void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer);
 }

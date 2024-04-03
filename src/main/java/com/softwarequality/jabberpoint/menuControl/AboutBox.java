@@ -17,6 +17,10 @@ public class AboutBox
 
     public static void show(Frame parent)
     {
+        if (parent == null)
+        {
+            throw new IllegalArgumentException("Missing parent in about box");
+        }
         JOptionPane.showMessageDialog(parent,
                 MESSAGE,
                 "About JabberPoint",

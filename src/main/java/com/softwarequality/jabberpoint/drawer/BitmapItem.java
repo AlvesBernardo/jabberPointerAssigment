@@ -21,7 +21,7 @@ public class BitmapItem extends SlideItem
     public BitmapItem(int level, String name) throws ImageLoadingException
     {
         super(level);
-        this.imageName = name;
+        setImageName(name);
         loadImage();
     }
 
@@ -37,9 +37,32 @@ public class BitmapItem extends SlideItem
         }
     }
 
-    public String getName()
+    public BufferedImage getBufferedImage()
     {
-        return imageName;
+        return bufferedImage;
+    }
+
+    public void setBufferedImage(BufferedImage bufferedImage)
+    {
+        if (bufferedImage == null)
+        {
+            throw new IllegalArgumentException("Missing buffered image in bitmap");
+        }
+        this.bufferedImage = bufferedImage;
+    }
+
+    public String getImageName()
+    {
+        return this.imageName;
+    }
+
+    public void setImageName(String imageName)
+    {
+        if (imageName == null)
+        {
+            throw new IllegalArgumentException("Missing image name in bitMap");
+        }
+        this.imageName = imageName;
     }
 
     public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style style)

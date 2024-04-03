@@ -35,10 +35,16 @@ public class MenuController extends MenuBar
     private final PresentationFacade presentation;
     private final Accessor xmlAccessor = new XMLAccessor();
 
-    public MenuController(Frame frame, PresentationFacade pres)
+    public MenuController(Frame frame, PresentationFacade presentationFacadeParameter)
     {
-        parent = frame;
-        presentation = pres;
+        if (frame == null){
+            throw new IllegalArgumentException("Missing frame menu controller");
+        }
+        if (presentationFacadeParameter == null){
+            throw new IllegalArgumentException("Missing frame menu controller");
+        }
+        this.parent = frame;
+        this.presentation = presentationFacadeParameter;
 
         Menu fileMenu = new Menu(FILE);
         fileMenu.add(createMenuItem(OPEN, this::openAction));
@@ -59,6 +65,8 @@ public class MenuController extends MenuBar
         setHelpMenu(helpMenu); // needed for portability (Motif, etc.).
     }
 
+
+
     private MenuItem createMenuItem(String name, ActionListener listener)
     {
         MenuItem menuItem = new MenuItem(name, new MenuShortcut(name.charAt(0)));
@@ -68,7 +76,7 @@ public class MenuController extends MenuBar
 
     private void openAction(ActionEvent actionEvent)
     {
-        presentation.clear();
+        this.presentation.clear();
         try
         {
             xmlAccessor.loadFile(presentation, TESTFILE);
@@ -78,20 +86,20 @@ public class MenuController extends MenuBar
             showErrorMessage(IOEX + exc, LOADERR);
         }
 
-        parent.repaint();
+        this.parent.repaint();
     }
 
     private void newAction(ActionEvent actionEvent)
     {
-        presentation.clear();
-        parent.repaint();
+        this.presentation.clear();
+        this.parent.repaint();
     }
 
     private void saveAction(ActionEvent actionEvent)
     {
         try
         {
-            xmlAccessor.saveFile(presentation, SAVEFILE);
+            this.xmlAccessor.saveFile(presentation, SAVEFILE);
         } catch (IOException exc)
         {
             showErrorMessage(IOEX + exc, SAVEERR);
@@ -102,7 +110,7 @@ public class MenuController extends MenuBar
     {
         String pageNumberStr = JOptionPane.showInputDialog(PAGENR);
         int pageNumber = Integer.parseInt(pageNumberStr);
-        presentation.setSlideNumber(pageNumber - 1);
+        this.presentation.setSlideNumber(pageNumber - 1);
     }
 
     private void showErrorMessage(String message, String title)

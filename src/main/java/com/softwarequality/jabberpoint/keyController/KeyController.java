@@ -13,6 +13,10 @@ public class KeyController extends KeyAdapter
 
     public KeyController(PresentationFacade presentationFacade)
     {
+        if (presentationFacade == null)
+        {
+            throw new IllegalArgumentException("Missing presentation face in key Controller");
+        }
         keyCommands.put(KeyEvent.VK_PAGE_DOWN, new NextSlideCommand(presentationFacade));
         keyCommands.put(KeyEvent.VK_DOWN, new NextSlideCommand(presentationFacade));
         keyCommands.put(KeyEvent.VK_ENTER, new NextSlideCommand(presentationFacade));

@@ -11,7 +11,16 @@ public class BitmapItemDrawer implements Drawer
 
     public BitmapItemDrawer(BitmapItem item)
     {
+        if (item == null)
+        {
+            throw new IllegalArgumentException("Missing  item in bitmap item drawer");
+        }
         this.item = item;
+    }
+
+    public BitmapItem getItem()
+    {
+        return item;
     }
 
     @Override

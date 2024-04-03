@@ -6,18 +6,18 @@ public class SlideBuilder
 
     public SlideBuilder()
     {
-        slide = new SlideImplementation();
+        this.slide = new SlideImplementation();
     }
 
     public SlideBuilder withTitle(String title)
     {
-        slide.setTitle(title);
+        this.slide.setTitle(title);
         return this;
     }
 
     public SlideBuilder appendItem(SlideItem slideItem)
     {
-        slide.appendItem(slideItem);
+        this.slide.appendItem(slideItem);
         return this;
     }
 

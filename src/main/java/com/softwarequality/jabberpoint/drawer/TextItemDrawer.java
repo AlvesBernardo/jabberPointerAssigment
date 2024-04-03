@@ -13,7 +13,15 @@ public class TextItemDrawer implements Drawer
 
     public TextItemDrawer(TextItem textItem)
     {
+        if (textItem == null){
+            throw new IllegalArgumentException("Missing text item in text item drawer");
+        }
         this.textItem = textItem;
+    }
+
+    public TextItem getTextItem()
+    {
+        return textItem;
     }
 
     @Override

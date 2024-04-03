@@ -14,7 +14,7 @@ public class Presentation
 
     public Presentation()
     {
-        slideViewComponent = null;
+        this.slideViewComponent = null;
         clear();
     }
 
@@ -34,9 +34,12 @@ public class Presentation
         return showTitle;
     }
 
-    public void setTitle(String nt)
+    public void setTitle(String title)
     {
-        showTitle = nt;
+        if (title == null){
+            throw new IllegalArgumentException("Missing title in presentation");
+        }
+        this.showTitle = title;
     }
 
     public void setShowView(SlideViewerComponent slideViewerComponent)

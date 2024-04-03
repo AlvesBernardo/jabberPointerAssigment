@@ -7,9 +7,13 @@ class NextSlideCommand implements Command
 {
     private final PresentationFacade presentation;
 
-    public NextSlideCommand(PresentationFacade pres)
+    public NextSlideCommand(PresentationFacade presentation)
     {
-        this.presentation = pres;
+        if (presentation == null)
+        {
+            throw new IllegalArgumentException("Missing presentation in next slide command");
+        }
+        this.presentation = presentation;
     }
 
     public void execute()

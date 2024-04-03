@@ -6,9 +6,17 @@ class ExitCommand implements Command
 {
     private final PresentationFacade presentation;
 
-    public ExitCommand(PresentationFacade pres)
+    public ExitCommand(PresentationFacade presentation)
     {
-        this.presentation = pres;
+        if (presentation == null){
+            throw new IllegalArgumentException("Missing presentation in exit command");
+        }
+        this.presentation = presentation;
+    }
+
+    public PresentationFacade getPresentation()
+    {
+        return presentation;
     }
 
     public void execute()

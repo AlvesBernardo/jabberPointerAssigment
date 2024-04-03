@@ -7,9 +7,12 @@ class PrevSlideCommand implements Command
 {
     private final PresentationFacade presentation;
 
-    public PrevSlideCommand(PresentationFacade pres)
+    public PrevSlideCommand(PresentationFacade presentation)
     {
-        this.presentation = pres;
+        if (presentation == null){
+            throw new IllegalArgumentException("Missing presentation in prev slide command");
+        }
+        this.presentation = presentation;
     }
 
     public void execute()
