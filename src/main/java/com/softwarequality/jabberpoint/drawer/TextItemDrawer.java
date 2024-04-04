@@ -13,7 +13,8 @@ public class TextItemDrawer implements Drawer
 
     public TextItemDrawer(TextItem textItem)
     {
-        if (textItem == null){
+        if (textItem == null)
+        {
             throw new IllegalArgumentException("Missing text item in text item drawer");
         }
         this.textItem = textItem;
@@ -21,12 +22,24 @@ public class TextItemDrawer implements Drawer
 
     public TextItem getTextItem()
     {
-        return textItem;
+        return this.textItem;
     }
 
     @Override
-    public void draw(int x, int y, float scale, Graphics g, Style style, ImageObserver observer)
+    public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer)
     {
-        textItem.draw(x, y, scale, g, style, observer);
+        if (graphics == null)
+        {
+            throw new RuntimeException("Missing graphic in draw in Text item drawer");
+        }
+        if (style == null)
+        {
+            throw new RuntimeException("Missing style in draw in text item drawer");
+        }
+        if (observer == null)
+        {
+            throw new RuntimeException("Missing observer in draw in text item drawer");
+        }
+        textItem.draw(x, y, scale, graphics, style, observer);
     }
 }

@@ -16,11 +16,11 @@ class ExitCommand implements Command
 
     public PresentationFacade getPresentation()
     {
-        return presentation;
+        return this.presentation;
     }
 
     public void execute()
     {
-        presentation.exit();
+        this.presentation.exit();
     }
 }

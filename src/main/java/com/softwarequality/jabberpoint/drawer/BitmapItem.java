@@ -39,7 +39,7 @@ public class BitmapItem extends SlideItem
 
     public BufferedImage getBufferedImage()
     {
-        return bufferedImage;
+        return this.bufferedImage;
     }
 
     public void setBufferedImage(BufferedImage bufferedImage)
@@ -67,18 +67,40 @@ public class BitmapItem extends SlideItem
 
     public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style style)
     {
-        return new Rectangle((int) (style.getIndent() * scale), 0,
-                (int) (bufferedImage.getWidth(observer) * scale),
-                (int) (style.getLeading() * scale) +
-                        (int) (bufferedImage.getHeight(observer) * scale));
+        if (graphics == null)
+        {
+            throw new RuntimeException("Missing graphic in draw or BitMap");
+        }
+        if (style == null)
+        {
+            throw new RuntimeException("Missing style in draw or BitMap");
+        }
+        if (observer == null)
+        {
+            throw new RuntimeException("Missing observer in draw or BitMap");
+        }
+
+
+        return new Rectangle((int) (style.getIndent() * scale), 0, (int) (bufferedImage.getWidth(observer) * scale), (int) (style.getLeading() * scale) + (int) (bufferedImage.getHeight(observer) * scale));
     }
 
     public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer)
     {
+        if (graphics == null)
+        {
+            throw new RuntimeException("Missing graphic in draw or BitMap Drawer");
+        }
+        if (style == null)
+        {
+            throw new RuntimeException("Missing style in draw or BitMap Drawer");
+        }
+        if (observer == null)
+        {
+            throw new RuntimeException("Missing observer in draw or BitMap Drawer");
+        }
         int width = x + (int) (style.getIndent() * scale);
         int height = y + (int) (style.getLeading() * scale);
-        graphics.drawImage(bufferedImage, width, height, (int) (bufferedImage.getWidth(observer) * scale),
-                (int) (bufferedImage.getHeight(observer) * scale), observer);
+        graphics.drawImage(bufferedImage, width, height, (int) (bufferedImage.getWidth(observer) * scale), (int) (bufferedImage.getHeight(observer) * scale), observer);
     }
 
     @Override

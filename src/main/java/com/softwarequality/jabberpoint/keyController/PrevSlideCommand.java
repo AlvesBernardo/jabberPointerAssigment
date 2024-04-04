@@ -17,6 +17,6 @@ class PrevSlideCommand implements Command
 
     public void execute()
     {
-        presentation.previousSlide();
+        this.presentation.previousSlide();
     }
 }

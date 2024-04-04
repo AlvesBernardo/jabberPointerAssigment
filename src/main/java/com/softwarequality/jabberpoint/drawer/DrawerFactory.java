@@ -7,6 +7,10 @@ public class DrawerFactory
 {
     public static Drawer createDrawer(SlideItem item)
     {
+        if (item == null)
+        {
+            throw new RuntimeException("Missing item in draw factory");
+        }
         if (item instanceof TextItem)
         {
             return new TextItemDrawer((TextItem) item);

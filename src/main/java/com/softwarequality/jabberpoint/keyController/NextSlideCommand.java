@@ -18,6 +18,6 @@ class NextSlideCommand implements Command
 
     public void execute()
     {
-        presentation.nextSlide();
+        this.presentation.nextSlide();
     }
 }

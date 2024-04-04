@@ -37,10 +37,12 @@ public class MenuController extends MenuBar
 
     public MenuController(Frame frame, PresentationFacade presentationFacadeParameter)
     {
-        if (frame == null){
+        if (frame == null)
+        {
             throw new IllegalArgumentException("Missing frame menu controller");
         }
-        if (presentationFacadeParameter == null){
+        if (presentationFacadeParameter == null)
+        {
             throw new IllegalArgumentException("Missing frame menu controller");
         }
         this.parent = frame;
@@ -66,9 +68,16 @@ public class MenuController extends MenuBar
     }
 
 
-
     private MenuItem createMenuItem(String name, ActionListener listener)
     {
+        if (name == null)
+        {
+            throw new RuntimeException("Missing name in menu controller");
+        }
+        if (listener == null)
+        {
+            throw new RuntimeException("Missing listener in menu controller");
+        }
         MenuItem menuItem = new MenuItem(name, new MenuShortcut(name.charAt(0)));
         menuItem.addActionListener(listener);
         return menuItem;
@@ -76,6 +85,10 @@ public class MenuController extends MenuBar
 
     private void openAction(ActionEvent actionEvent)
     {
+        if (actionEvent == null)
+        {
+            throw new RuntimeException("Missing event in menu controller");
+        }
         this.presentation.clear();
         try
         {
