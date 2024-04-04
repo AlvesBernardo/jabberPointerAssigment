@@ -15,9 +15,9 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>com.cosium.code</groupId>
+        <groupId>com.softwarequality.jabberpoint</groupId>
         <artifactId>git-code-format-maven-plugin</artifactId>
-        <version>${git-code-format-maven-plugin.version}</version>
+        <version>1.0.0</version>
         <executions>
           <!-- ... -->
         </executions>
