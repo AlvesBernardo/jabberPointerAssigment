@@ -1,4 +1,4 @@
----
+#https://github.com/super-linter/super-linter
 name: Lint
 
 on:  # yamllint disable-line rule:truthy
@@ -28,5 +28,5 @@ jobs:
         uses: super-linter/super-linter@v6.3.0  # x-release-please-version
         env:
           # To report GitHub Actions status checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BERNARDOMEHDISECRET }}
 ...
