@@ -1,72 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>Mehdi-and-Bernardo</groupId>
-  <artifactId>Jabber</artifactId>
-  <version>1</version>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <!-- Update compiler versions to Java 16 -->
-    <maven.compiler.source>19</maven.compiler.source>
-    <maven.compiler.target>19</maven.compiler.target>
+    <sdkVersion>2.0.5</sdkVersion>
   </properties>
-
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.authorize.sample</groupId>
+  <artifactId>Mehdi Bernardo </artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>Mehdi Bernardo</name>
+  <dependencies>
+    <dependency>
+      <groupId>net.authorize</groupId>
+      <artifactId>anet-java-sdk</artifactId>
+      <version>2.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
-        <groupId>com.softwarequality.jabberpoint</groupId>
-        <artifactId>git-code-format-maven-plugin</artifactId>
-        <version>3.8.1</version>
-        <executions>
-          <!-- ... -->
-        </executions>
-        <dependencies>
-          <!-- ... -->
-        </dependencies>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
         <configuration>
-          <!-- Update source and target versions to Java 16 -->
-          <source>16</source>
-          <target>22</target>
-          <formatterOptions>
-            <!-- Use AOSP style instead of Google Style (4-space indentation). -->
-            <googleJavaFormat.aosp>false</googleJavaFormat.aosp>
-            <!-- Format the javadoc -->
-            <googleJavaFormat.formatJavadoc>true</googleJavaFormat.formatJavadoc>
-            <!-- Fix import order and remove any unused imports, but do no other formatting. -->
-            <googleJavaFormat.fixImportsOnly>false</googleJavaFormat.fixImportsOnly>
-            <!-- Do not fix the import order. Unused imports will still be removed. -->
-            <googleJavaFormat.skipSortingImports>false</googleJavaFormat.skipSortingImports>
-            <!-- Do not remove unused imports. Imports will still be sorted. -->
-            <googleJavaFormat.skipRemovingUnusedImports>false</googleJavaFormat.skipRemovingUnusedImports>
-          </formatterOptions>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
+        <configuration>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>**/Log4j2Plugins.dat</exclude>
+              </excludes>
+            </filter>
+          </filters>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>SampleCode</finalName>
+              <transformers>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>net.authorize.sample.SampleCode</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
         </configuration>
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>com.aspose</groupId>
-      <artifactId>aspose-words</artifactId>
-      <version>19.12</version>
-      <classifier>jdk17</classifier>
-    </dependency>
-    <dependency>
-      <groupId>com.aspose</groupId>
-      <artifactId>aspose-words</artifactId>
-      <version>19.12</version>
-      <classifier>javadoc</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>com.aspose</groupId>
-      <artifactId>aspose-words</artifactId>
-      <version>19.12</version>
-      <classifier>shaping-harfbuzz-plugin</classifier>
-    </dependency>
-  </dependencies>
 </project>
