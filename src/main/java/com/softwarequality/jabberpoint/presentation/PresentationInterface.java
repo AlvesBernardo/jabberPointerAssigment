@@ -2,33 +2,32 @@ package com.softwarequality.jabberpoint.presentation;
 
 import com.softwarequality.jabberpoint.slide.Slide;
 
-public interface PresentationInterface
-{
-    void initialize();
+public interface PresentationInterface {
+  void initialize();
 
-    void appendSlide(Slide slide);
+  void appendSlide(Slide slide);
 
-    Slide getCurrentSlide();
+  Slide getCurrentSlide();
 
-    void nextSlide();
+  void nextSlide();
 
-    void previousSlide();
+  void previousSlide();
 
-    void exitPresenation();
+  void exitPresenation();
 
-    Slide getSlide(int slideNumber);
+  Slide getSlide(int slideNumber);
 
-    void exitPresentation();
+  void exitPresentation();
 
-    void clear();
+  void clear();
 
-    int getSlideNumber();
+  int getSlideNumber();
 
-    void setSlideNumber(int slideNumber);
+  void setSlideNumber(int slideNumber);
 
-    int getSize();
+  int getSize();
 
-    String getTitle();
+  String getTitle();
 
-    void setTitle(String title);
+  void setTitle(String title);
 }

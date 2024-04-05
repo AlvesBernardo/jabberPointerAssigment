@@ -3,10 +3,9 @@ package com.softwarequality.jabberpoint.slideView;
 import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 import com.softwarequality.jabberpoint.slide.Slide;
 import com.softwarequality.jabberpoint.slide.SlideConstants;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
+import javax.swing.*;
 
 public class SlideViewerComponent extends JComponent
 {
@@ -19,10 +18,6 @@ public class SlideViewerComponent extends JComponent
     private static final int FONTHEIGHT = 10;
     private static final int XPOS = 1100;
     private static final int YPOS = 20;
-    private Slide slide;
-    private Font labelFont = null;
-    private PresentationFacade presentation = null;
-    private JFrame frame = null;
     private final Observable observable = new Observable()
     {
         @Override
@@ -32,6 +27,10 @@ public class SlideViewerComponent extends JComponent
             super.notifyObservers();
         }
     };
+    private Slide slide;
+    private Font labelFont = null;
+    private PresentationFacade presentation = null;
+    private JFrame frame = null;
 
     public SlideViewerComponent(PresentationFacade pres, JFrame frame)
     {
