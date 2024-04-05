@@ -11,6 +11,7 @@ on:
   push:
     branches: [ "main-dev-test" ]
   pull_request:
+    types: [ opened, synchronize ] # added 'synchronize' event
     branches: [ "main-dev-test" ]
 
 jobs: #groups a set of actions that will be extecuted
