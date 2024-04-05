@@ -18,7 +18,7 @@ public class TextItem extends SlideItem {
 
   public TextItem(int level, String string) {
     super(level);
-    text = string;
+    setText(string);
   }
 
   public TextItem() {
@@ -30,17 +30,34 @@ public class TextItem extends SlideItem {
   }
 
   public void setText(String newText) {
-    text = newText;
+    if (newText == null) {
+      throw new IllegalStateException("Missing text in text item");
+    }
+    this.text = newText;
   }
 
   public AttributedString getAttributedString(Style style, float scale) {
+    if (style == null) {
+      throw new IllegalStateException("Missing stylew in text item ");
+    }
     AttributedString attrStr = new AttributedString(getText());
     attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
     return attrStr;
   }
 
-  public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style myStyle) {
-    List<TextLayout> layouts = getLayouts(g, myStyle, scale);
+  public Rectangle getBoundingBox(
+      Graphics graphics, ImageObserver observer, float scale, Style myStyle) {
+    if (graphics == null) {
+      throw new IllegalStateException("Missing graphics in text item ");
+    }
+    if (observer == null) {
+      throw new IllegalStateException("Missing observer in text item ");
+    }
+    if (myStyle == null) {
+      throw new IllegalStateException("Missing myStyle in text item ");
+    }
+
+    List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
     int xsize = 0, ysize = (int) (myStyle.getLeading() * scale);
     Iterator<TextLayout> iterator = layouts.iterator();
     while (iterator.hasNext()) {
@@ -57,7 +74,17 @@ public class TextItem extends SlideItem {
     return new Rectangle((int) (myStyle.getIndent() * scale), 0, xsize, ysize);
   }
 
-  public void draw(int x, int y, float scale, Graphics graphics, Style myStyle, ImageObserver o) {
+  public void draw(
+      int x, int y, float scale, Graphics graphics, Style myStyle, ImageObserver imageObserver) {
+    if (graphics == null) {
+      throw new IllegalStateException("Missing graphics in text item ");
+    }
+    if (imageObserver == null) {
+      throw new IllegalStateException("Missing imageObserver in text item ");
+    }
+    if (myStyle == null) {
+      throw new IllegalStateException("Missing myStyle in text item ");
+    }
     if (text == null || text.length() == 0) {
       return;
     }
@@ -76,10 +103,13 @@ public class TextItem extends SlideItem {
     }
   }
 
-  private List<TextLayout> getLayouts(Graphics g, Style s, float scale) {
+  private List<TextLayout> getLayouts(Graphics graphics, Style s, float scale) {
+    if (graphics == null) {
+      throw new IllegalStateException("Missing graphics in text item ");
+    }
     List<TextLayout> layouts = new ArrayList<TextLayout>();
     AttributedString attrStr = getAttributedString(s, scale);
-    Graphics2D g2d = (Graphics2D) g;
+    Graphics2D g2d = (Graphics2D) graphics;
     FontRenderContext frc = g2d.getFontRenderContext();
     LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
     float wrappingWidth = (SlideConstants.WIDTH - s.getIndent()) * scale;

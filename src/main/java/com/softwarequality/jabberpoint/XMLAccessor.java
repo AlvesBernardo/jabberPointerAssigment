@@ -37,12 +37,21 @@ public class XMLAccessor extends Accessor {
   protected static final String UNKNOWNTYPE = "Unknown Element type";
   protected static final String NFE = "Number Format Exception";
 
+
+
   private String getTitle(Element element, String tagName) {
+    if (tagName == null || element == null) {
+      throw new RuntimeException("Missing parameter for get title in xml accessor");
+    }
     NodeList titles = element.getElementsByTagName(tagName);
     return titles.item(0).getTextContent();
   }
 
   public void loadFile(PresentationFacade presentation, String filename) throws IOException {
+    if (presentation == null || filename == null) {
+      throw new RuntimeException("Missing parameter for load file in xml accessor");
+    }
+
     int slideNumber, itemNumber, max = 0, maxItems = 0;
     try {
       DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -101,6 +110,9 @@ public class XMLAccessor extends Accessor {
   }
 
   public void saveFile(PresentationFacade presentation, String filename) throws IOException {
+    if (presentation == null || filename == null) {
+      throw new RuntimeException("Missing parameter for save file in xml accessor");
+    }
     PrintWriter out = new PrintWriter(new FileWriter(filename));
     out.println("<?xml version=\"1.0\"?>");
     out.println("<!DOCTYPE presentation SYSTEM \"jabberpoint.dtd\">");

@@ -21,6 +21,7 @@ public class SlideViewerFrame extends JFrame {
     setupWindow(slideViewerComponent, presentationFacade);
   }
 
+
   public void setupWindow(
       SlideViewerComponent slideViewerComponent, PresentationFacade presentationFacade) {
     setTitle(JABTITLE);

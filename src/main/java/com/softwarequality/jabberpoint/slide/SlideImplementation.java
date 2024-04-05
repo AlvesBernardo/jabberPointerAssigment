@@ -19,7 +19,21 @@ public class SlideImplementation implements Slide {
     this.slideComponents = new ArrayList<>();
   }
 
+  public void setSlideComponents(List<SlideComponent> slideComponents) {
+    this.slideComponents = slideComponents;
+  }
+
+  public void setTitle(SlideComponent title) {
+    if (title == null) {
+      throw new IllegalStateException("Missing tittle for slide implementation");
+    }
+    this.title = title;
+  }
+
   protected void appendItem(SlideComponent slideComponent) {
+    if (slideComponent == null) {
+      throw new IllegalStateException("Can not append slide slideComponent");
+    }
     this.slideComponents.add(slideComponent);
   }
 
@@ -37,6 +51,9 @@ public class SlideImplementation implements Slide {
   }
 
   protected void setTitle(String title) {
+    if (title == null) {
+      throw new IllegalStateException("Can add title slide implementation");
+    }
     this.title = new TextItem(0, title); // Assuming TextItem implements SlideComponent now.
   }
 
@@ -52,6 +69,15 @@ public class SlideImplementation implements Slide {
 
   @Override
   public void draw(Graphics graphics, Rectangle area, ImageObserver observer) {
+    if (graphics == null) {
+      throw new IllegalStateException("Missing graphics to draw");
+    }
+    if (area == null) {
+      throw new IllegalStateException("Missing area to draw");
+    }
+    if (observer == null) {
+      throw new IllegalStateException("Missing observer to draw");
+    }
     float scale = getScale(area);
     int y = area.y;
 
@@ -73,15 +99,24 @@ public class SlideImplementation implements Slide {
 
   @Override
   public void add(SlideComponent slideComponent) {
+    if (slideComponent == null) {
+      throw new IllegalStateException("Missing slideComponent to add component");
+    }
     slideComponents.add(slideComponent);
   }
 
   @Override
   public void remove(SlideComponent slideComponent) {
+    if (slideComponent == null) {
+      throw new IllegalStateException("Missing slideComponent to remove component");
+    }
     slideComponents.remove(slideComponent);
   }
 
   private float getScale(Rectangle area) {
+    if (area == null) {
+      throw new IllegalStateException("Missing area to get scale");
+    }
     return Math.min(
         ((float) area.width) / ((float) WIDTH), ((float) area.height) / ((float) HEIGHT));
   }

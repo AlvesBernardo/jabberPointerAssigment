@@ -26,6 +26,11 @@ public class Style {
     this.leading = leading;
   }
 
+  public static Style[] getStyles()
+  {
+    return styles;
+  }
+  //:TODO ask mehdi
   public static void createStyles() {
     styles = new Style[STYLE_COUNT];
     for (int i = 0; i < STYLE_COUNT; i++) {

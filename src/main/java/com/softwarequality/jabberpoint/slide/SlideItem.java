@@ -13,11 +13,21 @@ public abstract class SlideItem implements SlideComponent {
     this.level = level;
   }
 
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
   public void add(SlideComponent slideComponent) {
+    if (slideComponent == null) {
+      throw new IllegalStateException("cant add no slide item without providing one");
+    }
     this.slideComponents.add(slideComponent);
   }
 
   public void remove(SlideComponent slideComponent) {
+    if (slideComponent == null) {
+      throw new IllegalStateException("cant remove no slide item without providing one");
+    }
     this.slideComponents.remove(slideComponent);
   }
 

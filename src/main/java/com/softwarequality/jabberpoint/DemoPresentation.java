@@ -8,6 +8,12 @@ import com.softwarequality.jabberpoint.slide.TextItem;
 class DemoPresentation extends Accessor {
 
   public void loadFile(PresentationFacade presentation, String unusedFilename) {
+    if (presentation == null) {
+      throw new IllegalStateException("Missing presenation in demo");
+    }
+    if (unusedFilename == null) {
+      throw new IllegalStateException("Missing filename in demo");
+    }
 
     presentation.setTitle("Demo Presentation");
     Slide slide1 =
@@ -54,6 +60,12 @@ class DemoPresentation extends Accessor {
   }
 
   public void saveFile(PresentationFacade presentation, String unusedFilename) {
+    if (presentation == null) {
+      throw new IllegalStateException("Can not save presenation if nothing is passed");
+    }
+    if (unusedFilename == null) {
+      throw new IllegalStateException("Missing file name to save");
+    }
     throw new IllegalStateException("Save As->Demo! called");
   }
 }

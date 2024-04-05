@@ -89,11 +89,17 @@ public class MenuController extends MenuBar {
   }
 
   private void newAction(ActionEvent actionEvent) {
+    if (actionEvent == null) {
+      throw new RuntimeException("Missing actionEvent too add action");
+    }
     this.presentation.clear();
     this.parent.repaint();
   }
 
   private void saveAction(ActionEvent actionEvent) {
+    if (actionEvent == null) {
+      throw new RuntimeException("Missing actionEvent to save action");
+    }
     try {
       this.xmlAccessor.saveFile(presentation, SAVEFILE);
     } catch (IOException exc) {
@@ -102,12 +108,21 @@ public class MenuController extends MenuBar {
   }
 
   private void gotoAction(ActionEvent actionEvent) {
+    if (actionEvent == null) {
+      throw new RuntimeException("Missing actionEvent to go to action");
+    }
     String pageNumberStr = JOptionPane.showInputDialog(PAGENR);
     int pageNumber = Integer.parseInt(pageNumberStr);
     this.presentation.setSlideNumber(pageNumber - 1);
   }
 
   private void showErrorMessage(String message, String title) {
+    if (message == null) {
+      throw new RuntimeException("Missing message to show error");
+    }
+    if (title == null) {
+      throw new RuntimeException("Missing tittle to show error");
+    }
     JOptionPane.showMessageDialog(parent, message, title, JOptionPane.ERROR_MESSAGE);
   }
 }

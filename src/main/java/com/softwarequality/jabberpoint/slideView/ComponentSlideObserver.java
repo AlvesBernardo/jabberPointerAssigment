@@ -10,12 +10,15 @@ public class ComponentSlideObserver implements Observer {
   private final SlideViewerComponent slideViewerComponent;
 
   public ComponentSlideObserver(SlideViewerComponent slideViewerComponent) {
+    if (slideViewerComponent == null){
+      throw new IllegalStateException("Missing slide viewer component in observer");
+    }
     this.slideViewerComponent = slideViewerComponent;
   }
 
   @Override
-  public void update(Observable o, Object arg) {
-    if (arg instanceof Slide newSlide) {
+  public void update(Observable observable, Object object) {
+    if (object instanceof Slide newSlide) {
       PresentationFacade presentation = slideViewerComponent.getPresentation();
       slideViewerComponent.update(presentation, newSlide);
     }
