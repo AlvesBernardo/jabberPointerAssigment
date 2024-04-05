@@ -20,7 +20,7 @@ jobs:
           mvn -B package --file pom.xml -Dmaven.test.skip
           mkdir staging && cp target/*.jar staging
 
-      - name: Set up JDK 19
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
@@ -33,23 +33,25 @@ jobs:
       - name: Clean with Maven
         run: mvn clean verify
 
-      - name: Set up cache for Maven
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+      - name: Package the maven project
+        run: mvn -B package --file pom.xml
 
-      - name: Persist workflow data as artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: github-actions-artifact
-          path: staging
+      - name: Create executable Jar File
+        run: mvn clean compile assembly:single
 
-      - name: Upload code coverage report to Google Drive
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.credentials }}
-          folderId: ${{ secrets.folderId }}
-          name: "coverage-report.zip" #
-          overwrite: "true" #
+      - name: Run the created file
+        run: java -jar target/JabberPoint-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+#      - name: Persist workflow data as artifacts
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: github-actions-artifact
+#          path: staging
+#
+#      - name: Upload code coverage report to Google Drive
+#        uses: adityak74/google-drive-upload-git-action@main
+#        with:
+#          credentials: ${{ secrets.credentials }}
+#          folderId: ${{ secrets.folderId }}
+#          name: "coverage-report.zip" #
+#          overwrite: "true" #
