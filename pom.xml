@@ -17,7 +17,7 @@
       <plugin>
         <groupId>com.softwarequality.jabberpoint</groupId>
         <artifactId>git-code-format-maven-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>3.8.1</version>
         <executions>
           <!-- ... -->
         </executions>
@@ -25,6 +25,8 @@
           <!-- ... -->
         </dependencies>
         <configuration>
+          <source>19</source>
+          <target>22</target>
           <formatterOptions>
             <!-- Use AOSP style instead of Google Style (4-space indentation). -->
             <googleJavaFormat.aosp>false</googleJavaFormat.aosp>
