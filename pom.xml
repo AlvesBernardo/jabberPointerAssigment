@@ -1,6 +1,6 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
- 
+
   <groupId>Mehdi-and-Bernardo</groupId>
   <artifactId>Jabber</artifactId>
   <version>1</version>
@@ -8,8 +8,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <!-- Update compiler versions to Java 16 -->
+    <maven.compiler.source>16</maven.compiler.source>
+    <maven.compiler.target>16</maven.compiler.target>
   </properties>
 
   <build>
@@ -25,7 +26,8 @@
           <!-- ... -->
         </dependencies>
         <configuration>
-          <source>19</source>
+          <!-- Update source and target versions to Java 16 -->
+          <source>16</source>
           <target>22</target>
           <formatterOptions>
             <!-- Use AOSP style instead of Google Style (4-space indentation). -->
@@ -44,4 +46,3 @@
     </plugins>
   </build>
 </project>
-
