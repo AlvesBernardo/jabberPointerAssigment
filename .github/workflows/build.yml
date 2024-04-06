@@ -15,11 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Maven project and create JAR
-        run: |
-          mvn -B package --file pom.xml -Dmaven.test.skip
-          mkdir staging && cp target/*.jar staging
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -27,11 +22,6 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Run tests
-        run: mvn test
-
-      - name: Clean with Maven
-        run: mvn clean verify
 
       - name: Package the maven project
         run: mvn -B package --file pom.xml
