@@ -33,26 +33,13 @@ jobs:
           path: target/MehdiBernardo-1.0-SNAPSHOT-jar-with-dependencies.jar
 
       - name: Upload Jar to Google
-        uses: vekexasia/onedrive-upload-gh-action@v2.0.0
+        uses: google-github-actions/setup-gcloud@v0
         with:
           service_account_key: ${{ secrets.GCA_SA_KEY }}
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
 
       - name: Deploy via GCS
-        run: | 
-          gsustil -m rm -rf gs://github-jabber/*
+        run: |
+          gsutil -m rm -rf gs://github-jabber/* || echo "$?"
           gsutil -m cp -r * gs://github-jabber/
 
-#      - name: Persist workflow data as artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: github-actions-artifact
-#          path: staging
-#
-#      - name: Upload code coverage report to Google Drive
-#        uses: adityak74/google-drive-upload-git-action@main
-#        with:
-#          credentials: ${{ secrets.credentials }}
-#          folderId: ${{ secrets.folderId }}
-#          name: "coverage-report.zip" #
-#          overwrite: "true" #
