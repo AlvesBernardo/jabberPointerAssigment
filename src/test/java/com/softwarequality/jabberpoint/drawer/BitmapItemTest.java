@@ -4,6 +4,7 @@ import com.softwarequality.jabberpoint.ImageLoadingException;
 import com.softwarequality.jabberpoint.slide.Style;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.*;
@@ -12,9 +13,9 @@ import java.awt.image.ImageObserver;
 
 public class BitmapItemTest {
     private BitmapItem bitmapItem;
-    private String imageName = "testImage.png";
-    private int level = 2;
-    private BufferedImage testBufferedImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+    private final String imageName = "testImage.png";
+    private final int level = 2;
+    private final BufferedImage testBufferedImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
 
     @BeforeEach
     public void setup() throws ImageLoadingException {
