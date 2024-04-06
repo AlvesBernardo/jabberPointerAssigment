@@ -2,25 +2,26 @@ package com.softwarequality.jabberpoint.slideView;
 
 import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 import com.softwarequality.jabberpoint.slide.Slide;
+
 import java.util.Observable;
 import java.util.Observer;
 
 public class ComponentSlideObserver implements Observer {
 
-  private final SlideViewerComponent slideViewerComponent;
+    private final SlideViewerComponent slideViewerComponent;
 
-  public ComponentSlideObserver(SlideViewerComponent slideViewerComponent) {
-    if (slideViewerComponent == null){
-      throw new IllegalStateException("Missing slide viewer component in observer");
+    public ComponentSlideObserver(SlideViewerComponent slideViewerComponent) {
+        if (slideViewerComponent == null) {
+            throw new IllegalStateException("Missing slide viewer component in observer");
+        }
+        this.slideViewerComponent = slideViewerComponent;
     }
-    this.slideViewerComponent = slideViewerComponent;
-  }
 
-  @Override
-  public void update(Observable observable, Object object) {
-    if (object instanceof Slide newSlide) {
-      PresentationFacade presentation = slideViewerComponent.getPresentation();
-      slideViewerComponent.update(presentation, newSlide);
+    @Override
+    public void update(Observable observable, Object object) {
+        if (object instanceof Slide newSlide) {
+            PresentationFacade presentation = slideViewerComponent.getPresentation();
+            slideViewerComponent.update(presentation, newSlide);
+        }
     }
-  }
 }

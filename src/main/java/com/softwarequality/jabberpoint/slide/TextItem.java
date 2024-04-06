@@ -46,7 +46,14 @@ public class TextItem extends SlideItem {
   }
 
   public Rectangle getBoundingBox(
-      Graphics graphics, ImageObserver observer, float scale, Style myStyle) {
+          Graphics graphics, ImageObserver observer, float scale, Style myStyle) {
+    validateParams(graphics, observer, myStyle);
+
+    List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
+    return calculateBoundingBox(layouts, myStyle, scale);
+  }
+
+  private void validateParams(Graphics graphics, ImageObserver observer, Style myStyle) {
     if (graphics == null) {
       throw new IllegalStateException("Missing graphics in text item ");
     }
@@ -56,26 +63,32 @@ public class TextItem extends SlideItem {
     if (myStyle == null) {
       throw new IllegalStateException("Missing myStyle in text item ");
     }
+  }
 
-    List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
+  private Rectangle calculateBoundingBox(List<TextLayout> layouts, Style myStyle, float scale) {
     int xsize = 0, ysize = (int) (myStyle.getLeading() * scale);
     Iterator<TextLayout> iterator = layouts.iterator();
+
     while (iterator.hasNext()) {
       TextLayout layout = iterator.next();
       Rectangle2D bounds = layout.getBounds();
+
       if (bounds.getWidth() > xsize) {
         xsize = (int) bounds.getWidth();
       }
+
       if (bounds.getHeight() > 0) {
         ysize += bounds.getHeight();
       }
+
       ysize += layout.getLeading() + layout.getDescent();
     }
+
     return new Rectangle((int) (myStyle.getIndent() * scale), 0, xsize, ysize);
   }
 
   public void draw(
-      int x, int y, float scale, Graphics graphics, Style myStyle, ImageObserver imageObserver) {
+          int x, int y, float scale, Graphics graphics, Style myStyle, ImageObserver imageObserver) {
     if (graphics == null) {
       throw new IllegalStateException("Missing graphics in text item ");
     }
@@ -90,8 +103,8 @@ public class TextItem extends SlideItem {
     }
     List<TextLayout> layouts = getLayouts(graphics, myStyle, scale);
     Point pen =
-        new Point(
-            x + (int) (myStyle.getIndent() * scale), y + (int) (myStyle.getLeading() * scale));
+            new Point(
+                    x + (int) (myStyle.getIndent() * scale), y + (int) (myStyle.getLeading() * scale));
     Graphics2D g2d = (Graphics2D) graphics;
     g2d.setColor(myStyle.getColor());
     Iterator<TextLayout> it = layouts.iterator();
