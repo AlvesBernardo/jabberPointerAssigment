@@ -32,10 +32,16 @@ jobs:
           name: my-artifact
           path: target/MehdiBernardo-1.0-SNAPSHOT-jar-with-dependencies.jar
 
+      - name: Upload Jar to Google
+        uses: vekexasia/onedrive-upload-gh-action@v2.0.0
+        with:
+          service_account_key: ${{ secrets.GCA_SA_KEY }}
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
 
-#      - name: Upload Jar to OneDrive
-#        uses: vekexasia/onedrive-upload-gh-action@v2.0.0
-#        env:
+      - name: Deploy via GCS
+        run: | 
+          gsustil -m rm -rf gs://github-jabber/*
+          gsutil -m cp -r * gs://github-jabber/
 
 #      - name: Persist workflow data as artifacts
 #        uses: actions/upload-artifact@v2
