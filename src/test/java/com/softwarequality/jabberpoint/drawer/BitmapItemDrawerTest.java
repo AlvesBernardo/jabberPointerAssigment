@@ -8,7 +8,7 @@ class BitmapItemDrawerTest {
 
     private BitmapItemDrawer drawer;
     private BitmapItem bitmapItem;
-    private final String imageName = "testImage.png";
+    private final String imageName = "src/testImage.png";
     private final int level = 2;
 
 

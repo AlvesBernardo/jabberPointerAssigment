@@ -13,7 +13,7 @@ import java.awt.image.ImageObserver;
 
 public class BitmapItemTest {
     private BitmapItem bitmapItem;
-    private final String imageName = "testImage.png";
+    private final String imageName = "src/testImage.png";
     private final int level = 2;
     private final BufferedImage testBufferedImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
 
