@@ -26,11 +26,13 @@ jobs:
       - name: Package the maven project
         run: mvn -B package --file pom.xml
 
-      - name: Create executable Jar File
-        run: mvn clean compile assembly:single
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: target/MehdiBernardo-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-      - name: Run the created file
-        run: java -jar target/MehdiBernardo-1.0-SNAPSHOT-jar-with-dependencies.jar
+
 #      - name: Upload Jar to OneDrive
 #        uses: vekexasia/onedrive-upload-gh-action@v2.0.0
 #        env:
