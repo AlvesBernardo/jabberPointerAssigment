@@ -33,7 +33,7 @@ jobs: #groups a set of actions that will be extecuted
     - name: Build with Maven Wrapper
       run: mvn -B package --file pom.xml
     - name: Build with Maven
-      run: ./mvnw --batch-mode clean verify
+      run: ./mvn --batch-mode clean verify
     - name: Run the hello world app
       run: java -cp ./src/main/java com.softwarequality.jabberpoint.HelloWorldApp
 
