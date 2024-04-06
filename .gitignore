@@ -13,7 +13,6 @@ replay_pid*
 ##############################
 ## Maven
 ##############################
-target/
 target/classes
 target/generated-sources
 target/generated-test-sources
