@@ -47,36 +47,18 @@ public class XMLAccessor extends Accessor {
     return titles.item(0).getTextContent();
   }
 
-
   public void loadFile(PresentationFacade presentation, String filename) throws IOException {
     if (presentation == null || filename == null) {
       throw new RuntimeException("Missing parameter for load file in xml accessor");
     }
 
-    int slideNumber, itemNumber, max = 0, maxItems = 0;
     try {
-      DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-      Document document = builder.parse(new File(filename));
+      Document document = createDocument(filename);
       Element doc = document.getDocumentElement();
+
       presentation.setTitle(getTitle(doc, SHOWTITLE));
+      populateSlides(doc, presentation);
 
-      NodeList slides = doc.getElementsByTagName(SLIDE);
-      max = slides.getLength();
-      for (slideNumber = 0; slideNumber < max; slideNumber++) {
-        Element xmlSlide = (Element) slides.item(slideNumber);
-
-        SlideBuilder slideBuilder = new SlideBuilder().withTitle(getTitle(xmlSlide, SLIDETITLE));
-
-        NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
-        maxItems = slideItems.getLength();
-        for (itemNumber = 0; itemNumber < maxItems; itemNumber++) {
-          Element item = (Element) slideItems.item(itemNumber);
-          loadSlideItem(slideBuilder, item);
-        }
-
-        Slide slide = slideBuilder.build();
-        presentation.appendSlide(slide);
-      }
     } catch (IOException iox) {
       System.err.println(iox);
     } catch (SAXException sax) {
@@ -86,6 +68,32 @@ public class XMLAccessor extends Accessor {
     } catch (ImageLoadingException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private Document createDocument(String filename) throws ParserConfigurationException, IOException, SAXException {
+    DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    return builder.parse(new File(filename));
+  }
+
+  private void populateSlides(Element doc, PresentationFacade presentation) throws ImageLoadingException {
+    NodeList slides = doc.getElementsByTagName(SLIDE);
+    int slideNumber, max = slides.getLength();
+    for (slideNumber = 0; slideNumber < max; slideNumber++) {
+      Element xmlSlide = (Element) slides.item(slideNumber);
+      Slide slide = createSlide(xmlSlide);
+      presentation.appendSlide(slide);
+    }
+  }
+
+  private Slide createSlide(Element xmlSlide) throws ImageLoadingException {
+    SlideBuilder slideBuilder = new SlideBuilder().withTitle(getTitle(xmlSlide, SLIDETITLE));
+    NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
+    int itemNumber, maxItems = slideItems.getLength();
+    for (itemNumber = 0; itemNumber < maxItems; itemNumber++) {
+      Element item = (Element) slideItems.item(itemNumber);
+      loadSlideItem(slideBuilder, item);
+    }
+    return slideBuilder.build();
   }
 
   protected void loadSlideItem(SlideBuilder slideBuilder, Element item)
@@ -114,37 +122,52 @@ public class XMLAccessor extends Accessor {
     if (presentation == null || filename == null) {
       throw new RuntimeException("Missing parameter for save file in xml accessor");
     }
-    PrintWriter out = new PrintWriter(new FileWriter(filename));
-    out.println("<?xml version=\"1.0\"?>");
-    out.println("<!DOCTYPE presentation SYSTEM \"jabberpoint.dtd\">");
-    out.println("<presentation>");
-    out.print("<showtitle>");
-    out.print(presentation.getTitle());
-    out.println("</showtitle>");
-    for (int slideNumber = 0; slideNumber < presentation.getSize(); slideNumber++) {
-      Slide slide = presentation.getSlide(slideNumber);
-      out.println("<slide>");
-      out.println("<title>" + slide.getTitle() + "</title>");
-      List<SlideItem> slideItems = slide.getSlideItems();
-      for (int itemNumber = 0; itemNumber < slideItems.size(); itemNumber++) {
-        SlideItem slideItem = slideItems.get(itemNumber);
-        out.print("<item kind=");
-        if (slideItem instanceof TextItem) {
-          out.print("\"text\" level=\"" + slideItem.getLevel() + "\">");
-          out.print(slideItem.getText());
-        } else {
-          if (slideItem instanceof BitmapItem) {
-            out.print("\"image\" level=\"" + slideItem.getLevel() + "\">");
-            out.print(((BitmapItem) slideItem).getImageName());
-          } else {
-            System.out.println("Ignoring " + slideItem);
-          }
-        }
-        out.println("</item>");
-      }
-      out.println("</slide>");
+    try (PrintWriter out = new PrintWriter(new FileWriter(filename))) {
+      generateXML(out, presentation);
     }
-    out.println("</presentation>");
-    out.close();
+  }
+
+  private void generateXML(PrintWriter writer, PresentationFacade presentation) {
+    writer.println("<?xml version=\"1.0\"?>");
+    writer.println("<!DOCTYPE presentation SYSTEM \"jabberpoint.dtd\">");
+    writer.println("<presentation>");
+    writer.println("<showtitle>" + presentation.getTitle() + "</showtitle>");
+
+    for (int slideNumber = 0; slideNumber < presentation.getSize(); slideNumber++)
+      writeSlide(writer, presentation.getSlide(slideNumber));
+    writer.println("</presentation>");
+  }
+
+  private void writeSlide(PrintWriter writer, Slide slide) {
+    writer.println("<slide>");
+    writer.println("<title>" + slide.getTitle() + "</title>");
+
+    for (SlideItem slideItem : slide.getSlideItems())
+      writeItem(writer, slideItem);
+
+    writer.println("</slide>");
+  }
+
+  private void writeItem(PrintWriter writer, SlideItem slideItem) {
+    writer.print("<item kind=");
+
+    if (slideItem instanceof TextItem)
+      writeTextItem(writer, (TextItem) slideItem);
+    else if (slideItem instanceof BitmapItem)
+      writeBitmapItem(writer, (BitmapItem) slideItem);
+    else
+      System.out.println("Ignoring " + slideItem);
+
+    writer.println("</item>");
+  }
+
+  private void writeTextItem(PrintWriter writer, TextItem textItem) {
+    writer.print("\"text\" level=\"" + textItem.getLevel() + "\">");
+    writer.print(textItem.getText());
+  }
+
+  private void writeBitmapItem(PrintWriter writer, BitmapItem bitmapItem) {
+    writer.print("\"image\" level=\"" + bitmapItem.getLevel() + "\">");
+    writer.print(bitmapItem.getImageName());
   }
 }
