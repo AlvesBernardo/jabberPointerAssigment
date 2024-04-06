@@ -34,3 +34,7 @@ jobs:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.BERNARDOMEHDISECRET }}
 
+      - name: Display linting output
+        if: ${{ failure() }}
+        run: cat super-linter.log
+
