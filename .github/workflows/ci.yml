@@ -20,7 +20,6 @@ jobs: #groups a set of actions that will be extecuted
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      package: write
 
     steps:
     - uses: actions/checkout@v3 #predifened user selects an action under path action/ that will run a code
