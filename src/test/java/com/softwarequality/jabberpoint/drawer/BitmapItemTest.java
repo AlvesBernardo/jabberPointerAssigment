@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.net.URL;
 
 public class BitmapItemTest {
     private BitmapItem bitmapItem;
@@ -19,6 +21,19 @@ public class BitmapItemTest {
 
     @BeforeEach
     public void setup() throws ImageLoadingException {
+        try {
+            URL url = this.getClass().getResource("/testImage.png");
+            File file = new File(url.getPath());
+            String imageName = file.getAbsolutePath();
+            System.out.println("Image path: " + imageName);
+
+            bitmapItem = new BitmapItem(level, imageName);
+
+            assertNotNull(bitmapItem, "bitmapItem is null after setup");
+            System.out.println("bitmapItem successfully initialized.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         bitmapItem = new BitmapItem(level, imageName);
     }
 
