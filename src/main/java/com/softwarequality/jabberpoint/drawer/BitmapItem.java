@@ -54,7 +54,7 @@ public class BitmapItem extends SlideItem {
   }
 
   public Rectangle getBoundingBox(
-      Graphics graphics, ImageObserver observer, float scale, Style style) {
+          Graphics graphics, ImageObserver observer, float scale, Style style) {
     if (graphics == null) {
       throw new RuntimeException("Missing graphic in draw or BitMap");
     }
@@ -66,14 +66,14 @@ public class BitmapItem extends SlideItem {
     }
 
     return new Rectangle(
-        (int) (style.getIndent() * scale),
-        0,
-        (int) (bufferedImage.getWidth(observer) * scale),
-        (int) (style.getLeading() * scale) + (int) (bufferedImage.getHeight(observer) * scale));
+            (int) (style.getIndent() * scale),
+            0,
+            (int) (bufferedImage.getWidth(observer) * scale),
+            (int) (style.getLeading() * scale) + (int) (bufferedImage.getHeight(observer) * scale));
   }
 
   public void draw(
-      int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
+          int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
     if (graphics == null) {
       throw new RuntimeException("Missing graphic in draw or BitMap Drawer");
     }
@@ -86,12 +86,12 @@ public class BitmapItem extends SlideItem {
     int width = x + (int) (style.getIndent() * scale);
     int height = y + (int) (style.getLeading() * scale);
     graphics.drawImage(
-        bufferedImage,
-        width,
-        height,
-        (int) (bufferedImage.getWidth(observer) * scale),
-        (int) (bufferedImage.getHeight(observer) * scale),
-        observer);
+            bufferedImage,
+            width,
+            height,
+            (int) (bufferedImage.getWidth(observer) * scale),
+            (int) (bufferedImage.getHeight(observer) * scale),
+            observer);
   }
 
   @Override
@@ -113,7 +113,7 @@ public class BitmapItem extends SlideItem {
       bufferedImage = ImageIO.read(new File(imageName));
     } catch (IOException e) {
       throw new ImageLoadingException(
-          FILE_NOT_FOUND_MESSAGE + imageName + FILE_NOT_FOUND_SUFFIX, e);
+              FILE_NOT_FOUND_MESSAGE + imageName + FILE_NOT_FOUND_SUFFIX, e);
     }
   }
 }

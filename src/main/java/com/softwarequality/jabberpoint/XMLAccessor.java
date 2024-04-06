@@ -47,6 +47,7 @@ public class XMLAccessor extends Accessor {
     return titles.item(0).getTextContent();
   }
 
+
   public void loadFile(PresentationFacade presentation, String filename) throws IOException {
     if (presentation == null || filename == null) {
       throw new RuntimeException("Missing parameter for load file in xml accessor");
