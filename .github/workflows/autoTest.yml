@@ -1,7 +1,8 @@
 name: Java Tests
 
 on:
-  push: # Remove branch restriction
+  push: # Remove branch restriction.
+  pull_request:
   schedule:
     - cron: '0 0 * * *'  # Runs every day at midnight UTC
 
@@ -20,15 +21,12 @@ jobs:
           java-version: '17'
           cache: maven
 
-      #      - name: Cache Maven packages
-      #        uses: actions/cache@v2
-      #        with:
-      #          path: ~/.m2
-      #          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-      #          restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn  package --file pom.xml
+
+      - name: Clean with Maven
+        run: mvn clean --file pom.xml
 
       - name: Test with Maven
         run: mvn -B test --file pom.xml
