@@ -1,0 +1,19 @@
+{
+  "ABOUT": "About",
+  "FILE": "File",
+  "EXIT": "Exit",
+  "GOTO": "Go to",
+  "HELP": "Help",
+  "NEW": "New",
+  "NEXT": "Next",
+  "OPEN": "Open",
+  "PAGENR": "Page number?",
+  "PREV": "Prev",
+  "SAVE": "Save",
+  "VIEW": "View",
+  "TESTFILE": "test.xml",
+  "SAVEFILE": "dump.xml",
+  "IOEX": "IO Exception: ",
+  "LOADERR": "Load Error",
+  "SAVEERR": "Save Error"
+}
