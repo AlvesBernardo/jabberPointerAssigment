@@ -33,8 +33,11 @@ jobs:
           LOG_FILE: linger.log
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.BERNARDOMEHDISECRET }}
-
-      - name: Display linting output
-        if: ${{ failure() }}
-        run: cat super-linter.log
+          
+      - name: Upload log file
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: super-linter-log
+          path: ./super-linter.log
 
