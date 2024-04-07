@@ -13,13 +13,15 @@ replay_pid*
 ##############################
 ## Maven
 ##############################
-target/classes
-target/surefire-reports
-target/generated-sources
-target/generated-test-sources
-target/maven-archiver
-target/maven-status
-target/test-classes
+target/classes/*
+target/surefire-reports/*
+target/generated-sources/*
+target/generated-test-sources/*
+target/maven-archiver/*
+target/maven-status/*
+target/test-classes/*
+target/surefire-reports/
+
 
 pom.xml.tag
 pom.xml.releaseBackup
