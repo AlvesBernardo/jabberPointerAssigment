@@ -1,21 +1,26 @@
-Please install https://jar-download.com/download-handling.php
-
-Then do the following
-In IntelliJ IDEA, open your project.
-Go to File -> Project Structure... or use the Ctrl + Shift + Alt + S shortcut.
-A new window titled "Project Structure" will be opened. In this window, under "Project Settings", click on Modules.
-In the "Modules" tab, click on the Dependencies sub-tab which can be found at the top of the window.
-Now in the "Dependencies" sub-tab, towards the right side, you'll see a "+" button, click on it. From the drop-down menu select the second option, JARs or directories....
-A new window titled "Select Path" will open. In this window, navigate and find the json jar file that you previously downloaded. Once you've found the jar file, click on OK.
-Finally, click on Apply and OK in the "Project Structure" window.
-
-Also install mvn pls
-
-This project run on maven 17 or higher
-
-To install maven https://www.google.com/search?q=maven+&sca_esv=3e3e49e45356cc73&sca_upv=1&sxsrf=ACQVn0_Tg3H_E55Da2vKCPmf_3jorawbEw%3A1712484975067&ei=b3ISZujaA7rsi-gP_42FoAI&ved=0ahUKEwiozvzU76-FAxU69gIHHf9GASQQ4dUDCBA&uact=5&oq=maven+&gs_lp=Egxnd3Mtd2l6LXNlcnAiBm1hdmVuIDIEECMYJzIKECMYgAQYigUYJzIEECMYJzIKEAAYgAQYigUYQzILEAAYgAQYigUYkQIyCxAAGIAEGIoFGJECMgoQABiABBiKBRhDMgoQABiABBiKBRhDMgoQABiABBiKBRhDMgUQABiABEjuA1AoWIcDcAF4AZABAJgBZqABiQKqAQMyLjG4AQPIAQD4AQGYAgSgAp8CwgIKEAAYRxjWBBiwA5gDAIgGAZAGCJIHAzMuMaAHrBY&sclient=gws-wiz-serp
-To install jav https://www.oracle.com/java/technologies/java-se-glance.html
-
-Usefull commands
+#Project Setup Instructions
+Follow the below instructions to setup the project in your local development environment.
+##Prerequisites
+Make sure the following software is installed on your machine:
+Java 17 or higher. You can download Java from Oracle's website.
+Maven 3.8.1 (or above). Follow this Google search link to find relevant resources for installing Maven.
+IntelliJ IDEA (preferably 2024.1, Ultimate Edition).
+You can verify your Java and Maven installations by running these commands in your terminal:
+java --version
 mvn --version
+##Install Additional Libraries
+Please install https://jar-download.com/download-handling.php
+This project requires an additional JSON library. Follow these steps to add the JSON library to your project:
+Download the library from this link.
+Open your project in IntelliJ IDEA.
+Go to File -> Project Structure... or use the Ctrl + Shift + Alt + S shortcut.
+Click on Modules under "Project Settings".
+In the "Modules" tab, click on the Dependencies sub-tab located at the top of the window.
+Click on the "+" button on the right side, then select JARs or directories... from the drop-down menu.
+Navigate and find the downloaded JSON library jar file, then click OK.
+Finally, click Apply and OK in the "Project Structure" window.
+#Build the Project
+After installing all the dependencies, build the project by opening the terminal in the project directory and running:
 mvn clean install
+#Deployed Application
+The application's executable JAR file has been uploaded to Google Cloud Services. Please ensure to have the appropriate permissions or credentials to access the application.
