@@ -30,11 +30,9 @@ jobs:
         with:
           service_account_key: ${{ secrets.GCA_SA_KEY }}
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
-          filename: "target/JabberPoint-1.0-SNAPSHOT-jar-with-dependencies.jar"
 
 
       - name: Deploy via GCS
         run: |
           gsutil -m rm -rf gs://github-jabber/* || echo "$?"
-          gsutil -m cp -r * gs://github-jabber/
-
+          gsutil -m cp -r target/JabberPoint-1.0-SNAPSHOT-jar-with-dependencies.jar  gs://github-jabber/
