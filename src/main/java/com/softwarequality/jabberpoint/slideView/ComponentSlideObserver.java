@@ -17,6 +17,8 @@ public class ComponentSlideObserver implements Observer {
         this.slideViewerComponent = slideViewerComponent;
     }
 
+    //TODO::Create a Observer by our own
+
     @Override
     public void update(Observable observable, Object object) {
         if (object instanceof Slide newSlide) {

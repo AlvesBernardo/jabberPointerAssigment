@@ -2,14 +2,12 @@ package com.softwarequality.jabberpoint.keyController;
 
 import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
-class ExitCommand implements Command
-{
-    private final PresentationFacade presentation;
+abstract class AbstractCommand implements Command {
+    protected final PresentationFacade presentation;
 
-    public ExitCommand(PresentationFacade presentation)
-    {
+    AbstractCommand(PresentationFacade presentation) {
         if (presentation == null){
-            throw new IllegalArgumentException("Missing presentation in exit command");
+            throw new IllegalArgumentException("Missing presentation in command");
         }
         this.presentation = presentation;
     }
@@ -17,10 +15,5 @@ class ExitCommand implements Command
     public PresentationFacade getPresentation()
     {
         return this.presentation;
-    }
-
-    public void execute()
-    {
-        this.presentation.exit();
     }
 }

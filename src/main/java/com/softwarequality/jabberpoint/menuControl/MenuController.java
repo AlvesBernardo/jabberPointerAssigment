@@ -1,6 +1,7 @@
 package com.softwarequality.jabberpoint.menuControl;
 
 import com.softwarequality.jabberpoint.Accessor;
+import com.softwarequality.jabberpoint.Constants;
 import com.softwarequality.jabberpoint.XMLAccessor;
 import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
@@ -11,23 +12,24 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class MenuController extends MenuBar {
-    protected static final String ABOUT = "About";
-    protected static final String FILE = "File";
-    protected static final String EXIT = "Exit";
-    protected static final String GOTO = "Go to";
-    protected static final String HELP = "Help";
-    protected static final String NEW = "New";
-    protected static final String NEXT = "Next";
-    protected static final String OPEN = "Open";
-    protected static final String PAGENR = "Page number?";
-    protected static final String PREV = "Prev";
-    protected static final String SAVE = "Save";
-    protected static final String VIEW = "View";
-    protected static final String TESTFILE = "test.xml";
-    protected static final String SAVEFILE = "dump.xml";
-    protected static final String IOEX = "IO Exception: ";
-    protected static final String LOADERR = "Load Error";
-    protected static final String SAVEERR = "Save Error";
+    Constants constants = new Constants("constants.json");
+    String ABOUT = constants.getValue("ABOUT");
+    String FILE = constants.getValue("FILE");
+    String EXIT = constants.getValue("EXIT");
+    String GOTO = constants.getValue("GOTO");
+    String HELP = constants.getValue("HELP");
+    String NEW = constants.getValue("NEW");
+    String NEXT = constants.getValue("NEXT");
+    String OPEN = constants.getValue("OPEN");
+    String PAGENR = constants.getValue("PAGENR");
+    String PREV = constants.getValue("PREV");
+    String SAVE = constants.getValue("SAVE");
+    String VIEW = constants.getValue("VIEW");
+    String TESTFILE = constants.getValue("TESTFILE");
+    String SAVEFILE = constants.getValue("SAVEFILE");
+    String IOEX = constants.getValue("IOEX");
+    String LOADERR = constants.getValue("LOADERR");
+    String SAVEERR = constants.getValue("SAVEERR");
     private static final long serialVersionUID = 227L;
     private final Frame parent;
     private final PresentationFacade presentation;
