@@ -6,7 +6,7 @@ import com.softwarequality.jabberpoint.slide.Slide;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ComponentSlideObserver implements Observer {
+public class ComponentSlideObserver {
 
     private final SlideViewerComponent slideViewerComponent;
 
@@ -17,13 +17,8 @@ public class ComponentSlideObserver implements Observer {
         this.slideViewerComponent = slideViewerComponent;
     }
 
-    //TODO::Create a Observer by our own
-
-    @Override
-    public void update(Observable observable, Object object) {
-        if (object instanceof Slide newSlide) {
-            PresentationFacade presentation = slideViewerComponent.getPresentation();
-            slideViewerComponent.update(presentation, newSlide);
-        }
+    public void accept(Slide newSlide) {
+        PresentationFacade presentation = slideViewerComponent.getPresentation();
+        slideViewerComponent.update(presentation, newSlide);
     }
 }

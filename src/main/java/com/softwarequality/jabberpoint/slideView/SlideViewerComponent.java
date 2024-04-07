@@ -29,6 +29,7 @@ public class SlideViewerComponent extends JComponent {
   private Font labelFont = null;
   private PresentationFacade presentation = null;
   private JFrame frame = null;
+  private ComponentSlideObserver observer;
 
   public SlideViewerComponent(PresentationFacade presentation, JFrame frame) {
     setBackground(BGCOLOR);
@@ -36,7 +37,7 @@ public class SlideViewerComponent extends JComponent {
     labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
     setFrame(frame);
     // Add observer
-    observable.addObserver(new ComponentSlideObserver(this));
+    observer = new ComponentSlideObserver(this);
   }
 
   public Slide getSlide() {
