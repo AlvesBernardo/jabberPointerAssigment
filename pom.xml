@@ -1,45 +1,93 @@
-<project>
-  <modelVersion>4.0.0</modelVersion>
- 
-  <groupId>Mehdi-and-Bernardo</groupId>
-  <artifactId>Jabber</artifactId>
-  <version>1</version>
+<?xml version="1.0" encoding="UTF-8"?>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>com.cosium.code</groupId>
-        <artifactId>git-code-format-maven-plugin</artifactId>
-        <version>${git-code-format-maven-plugin.version}</version>
-        <executions>
-          <!-- ... -->
-        </executions>
-        <dependencies>
-          <!-- ... -->
-        </dependencies>
-        <configuration>
-          <formatterOptions>
-            <!-- Use AOSP style instead of Google Style (4-space indentation). -->
-            <googleJavaFormat.aosp>false</googleJavaFormat.aosp>
-            <!-- Format the javadoc -->
-            <googleJavaFormat.formatJavadoc>true</googleJavaFormat.formatJavadoc>
-            <!-- Fix import order and remove any unused imports, but do no other formatting. -->
-            <googleJavaFormat.fixImportsOnly>false</googleJavaFormat.fixImportsOnly>
-            <!-- Do not fix the import order. Unused imports will still be removed. -->
-            <googleJavaFormat.skipSortingImports>false</googleJavaFormat.skipSortingImports>
-            <!-- Do not remove unused imports. Imports will still be sorted. -->
-            <googleJavaFormat.skipRemovingUnusedImports>false</googleJavaFormat.skipRemovingUnusedImports>
-          </formatterOptions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <groupId>MehdiBernardo</groupId>
+    <artifactId>MehdiBernardo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>MehdiBernardo</name>
+    <url>http://www.example.com</url>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.softwarequality.jabberpoint.JabberPoint</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.softwarequality.jabberpoint.JabberPoint</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+
 </project>
-

@@ -1,0 +1,63 @@
+//package com.softwarequality.jabberpoint.slide;
+//
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//
+//import java.awt.*;
+//import java.awt.image.ImageObserver;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//
+//class SlideItemTest {
+//    private SlideItem slideItem;
+//
+//    @BeforeEach
+//    void setUp() {
+//        this.slideItem = new SlideItem(1) {
+//            @Override
+//            public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style) {
+//                return new Rectangle(); // Default implementation for test purposes
+//            }
+//            @Override
+//            public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
+//                //Default implementation for test purposes
+//            }
+//        };
+//    }
+//
+//    @Test
+//    void givenSlideComponentWhenAddThenItIsAddedToSlideComponents() {
+//        SlideComponent testSlideComponent = new SlideItem(1) {
+//            // The overridden methods go here.
+//        };
+//        this.slideItem.add(testSlideComponent);
+//        assertTrue(this.slideItem.getSlideComponents().contains(testSlideComponent));
+//    }
+//
+//    @Test
+//    void givenNullSlideComponentWhenAddThenThrowException() {
+//        assertThrows(IllegalStateException.class, () -> this.slideItem.add(null));
+//    }
+//
+//    @Test
+//    void givenSlideComponentWhenRemoveThenItIsRemovedFromSlideComponents() {
+//        SlideComponent testSlideComponent = new SlideItem(1) {
+//            // The overridden methods go here.
+//        };
+//        this.slideItem.add(testSlideComponent);
+//        this.slideItem.remove(testSlideComponent);
+//        assertFalse(this.slideItem.getSlideComponents().contains(testSlideComponent));
+//    }
+//
+//    @Test
+//    void givenNullSlideComponentWhenRemoveThenThrowException() {
+//        assertThrows(IllegalStateException.class, () -> this.slideItem.remove(null));
+//    }
+//
+//    @Test
+//    void givenLevelWhenSetLevelThenSlideLevelIsSet() {
+//        int newLevel = 2;
+//        this.slideItem.setLevel(newLevel);
+//        assertEquals(newLevel, this.slideItem.getLevel());
+//    }
+//}

@@ -1,28 +1,44 @@
-name: "Building the project making a jar file"
+name: Building the project and creating a JAR file
 
 on:
   push:
     branches:
-      -master
-      -'main-dev'
+      - master
+      - main-dev
   pull_request:
 
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
 
-  - name: "Build maven project"
-    run: |
-      mvn -B package --file pom.xml -Dmaven.test.skip
-      mkdir staging && cp target/*.jar staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  - name: Set up cache for Maven
-    uses: actions/cache@v2
-    with:
-      path: ~/.m2
-      key: ${{ runner.os }}-m2-${{ hasFiles('**/pom.xml') }}
-      restore-keys: ${{ runner.os }}-m2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-  - name: Persist workflow data as artifacts
-    uses: actions/upload-artifact@v2
-    with:
-      name: github-actions-artifact
-      path: staging
+      - name: Package the maven project
+        run: mvn -B package --file pom.xml
 
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: target/MehdiBernardo-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+      - name: Upload Jar to Google
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          service_account_key: ${{ secrets.GCA_SA_KEY }}
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+
+
+      - name: Deploy via GCS
+        run: |
+          gsutil -m rm -rf gs://github-jabber/* || echo "$?"
+          gsutil -m cp -r target/MehdiBernardo-1.0-SNAPSHOT-jar-with-dependencies.jar  gs://github-jabber/
