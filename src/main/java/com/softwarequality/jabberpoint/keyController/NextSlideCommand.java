@@ -3,7 +3,7 @@ package com.softwarequality.jabberpoint.keyController;
 
 import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
-class NextSlideCommand implements Command
+public class NextSlideCommand implements Command
 {
     private final PresentationFacade presentation;
 
