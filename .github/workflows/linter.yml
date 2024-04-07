@@ -1,0 +1,36 @@
+name: SpotBugs linter
+
+on:
+  push:
+    branches: [ master-dev ]
+  pull_request:
+    branches: [ master-dev ]
+    paths:
+      - 'src/**'
+
+jobs:
+  spotbugs:
+    name: Run SpotBugs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Run SpotBugs
+        uses: tynmarket/spotbugs-action@v1
+        id: spotbugs
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          inputPath: 'build/reports/spotbugs/main.xml'
+
+      - name: Show SpotBugs analysis results
+        run: echo "${{ steps.spotbugs.outputs.result }}"
