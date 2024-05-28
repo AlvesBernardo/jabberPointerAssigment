@@ -1,8 +1,6 @@
-package com.softwarequality.jabberpoint.keyController;
+package com.softwarequality.jabberpoint.commands;
 
-import com.softwarequality.jabberpoint.keyController.NextSlideCommand;
 import com.softwarequality.jabberpoint.presentation.Presentation;
-import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class NextSlideCommandTest {
 
-    private TestablePresentationFacade testablePresentation;
+    private TestablePresentation testablePresentation;
     private NextSlideCommand nextSlideCommand;
 
     @BeforeEach
     void setUp() {
         Presentation presentation = new Presentation();  // Create a new Presentation
-        this.testablePresentation = new TestablePresentationFacade(presentation);
+        this.testablePresentation = new TestablePresentation(presentation);
         this.nextSlideCommand = new NextSlideCommand(testablePresentation);
     }
 
@@ -27,10 +25,10 @@ public class NextSlideCommandTest {
         this.nextSlideCommand.execute();
 
         // Assert
-        assertTrue(this.testablePresentation.nextSlideCalled, "nextSlide method was not called on the presentation facade");
+        assertTrue(this.testablePresentation.nextSlideCalled, "nextSlide method was not called on the presentation");
     }
 
-    class TestablePresentationFacade extends PresentationFacade {
+    class TestablePresentation extends Presentation {
 
         boolean nextSlideCalled = false;
 
@@ -40,7 +38,7 @@ public class NextSlideCommandTest {
             super.nextSlide();
         }
 
-        public TestablePresentationFacade(Presentation presentation) {
+        public TestablePresentation(Presentation presentation) {
             super(presentation);
         }
     }

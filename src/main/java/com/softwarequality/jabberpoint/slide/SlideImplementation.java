@@ -1,10 +1,9 @@
 package com.softwarequality.jabberpoint.slide;
 
-import static com.softwarequality.jabberpoint.slide.SlideConstants.HEIGHT;
-import static com.softwarequality.jabberpoint.slide.SlideConstants.WIDTH;
-
 import com.softwarequality.jabberpoint.drawer.Drawer;
 import com.softwarequality.jabberpoint.drawer.DrawerFactory;
+import com.softwarequality.jabberpoint.drawer.TextItem;
+
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
@@ -19,20 +18,16 @@ public class SlideImplementation implements Slide {
     this.slideComponents = new ArrayList<>();
   }
 
-  public void setSlideComponents(List<SlideComponent> slideComponents) {
-    this.slideComponents = slideComponents;
-  }
-
   public void setTitle(SlideComponent title) {
     if (title == null) {
-      throw new IllegalStateException("Missing tittle for slide implementation");
+      throw new IllegalStateException("Missing title for slide implementation");
     }
     this.title = title;
   }
 
   protected void appendItem(SlideComponent slideComponent) {
     if (slideComponent == null) {
-      throw new IllegalStateException("Can not append slide slideComponent");
+      throw new IllegalStateException("Cannot append null slide component");
     }
     this.slideComponents.add(slideComponent);
   }
@@ -40,9 +35,9 @@ public class SlideImplementation implements Slide {
   @Override
   public List<SlideItem> getSlideItems() {
     return slideComponents.stream()
-        .filter(c -> c instanceof SlideItem)
-        .map(c -> (SlideItem) c)
-        .collect(Collectors.toList());
+            .filter(c -> c instanceof SlideItem)
+            .map(c -> (SlideItem) c)
+            .collect(Collectors.toList());
   }
 
   @Override
@@ -52,7 +47,7 @@ public class SlideImplementation implements Slide {
 
   protected void setTitle(String title) {
     if (title == null) {
-      throw new IllegalStateException("Can add title slide implementation");
+      throw new IllegalStateException("Cannot set null title in slide implementation");
     }
     this.title = new TextItem(0, title); // Assuming TextItem implements SlideComponent now.
   }
@@ -80,13 +75,14 @@ public class SlideImplementation implements Slide {
     }
     float scale = getScale(area);
     int y = area.y;
+    DrawerFactory drawerFactory = new DrawerFactory();
 
     for (SlideComponent component : slideComponents) {
       if (component instanceof SlideItem slideItem) {
         Style style = Style.getStyle(slideItem.getLevel());
 
         // Create the appropriate drawer for the item
-        Drawer drawer = DrawerFactory.createDrawer(slideItem);
+        Drawer drawer = drawerFactory.createDrawer(slideItem);
 
         // Draw the item using the drawer
         drawer.draw(area.x, y, scale, graphics, style, observer);
@@ -100,7 +96,7 @@ public class SlideImplementation implements Slide {
   @Override
   public void add(SlideComponent slideComponent) {
     if (slideComponent == null) {
-      throw new IllegalStateException("Missing slideComponent to add component");
+      throw new IllegalStateException("Cannot add null slide component");
     }
     slideComponents.add(slideComponent);
   }
@@ -108,7 +104,7 @@ public class SlideImplementation implements Slide {
   @Override
   public void remove(SlideComponent slideComponent) {
     if (slideComponent == null) {
-      throw new IllegalStateException("Missing slideComponent to remove component");
+      throw new IllegalStateException("Cannot remove null slide component");
     }
     slideComponents.remove(slideComponent);
   }
@@ -118,6 +114,7 @@ public class SlideImplementation implements Slide {
       throw new IllegalStateException("Missing area to get scale");
     }
     return Math.min(
-        ((float) area.width) / ((float) WIDTH), ((float) area.height) / ((float) HEIGHT));
+            ((float) area.width) / ((float) SlideConstants.WIDTH),
+            ((float) area.height) / ((float) SlideConstants.HEIGHT));
   }
 }

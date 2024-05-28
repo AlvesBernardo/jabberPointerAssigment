@@ -1,9 +1,8 @@
-package com.softwarequality.jabberpoint.keyController;
+package com.softwarequality.jabberpoint.commands;
 
 import com.softwarequality.jabberpoint.presentation.Presentation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,12 +10,12 @@ class ExitCommandTest {
 
     private ExitCommand exitCommand2;
     private ExitCommand command;
-    private TestablePresentationFacade testablePresentation;
+    private TestablePresentation testablePresentation;
 
     @BeforeEach
     void setUp() {
         Presentation presentation = new Presentation();  // create Presentation instance
-        testablePresentation = new TestablePresentationFacade(presentation);
+        testablePresentation = new TestablePresentation(presentation);
         this.command = new ExitCommand(testablePresentation);
     }
 
@@ -33,10 +32,10 @@ class ExitCommandTest {
         this.command.execute();
 
         // Assert
-        assertTrue(testablePresentation.exitCalled, "Exit method was not called on the presentation facade");
+        assertTrue(testablePresentation.exitCalled, "Exit method was not called on the presentation");
     }
 
-    class TestablePresentationFacade extends PresentationFacade {
+    class TestablePresentation extends Presentation {
         boolean exitCalled = false;
 
         @Override
@@ -44,7 +43,7 @@ class ExitCommandTest {
             this.exitCalled = true;
         }
 
-        public TestablePresentationFacade(Presentation presentation) {
+        public TestablePresentation(Presentation presentation) {
             super(presentation);
         }
     }

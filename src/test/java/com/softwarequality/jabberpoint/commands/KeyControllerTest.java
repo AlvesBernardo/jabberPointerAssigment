@@ -1,4 +1,4 @@
-package com.softwarequality.jabberpoint.keyController;
+package com.softwarequality.jabberpoint.commands;
 
 import org.junit.jupiter.api.Test;
 

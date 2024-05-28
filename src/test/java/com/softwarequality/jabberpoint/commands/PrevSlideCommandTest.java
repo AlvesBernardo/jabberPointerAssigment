@@ -1,8 +1,6 @@
-package com.softwarequality.jabberpoint.keyController;
+package com.softwarequality.jabberpoint.commands;
 
-import com.softwarequality.jabberpoint.keyController.PrevSlideCommand;
 import com.softwarequality.jabberpoint.presentation.Presentation;
-import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PrevSlideCommandTest {
 
-    private TestablePresentationFacade testablePresentationFacade;
+    private TestablePresentation testablePresentation;
     private PrevSlideCommand prevSlideCommand;
 
     @BeforeEach
     void setUp() {
         Presentation presentation = new Presentation();  // Create a new Presentation instance
-        this.testablePresentationFacade = new TestablePresentationFacade(presentation);
-        this.prevSlideCommand = new PrevSlideCommand(testablePresentationFacade);
+        this.testablePresentation = new TestablePresentation(presentation);
+        this.prevSlideCommand = new PrevSlideCommand(testablePresentation);
     }
 
     @Test
@@ -27,20 +25,20 @@ public class PrevSlideCommandTest {
         this.prevSlideCommand.execute();
 
         // Assert
-        assertTrue(this.testablePresentationFacade.isPreviousSlideCalled(), "previousSlide method was not called on the presentation facade");
+        assertTrue(this.testablePresentation.isPreviousSlideCalled(), "previousSlide method was not called on the presentation");
     }
 
-    class TestablePresentationFacade extends PresentationFacade {
+    class TestablePresentation extends Presentation {
 
         private boolean previousSlideCalled = false;
 
         @Override
         public void previousSlide() {
             this.previousSlideCalled = true;
-            super.previousSlide();
+            super.prevSlide();
         }
 
-        public TestablePresentationFacade(Presentation presentation) {
+        public TestablePresentation(Presentation presentation) {
             super(presentation);
         }
 

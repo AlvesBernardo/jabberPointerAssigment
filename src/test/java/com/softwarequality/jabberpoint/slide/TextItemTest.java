@@ -1,10 +1,10 @@
 package com.softwarequality.jabberpoint.slide;
 
+import com.softwarequality.jabberpoint.drawer.TextItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.awt.image.ImageObserver;
-import com.softwarequality.jabberpoint.slide.Style;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,6 +1,6 @@
 package com.softwarequality.jabberpoint.drawer;
 
-import com.softwarequality.jabberpoint.ImageLoadingException;
+import com.softwarequality.jabberpoint.utils.ImageLoadingException;
 import com.softwarequality.jabberpoint.slide.Style;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -110,7 +110,7 @@ public class BitmapItemTest {
 
     @Test
     public void testGetImage() {
-        assertNotNull(bitmapItem.getImage());
+        assertNotNull(bitmapItem.getBufferedImage());
     }
 
     // This test assumes that the image file doesn't exist, so it should throw an exception
