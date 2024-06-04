@@ -54,15 +54,15 @@ class SlideItemTest {
         assertTrue(this.slideItem.getSlideComponents().contains(testSlideComponent));
     }
 
-    @Test
-    void givenNullSlideComponentWhenAddComponentThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideItem.addComponent(null));
-    }
+	@Test
+	void givenNullSlideComponentWhenAddComponentThenThrowException() {
+		assertThrows(IllegalArgumentException.class, () -> this.slideItem.addComponent(null));
+	}
 
-    @Test
-    void givenNullSlideComponentWhenRemoveThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideItem.removeComponent(null));
-    }
+	@Test
+	void givenNullSlideComponentWhenRemoveThenThrowException() {
+		assertThrows(IllegalArgumentException.class, () -> this.slideItem.removeComponent(null));
+	}
 
     @Test
     void givenLevelWhenSetLevelThenSlideLevelIsSet() {

@@ -19,10 +19,11 @@ class SlideBuilderTest {
         this.slideBuilder = new SlideBuilder();
     }
 
-    @Test
-    void givenNullTitleWhenWithTitleThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideBuilder.withTitle(null));
-    }
+	@Test
+	void givenNullTitleWhenWithTitleThenThrowException() {
+		assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.withTitle(null));
+	}
+
 
     @Test
     void givenTitleWhenWithTitleThenSlideTitleIsSet() {
@@ -32,10 +33,10 @@ class SlideBuilderTest {
         assertEquals(testTitle, slide.getTitle());
     }
 
-    @Test
-    void givenNullSlideItemWhenAppendItemThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideBuilder.appendItem(null));
-    }
+	@Test
+	void givenNullSlideItemWhenAppendItemThenThrowException() {
+		assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.appendItem(null));
+	}
 
     @Test
     void givenSlideItemWhenAppendItemThenSlideItemIsAdded() {
