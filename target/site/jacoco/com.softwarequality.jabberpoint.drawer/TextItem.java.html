@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MehdiBernardo</a> &gt; <a href="index.source.html" class="el_package">com.softwarequality.jabberpoint.drawer</a> &gt; <span class="el_source">TextItem.java</span></div><h1>TextItem.java</h1><pre class="source lang-java linenums">package com.softwarequality.jabberpoint.drawer;
+
+import com.softwarequality.jabberpoint.slide.SlideConstants;
+import com.softwarequality.jabberpoint.slide.SlideItem;
+import com.softwarequality.jabberpoint.slide.Style;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.LineBreakMeasurer;
+import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ImageObserver;
+import java.text.AttributedString;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TextItem extends SlideItem {
+  private String text;
+
+  public TextItem(int level, String string) {
+<span class="fc" id="L23">    super(level);</span>
+<span class="fc" id="L24">    setText(string);</span>
+<span class="fc" id="L25">  }</span>
+
+  public String getText() {
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">    return text == null ? &quot;&quot; : text;</span>
+  }
+
+  public void setText(String newText) {
+<span class="fc" id="L32">    ValidationUtils.checkNotNull(newText, &quot;Text cannot be null&quot;);</span>
+<span class="fc" id="L33">    this.text = newText;</span>
+<span class="fc" id="L34">  }</span>
+
+  public AttributedString getAttributedString(Style style, float scale) {
+<span class="nc" id="L37">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="nc" id="L38">    AttributedString attrStr = new AttributedString(getText());</span>
+<span class="nc" id="L39">    attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());</span>
+<span class="nc" id="L40">    return attrStr;</span>
+  }
+
+  @Override
+  public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style style) {
+<span class="nc" id="L45">    validateParameters(graphics, observer, style);</span>
+<span class="nc" id="L46">    List&lt;TextLayout&gt; layouts = getLayouts(graphics, style, scale);</span>
+<span class="nc" id="L47">    return calculateBoundingBox(layouts, style, scale);</span>
+  }
+
+  private Rectangle calculateBoundingBox(List&lt;TextLayout&gt; layouts, Style style, float scale) {
+<span class="nc" id="L51">    int xsize = 0, ysize = (int) (style.getLeading() * scale);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">    for (TextLayout layout : layouts) {</span>
+<span class="nc" id="L53">      Rectangle2D bounds = layout.getBounds();</span>
+<span class="nc" id="L54">      xsize = Math.max(xsize, (int) bounds.getWidth());</span>
+<span class="nc" id="L55">      ysize += (int) bounds.getHeight();</span>
+<span class="nc" id="L56">      ysize += (int) (layout.getLeading() + layout.getDescent());</span>
+<span class="nc" id="L57">    }</span>
+<span class="nc" id="L58">    return new Rectangle((int) (style.getIndent() * scale), 0, xsize, ysize);</span>
+  }
+
+  @Override
+  public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
+<span class="nc" id="L63">    validateParameters(graphics, observer, style);</span>
+<span class="nc" id="L64">    List&lt;TextLayout&gt; layouts = getLayouts(graphics, style, scale);</span>
+<span class="nc" id="L65">    TextItemDrawer.drawLayouts(x, y, scale, (Graphics2D) graphics, style, layouts);</span>
+<span class="nc" id="L66">  }</span>
+
+  public List&lt;TextLayout&gt; getLayouts(Graphics graphics, Style style, float scale) {
+<span class="nc" id="L69">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+
+<span class="nc" id="L71">    List&lt;TextLayout&gt; layouts = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L72">    AttributedString attrStr = getAttributedString(style, scale);</span>
+<span class="nc" id="L73">    Graphics2D g2d = (Graphics2D) graphics;</span>
+<span class="nc" id="L74">    FontRenderContext frc = g2d.getFontRenderContext();</span>
+<span class="nc" id="L75">    LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);</span>
+<span class="nc" id="L76">    float wrappingWidth = (SlideConstants.WIDTH - style.getIndent()) * scale;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">    while (measurer.getPosition() &lt; getText().length()) {</span>
+<span class="nc" id="L78">      TextLayout layout = measurer.nextLayout(wrappingWidth);</span>
+<span class="nc" id="L79">      layouts.add(layout);</span>
+<span class="nc" id="L80">    }</span>
+<span class="nc" id="L81">    return layouts;</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L86">    return &quot;TextItem[&quot; + getLevel() + &quot;,&quot; + getText() + &quot;]&quot;;</span>
+  }
+
+  private void validateParameters(Graphics graphics, ImageObserver observer, Style style) {
+<span class="nc" id="L90">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+<span class="nc" id="L91">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
+<span class="nc" id="L92">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="nc" id="L93">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

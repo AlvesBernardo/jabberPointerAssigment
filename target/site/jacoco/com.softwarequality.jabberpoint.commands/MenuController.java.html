@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MenuController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MehdiBernardo</a> &gt; <a href="index.source.html" class="el_package">com.softwarequality.jabberpoint.commands</a> &gt; <span class="el_source">MenuController.java</span></div><h1>MenuController.java</h1><pre class="source lang-java linenums">package com.softwarequality.jabberpoint.commands;
+
+import com.softwarequality.jabberpoint.presentation.Presentation;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+import com.softwarequality.jabberpoint.XMLAccessor;
+import com.softwarequality.jabberpoint.Constants;
+
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MenuController extends MenuBar {
+    private final Frame parent;
+    private final Presentation presentation;
+<span class="nc" id="L16">    private final Map&lt;String, Command&gt; commands = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L18">    public MenuController(Frame frame, Presentation presentation) {</span>
+<span class="nc" id="L19">        ValidationUtils.checkNotNull(frame, &quot;Missing frame menu controller&quot;);</span>
+<span class="nc" id="L20">        ValidationUtils.checkNotNull(presentation, &quot;Missing presentation facade parameter&quot;);</span>
+
+<span class="nc" id="L22">        this.parent = frame;</span>
+<span class="nc" id="L23">        this.presentation = presentation;</span>
+<span class="nc" id="L24">        initializeCommands();</span>
+<span class="nc" id="L25">        createMenus();</span>
+<span class="nc" id="L26">    }</span>
+
+    private void initializeCommands() {
+<span class="nc" id="L29">        commands.put(&quot;OPEN&quot;, new OpenCommand(presentation, parent, new XMLAccessor(), new Constants(&quot;constants.json&quot;)));</span>
+<span class="nc" id="L30">        commands.put(&quot;NEW&quot;, new NewCommand(presentation, parent));</span>
+<span class="nc" id="L31">        commands.put(&quot;SAVE&quot;, new SaveCommand(presentation, parent, new XMLAccessor(), new Constants(&quot;constants.json&quot;)));</span>
+<span class="nc" id="L32">        commands.put(&quot;GOTO&quot;, new GotoCommand(presentation, parent, new Constants(&quot;constants.json&quot;)));</span>
+<span class="nc" id="L33">    }</span>
+
+    private void createMenus() {
+<span class="nc" id="L36">        this.add(createFileMenu());</span>
+<span class="nc" id="L37">        this.add(createViewMenu());</span>
+<span class="nc" id="L38">        this.setHelpMenu(createHelpMenu());</span>
+<span class="nc" id="L39">    }</span>
+
+    private Menu createFileMenu() {
+<span class="nc" id="L42">        Menu fileMenu = new Menu(&quot;File&quot;);</span>
+<span class="nc" id="L43">        fileMenu.add(createMenuItem(&quot;Open&quot;, commands.get(&quot;OPEN&quot;)));</span>
+<span class="nc" id="L44">        fileMenu.add(createMenuItem(&quot;New&quot;, commands.get(&quot;NEW&quot;)));</span>
+<span class="nc" id="L45">        fileMenu.add(createMenuItem(&quot;Save&quot;, commands.get(&quot;SAVE&quot;)));</span>
+<span class="nc" id="L46">        fileMenu.addSeparator();</span>
+<span class="nc" id="L47">        fileMenu.add(createMenuItem(&quot;Exit&quot;, e -&gt; System.exit(0)));</span>
+<span class="nc" id="L48">        return fileMenu;</span>
+    }
+
+    private Menu createViewMenu() {
+<span class="nc" id="L52">        Menu viewMenu = new Menu(&quot;View&quot;);</span>
+<span class="nc" id="L53">        viewMenu.add(createMenuItem(&quot;Next&quot;, new NextSlideCommand(presentation)));</span>
+<span class="nc" id="L54">        viewMenu.add(createMenuItem(&quot;Prev&quot;, new PrevSlideCommand(presentation)));</span>
+<span class="nc" id="L55">        viewMenu.add(createMenuItem(&quot;Goto&quot;, commands.get(&quot;GOTO&quot;)));</span>
+<span class="nc" id="L56">        return viewMenu;</span>
+    }
+
+    private Menu createHelpMenu() {
+<span class="nc" id="L60">        Menu helpMenu = new Menu(&quot;Help&quot;);</span>
+<span class="nc" id="L61">        helpMenu.add(createMenuItem(&quot;About&quot;, e -&gt; AboutBox.show(parent)));</span>
+<span class="nc" id="L62">        return helpMenu;</span>
+    }
+
+    private MenuItem createMenuItem(String name, Command command) {
+<span class="nc" id="L66">        MenuItem menuItem = new MenuItem(name, new MenuShortcut(name.charAt(0)));</span>
+<span class="nc" id="L67">        menuItem.addActionListener(e -&gt; command.execute());</span>
+<span class="nc" id="L68">        return menuItem;</span>
+    }
+
+    private MenuItem createMenuItem(String name, ActionListener listener) {
+<span class="nc" id="L72">        MenuItem menuItem = new MenuItem(name, new MenuShortcut(name.charAt(0)));</span>
+<span class="nc" id="L73">        menuItem.addActionListener(listener);</span>
+<span class="nc" id="L74">        return menuItem;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

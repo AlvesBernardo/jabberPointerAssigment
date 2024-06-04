@@ -1,122 +1,114 @@
-//package com.softwarequality.jabberpoint.drawer;
-//
-//import com.softwarequality.jabberpoint.utils.ImageLoadingException;
-//import com.softwarequality.jabberpoint.slide.Style;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//import java.awt.*;
-//import java.awt.image.BufferedImage;
-//import java.awt.image.ImageObserver;
-//import java.io.File;
-//import java.net.URL;
-//
-//public class BitmapItemTest {
-//    private BitmapItem bitmapItem;
-//    private final String imageName = "src/test/resources/testImage.png"     ;
-//    private final int level = 2;
-//    private final BufferedImage testBufferedImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
-//
-//    @BeforeEach
-//    public void setup() throws ImageLoadingException {
-//        try {
-//            URL url = this.getClass().getResource("testImage.png");
-//            File file = new File(url.getPath());
-//            String imageName = file.getAbsolutePath();
-//            System.out.println("Image path: " + imageName);
-//
-//            bitmapItem = new BitmapItem(level, imageName);
-//
-//            assertNotNull(bitmapItem, "bitmapItem is null after setup");
-//            System.out.println("bitmapItem successfully initialized.");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        bitmapItem = new BitmapItem(level, imageName);
-//    }
-//
+package com.softwarequality.jabberpoint.drawer;
+
+import com.softwarequality.jabberpoint.slide.Style;
+import com.softwarequality.jabberpoint.utils.ImageLoadingException;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+public class BitmapItemTest {
+
+    private BitmapItem bitmapItem;
+    private String imageName;
+    private BufferedImage bufferedImage;
+
+    @BeforeEach
+    void setUp() {
+        imageName = "testImage.png";
+    }
+
 //    @Test
-//    public void testConstructor() {
-//        assertNotNull(bitmapItem);
-//        assertEquals(level, bitmapItem.getLevel());
+//    void testConstructorAndLoadImageSuccess() throws ImageLoadingException, IOException {
+//        // Mock the File and ImageIO to simulate image loading
+//        File mockFile = mock(File.class);
+//        when(mockFile.exists()).thenReturn(true);
+//
+//        bufferedImage = mock(BufferedImage.class);
+//        mockStatic(ImageIO.class);
+//        when(ImageIO.read(any(File.class))).thenReturn(bufferedImage);
+//
+//        bitmapItem = new BitmapItem(1, imageName);
+//        assertNotNull(bitmapItem.getBufferedImage());
 //        assertEquals(imageName, bitmapItem.getImageName());
 //    }
-//
+
+    @Test
+    void testConstructorAndLoadImageFailure() {
+        // Simulate a failure in loading the image
+        assertThrows(ImageLoadingException.class, () -> new BitmapItem(1, "nonexistentImage.png"));
+    }
+
 //    @Test
-//    public void testSetImageName() {
-//        String newImageName = "newImage.png";
-//        bitmapItem.setImageName(newImageName);
-//        assertEquals(newImageName, bitmapItem.getImageName());
+//    void testSetBufferedImage() throws ImageLoadingException {
+//        bufferedImage = mock(BufferedImage.class);
+//        bitmapItem = new BitmapItem(1, imageName);
+//        bitmapItem.setBufferedImage(bufferedImage);
+//        assertEquals(bufferedImage, bitmapItem.getBufferedImage());
 //    }
-//
+
+    @Test
+    void testSetImageName() throws ImageLoadingException {
+        bitmapItem = new BitmapItem(1, imageName);
+        bitmapItem.setImageName("newImage.png");
+        assertEquals("newImage.png", bitmapItem.getImageName());
+    }
+
 //    @Test
-//    public void testSetImageNameNull() {
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            bitmapItem.setImageName(null);
-//        });
-//    }
+//    void testGetBoundingBox() throws ImageLoadingException {
+//        Graphics graphics = mock(Graphics.class);
+//        ImageObserver observer = mock(ImageObserver.class);
+//        Style style = mock(Style.class);
+//        when(style.getIndent()).thenReturn(20);
+//        when(style.getLeading()).thenReturn(10);
 //
+//        bufferedImage = mock(BufferedImage.class);
+//        when(bufferedImage.getWidth(observer)).thenReturn(100);
+//        when(bufferedImage.getHeight(observer)).thenReturn(50);
+//
+//        bitmapItem = new BitmapItem(1, imageName);
+//        bitmapItem.setBufferedImage(bufferedImage);
+//
+//        Rectangle boundingBox = bitmapItem.getBoundingBox(graphics, observer, 1.0f, style);
+//        assertEquals(new Rectangle(20, 0, 100, 60), boundingBox);
+//    }
+
 //    @Test
-//    public void testSetBufferedImage() {
-//        bitmapItem.setBufferedImage(testBufferedImage);
-//        assertEquals(testBufferedImage, bitmapItem.getBufferedImage());
+//    void testDraw() throws ImageLoadingException {
+//        Graphics graphics = mock(Graphics.class);
+//        ImageObserver observer = mock(ImageObserver.class);
+//        Style style = mock(Style.class);
+//        when(style.getIndent()).thenReturn(20);
+//        when(style.getLeading()).thenReturn(10);
+//
+//        bufferedImage = mock(BufferedImage.class);
+//        when(bufferedImage.getWidth(observer)).thenReturn(100);
+//        when(bufferedImage.getHeight(observer)).thenReturn(50);
+//
+//        bitmapItem = new BitmapItem(1, imageName);
+//        bitmapItem.setBufferedImage(bufferedImage);
+//
+//        bitmapItem.draw(10, 10, 1.0f, graphics, style, observer);
+//        verify(graphics).drawImage(eq(bufferedImage), eq(30), eq(20), eq(100), eq(50), eq(observer));
 //    }
-//
-//    @Test
-//    public void testSetBufferedImageNull() {
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            bitmapItem.setBufferedImage(null);
-//        });
-//    }
-//
-//    @Test
-//    public void testGetBoundingBox() {
-//        Style style = new Style(10, Color.white, 1, 1);
-//        ImageObserver observer = null;
-//        Graphics graphics = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB).getGraphics();
-//
-//        final int testLevel = level;
-//        final String testImageName = "non_existent.png";
-//        Throwable exception = assertThrows(ImageLoadingException.class, () -> new BitmapItem(testLevel, testImageName));
-//        assertEquals("File " + testImageName + " not found", exception.getMessage());
-//
-//        observer = new Canvas();
-//
-//        assertNotNull(bitmapItem.getBoundingBox(graphics, observer, 2.0f, style));
-//    }
-//
-//    @Test
-//    public void testDraw() {
-//        Style style = new Style(10, Color.white, 1, 1);
-//        ImageObserver observer = new Canvas();
-//        Graphics graphics = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB).getGraphics();
-//
-//        // Should not throw an Exception
-//        bitmapItem.draw(10, 10, 2.0f, graphics, style, observer);
-//    }
-//
-//    @Test
-//    public void testGetText() {
-//        assertNull(bitmapItem.getText());
-//    }
-//
-//    @Test
-//    public void testToString() {
-//        assertTrue(bitmapItem.toString().contains(imageName));
-//        assertTrue(bitmapItem.toString().contains(String.valueOf(level)));
-//    }
-//
-//    @Test
-//    public void testGetImage() {
-//        assertNotNull(bitmapItem.getBufferedImage());
-//    }
-//
-//    // This test assumes that the image file doesn't exist, so it should throw an exception
-//    @Test
-//    public void testLoadImageNonExistentFileThrowsException() {
-//        Throwable exception = assertThrows(ImageLoadingException.class, () -> new BitmapItem(level, "non_existent.png"));
-//        assertEquals("File non_existent.png not found", exception.getMessage());
-//    }
-//}
+
+    @Test
+    void testValidation() throws ImageLoadingException {
+        bitmapItem = new BitmapItem(1, imageName);
+
+        // Test validation for null BufferedImage
+        assertThrows(IllegalArgumentException.class, () -> bitmapItem.setBufferedImage(null));
+
+        // Test validation for null ImageName
+        assertThrows(IllegalArgumentException.class, () -> bitmapItem.setImageName(null));
+    }
+}

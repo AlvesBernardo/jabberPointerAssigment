@@ -3,59 +3,55 @@
 //import com.softwarequality.jabberpoint.slide.Style;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
 //
 //import java.awt.*;
 //import java.awt.image.BufferedImage;
 //import java.awt.image.ImageObserver;
 //
-//import static org.mockito.ArgumentMatchers.*;
-//import static org.mockito.Mockito.verify;
-//import org.mockito.junit.jupiter.MockitoExtension;
+//import static org.junit.jupiter.api.Assertions.assertThrows;
+//import static org.mockito.Mockito.*;
 //
-//@ExtendWith(MockitoExtension.class)
 //class BitmapItemDrawerTest {
-//	@Mock
-//	private Graphics mockGraphics;
-//	@Mock
-//	private BufferedImage mockBufferedImage;
-//	@Mock
-//	private BitmapItem mockBitmapItem;
-//	@Mock
-//	private Style mockStyle;
-//	@Mock
-//	private ImageObserver mockObserver;
 //
-//	private BitmapItemDrawer drawerUnderTest;
+//    private BitmapItemDrawer bitmapItemDrawer;
+//    private BitmapItem bitmapItem;
+//    private Graphics graphics;
+//    private Style style;
+//    private ImageObserver observer;
 //
-//	@BeforeEach
-//	void setUp() {
-//		MockitoAnnotations.initMocks(this);
-//	}
+//    @BeforeEach
+//    void setUp() {
+//        bitmapItem = mock(BitmapItem.class);
+//        graphics = mock(Graphics.class);
+//        style = mock(Style.class);
+//        observer = mock(ImageObserver.class);
+//        bitmapItemDrawer = new BitmapItemDrawer(bitmapItem);
+//    }
 //
-//	@Test
-//	void testDraw() {
-//		// setup
-//		int x = 10;
-//		int y = 10;
-//		float scale = 1.0f;
-//		drawerUnderTest = new BitmapItemDrawer(mockBitmapItem);
+//    @Test
+//    void testDraw() {
+//        // Mocking bitmap item's properties
+//        BufferedImage bufferedImage = mock(BufferedImage.class);
+//        when(bufferedImage.getWidth(observer)).thenReturn(100);
+//        when(bufferedImage.getHeight(observer)).thenReturn(50);
+//        when(bitmapItem.getBufferedImage()).thenReturn(bufferedImage);
 //
-//		// when
-//		drawerUnderTest.draw(x, y, scale, mockGraphics, mockStyle, mockObserver);
+//        // Mocking style properties
+//        when(style.getIndent()).thenReturn(20);
+//        when(style.getLeading()).thenReturn(10);
 //
-//		// then
-//		verify(mockGraphics).drawImage(
-//				eq(mockBufferedImage),
-//				anyInt(),
-//				anyInt(),
-//				anyInt(),
-//				anyInt(),
-//				eq(mockObserver)
-//		);
-//	}
+//        // Execute the draw method
+//        bitmapItemDrawer.draw(10, 10, 1.0f, graphics, style, observer);
 //
+//        // Verify that graphics.drawImage is called with the correct parameters
+//        verify(graphics).drawImage(eq(bufferedImage), eq(10 + 20), eq(10), eq(100), eq(50), eq(observer));
+//    }
 //
+//    @Test
+//    void testNullInputs() {
+//        assertThrows(IllegalArgumentException.class, () -> bitmapItemDrawer.draw(10, 10, 1.0f, null, style, observer));
+//        assertThrows(IllegalArgumentException.class, () -> bitmapItemDrawer.draw(10, 10, 1.0f, graphics, null, observer));
+//        assertThrows(IllegalArgumentException.class, () -> bitmapItemDrawer.draw(10, 10, 1.0f, graphics, style, null));
+//        assertThrows(IllegalArgumentException.class, () -> new BitmapItemDrawer(null));
+//    }
 //}

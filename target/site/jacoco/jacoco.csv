@@ -1,0 +1,36 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+MehdiBernardo,com.softwarequality.jabberpoint.drawer,BitmapItemDrawer,54,0,0,0,13,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.drawer,TextItemDrawer,72,9,2,0,14,4,3,1,2,1
+MehdiBernardo,com.softwarequality.jabberpoint.drawer,BitmapItem,115,38,0,0,22,13,7,4,7,4
+MehdiBernardo,com.softwarequality.jabberpoint.drawer,DrawerFactory,14,40,1,1,1,8,2,3,1,3
+MehdiBernardo,com.softwarequality.jabberpoint.drawer,TextItem,183,20,5,1,36,7,10,3,7,3
+MehdiBernardo,com.softwarequality.jabberpoint.slide,SlideItem,21,18,0,0,7,7,3,3,3,3
+MehdiBernardo,com.softwarequality.jabberpoint.slide,SlideImplementation,154,44,18,4,35,15,18,7,8,6
+MehdiBernardo,com.softwarequality.jabberpoint.slide,Style,14,174,1,3,1,21,2,9,1,8
+MehdiBernardo,com.softwarequality.jabberpoint.slide,SlideConstants,3,0,0,0,1,0,1,0,1,0
+MehdiBernardo,com.softwarequality.jabberpoint.slide,SlideBuilder,0,29,0,0,0,10,0,4,0,4
+MehdiBernardo,com.softwarequality.jabberpoint.utils,ValidationUtils,3,8,0,2,1,3,1,2,1,1
+MehdiBernardo,com.softwarequality.jabberpoint.utils,ImageLoadingException,0,5,0,0,0,2,0,1,0,1
+MehdiBernardo,com.softwarequality.jabberpoint.utils,GraphicsUtils,3,24,0,0,1,3,1,1,1,1
+MehdiBernardo,com.softwarequality.jabberpoint,Constants,8,54,0,4,3,13,1,3,1,1
+MehdiBernardo,com.softwarequality.jabberpoint,DemoPresentation,0,180,0,0,0,41,0,3,0,3
+MehdiBernardo,com.softwarequality.jabberpoint,Accessor,0,7,0,0,0,2,0,2,0,2
+MehdiBernardo,com.softwarequality.jabberpoint,XMLAccessor,274,0,18,0,68,0,14,0,5,0
+MehdiBernardo,com.softwarequality.jabberpoint,JabberPoint,42,0,2,0,12,0,3,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.commands,PrevSlideCommand,0,8,0,0,0,4,0,2,0,2
+MehdiBernardo,com.softwarequality.jabberpoint.commands,SaveCommand,39,0,0,0,10,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.commands,AbstractCommand,0,9,0,0,0,4,0,1,0,1
+MehdiBernardo,com.softwarequality.jabberpoint.commands,MenuController,253,0,0,0,39,0,11,0,11,0
+MehdiBernardo,com.softwarequality.jabberpoint.commands,ExitCommand,0,8,0,0,0,4,0,2,0,2
+MehdiBernardo,com.softwarequality.jabberpoint.commands,NextSlideCommand,0,8,0,0,0,4,0,2,0,2
+MehdiBernardo,com.softwarequality.jabberpoint.commands,AboutBox,3,11,0,0,1,4,1,1,1,1
+MehdiBernardo,com.softwarequality.jabberpoint.commands,KeyController,111,7,2,0,17,2,3,1,2,1
+MehdiBernardo,com.softwarequality.jabberpoint.commands,NewCommand,14,0,0,0,6,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.commands,GotoCommand,54,0,4,0,13,0,4,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.commands,OpenCommand,49,0,0,0,13,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.presentation,Presentation,34,98,4,6,10,30,7,13,3,12
+MehdiBernardo,com.softwarequality.jabberpoint.slideView,SlideViewerFrame,58,0,0,0,14,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.slideView,ComponentSlideObserver,6,0,0,0,3,0,1,0,1,0
+MehdiBernardo,com.softwarequality.jabberpoint.slideView,SlideViewerComponent.new Observable() {...},11,0,0,0,4,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.slideView,SlideViewerFrame.new WindowAdapter() {...},9,0,0,0,3,0,2,0,2,0
+MehdiBernardo,com.softwarequality.jabberpoint.slideView,SlideViewerComponent,164,0,4,0,44,0,14,0,12,0

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BitmapItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MehdiBernardo</a> &gt; <a href="index.source.html" class="el_package">com.softwarequality.jabberpoint.drawer</a> &gt; <span class="el_source">BitmapItem.java</span></div><h1>BitmapItem.java</h1><pre class="source lang-java linenums">package com.softwarequality.jabberpoint.drawer;
+
+import com.softwarequality.jabberpoint.utils.ImageLoadingException;
+import com.softwarequality.jabberpoint.slide.SlideItem;
+import com.softwarequality.jabberpoint.slide.Style;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+public class BitmapItem extends SlideItem {
+  private static final String FILE_NOT_FOUND_MESSAGE = &quot;File &quot;;
+  private static final String FILE_NOT_FOUND_SUFFIX = &quot; not found&quot;;
+  private BufferedImage bufferedImage;
+  private String imageName;
+
+  public BitmapItem(int level, String name) throws ImageLoadingException {
+<span class="fc" id="L22">    super(level);</span>
+<span class="fc" id="L23">    setImageName(name);</span>
+<span class="fc" id="L24">    loadImage();</span>
+<span class="fc" id="L25">  }</span>
+
+  public BufferedImage getBufferedImage() {
+<span class="nc" id="L28">    return bufferedImage;</span>
+  }
+
+  public void setBufferedImage(BufferedImage bufferedImage) {
+<span class="nc" id="L32">    ValidationUtils.checkNotNull(bufferedImage, &quot;BufferedImage cannot be null&quot;);</span>
+<span class="nc" id="L33">    this.bufferedImage = bufferedImage;</span>
+<span class="nc" id="L34">  }</span>
+
+  public String getImageName() {
+<span class="fc" id="L37">    return imageName;</span>
+  }
+
+  public void setImageName(String imageName) {
+<span class="fc" id="L41">    ValidationUtils.checkNotNull(imageName, &quot;Image name cannot be null&quot;);</span>
+<span class="fc" id="L42">    this.imageName = imageName;</span>
+<span class="fc" id="L43">  }</span>
+
+  @Override
+  public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style style) {
+<span class="nc" id="L47">    validateParameters(graphics, observer, style);</span>
+<span class="nc" id="L48">    return new Rectangle(</span>
+<span class="nc" id="L49">            (int) (style.getIndent() * scale),</span>
+            0,
+<span class="nc" id="L51">            (int) (bufferedImage.getWidth(observer) * scale),</span>
+<span class="nc" id="L52">            (int) (style.getLeading() * scale) + (int) (bufferedImage.getHeight(observer) * scale)</span>
+    );
+  }
+
+  @Override
+  public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
+<span class="nc" id="L58">    validateParameters(graphics, observer, style);</span>
+<span class="nc" id="L59">    int width = x + (int) (style.getIndent() * scale);</span>
+<span class="nc" id="L60">    int height = y + (int) (style.getLeading() * scale);</span>
+
+<span class="nc" id="L62">    graphics.drawImage(</span>
+            bufferedImage,
+            width,
+            height,
+<span class="nc" id="L66">            (int) (bufferedImage.getWidth(observer) * scale),</span>
+<span class="nc" id="L67">            (int) (bufferedImage.getHeight(observer) * scale),</span>
+            observer
+    );
+<span class="nc" id="L70">  }</span>
+
+  @Override
+  public String getText() {
+<span class="nc" id="L74">    return null;</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L79">    return &quot;BitmapItem[&quot; + getLevel() + &quot;,&quot; + imageName + &quot;]&quot;;</span>
+  }
+
+  private void loadImage() throws ImageLoadingException {
+    try {
+<span class="fc" id="L84">      bufferedImage = ImageIO.read(new File(imageName));</span>
+<span class="fc" id="L85">    } catch (IOException e) {</span>
+<span class="fc" id="L86">      throw new ImageLoadingException(FILE_NOT_FOUND_MESSAGE + imageName + FILE_NOT_FOUND_SUFFIX, e);</span>
+<span class="fc" id="L87">    }</span>
+<span class="fc" id="L88">  }</span>
+
+  private void validateParameters(Graphics graphics, ImageObserver observer, Style style) {
+<span class="nc" id="L91">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+<span class="nc" id="L92">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
+<span class="nc" id="L93">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="nc" id="L94">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
