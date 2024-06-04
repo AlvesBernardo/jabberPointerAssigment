@@ -10,6 +10,6 @@ public interface Slide {
   List<SlideComponent> getSlideComponents();
   int getSize();
   void draw(Graphics graphics, Rectangle area, ImageObserver view);
-  void add(SlideComponent slideComponent);
-  void remove(SlideComponent slideComponent);
+  void addComponent(SlideComponent slideComponent);
+  void removeComponent(SlideComponent slideComponent);
 }

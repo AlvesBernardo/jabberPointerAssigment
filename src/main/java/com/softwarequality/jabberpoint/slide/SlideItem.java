@@ -19,12 +19,13 @@ public abstract class SlideItem implements SlideComponent {
     this.level = level;
   }
 
-  public void add(SlideComponent slideComponent) {
+
+  public void addComponent(SlideComponent slideComponent) {
     ValidationUtils.checkNotNull(slideComponent, "Cannot add null slide item");
     this.slideComponents.add(slideComponent);
   }
 
-  public void remove(SlideComponent slideComponent) {
+  public void removeComponent(SlideComponent slideComponent) {
     ValidationUtils.checkNotNull(slideComponent, "Cannot remove null slide item");
     this.slideComponents.remove(slideComponent);
   }
@@ -36,6 +37,7 @@ public abstract class SlideItem implements SlideComponent {
   public List<SlideComponent> getSlideComponents() {
     return this.slideComponents;
   }
+
 
   @Override
   public abstract Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style);

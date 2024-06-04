@@ -94,7 +94,7 @@ public class SlideImplementation implements Slide {
   }
 
   @Override
-  public void add(SlideComponent slideComponent) {
+  public void addComponent(SlideComponent slideComponent) {
     if (slideComponent == null) {
       throw new IllegalStateException("Cannot add null slide component");
     }
@@ -102,7 +102,7 @@ public class SlideImplementation implements Slide {
   }
 
   @Override
-  public void remove(SlideComponent slideComponent) {
+  public void removeComponent(SlideComponent slideComponent) {
     if (slideComponent == null) {
       throw new IllegalStateException("Cannot remove null slide component");
     }

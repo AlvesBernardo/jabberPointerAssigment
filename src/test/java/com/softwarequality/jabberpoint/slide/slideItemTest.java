@@ -31,7 +31,7 @@ class SlideItemTest {
     }
 
 
-    void givenSlideComponentWhenAddThenItIsAddedToSlideComponents() {
+    void givenSlideComponentWhenAddComponentThenItIsAddedToSlideComponents() {
         SlideComponent testSlideComponent = new SlideItem(1) {
             @Override
             public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style) {
@@ -50,18 +50,18 @@ class SlideItemTest {
                 return "Test slide item";
             }
         };
-        this.slideItem.add(testSlideComponent);
+        this.slideItem.addComponent(testSlideComponent);
         assertTrue(this.slideItem.getSlideComponents().contains(testSlideComponent));
     }
 
     @Test
-    void givenNullSlideComponentWhenAddThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideItem.add(null));
+    void givenNullSlideComponentWhenAddComponentThenThrowException() {
+        assertThrows(IllegalStateException.class, () -> this.slideItem.addComponent(null));
     }
 
     @Test
     void givenNullSlideComponentWhenRemoveThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideItem.remove(null));
+        assertThrows(IllegalStateException.class, () -> this.slideItem.removeComponent(null));
     }
 
     @Test
