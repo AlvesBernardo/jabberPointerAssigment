@@ -18,16 +18,36 @@ public class GotoCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        String pageNumberStr = JOptionPane.showInputDialog(parent, constants.getValue("PAGENR"));
-        try {
-            int pageNumber = Integer.parseInt(pageNumberStr);
-            if (pageNumber < 1 || pageNumber > presentation.getSize()) {
-                JOptionPane.showMessageDialog(parent, "Invalid slide number. Please enter a number between 1 and " + presentation.getSize() + ".", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                presentation.setSlideNumber(pageNumber - 1);
-            }
-        } catch (NumberFormatException exc) {
-            JOptionPane.showMessageDialog(parent, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        String pageNumberStr = requestPageInput();
+
+        if(!isPageNumberValid(pageNumberStr)) {
+            showErrorMessage("Please enter a valid number.");
+            return;
         }
+
+        int pageNumber = Integer.parseInt(pageNumberStr);
+
+        if(!isPageWithinRange(pageNumber)) {
+            showErrorMessage("Invalid slide number. Please enter a number between 1 and " + presentation.getSize() + ".");
+            return;
+        }
+
+        presentation.setSlideNumber(pageNumber - 1);
+    }
+
+    private String requestPageInput() {
+        return JOptionPane.showInputDialog(parent, constants.getValue("PAGENR"));
+    }
+
+    private boolean isPageNumberValid(String pageNumberStr) {
+        return pageNumberStr.matches("\\d+");
+    }
+
+    private boolean isPageWithinRange(int pageNumber) {
+        return pageNumber > 0 && pageNumber <= presentation.getSize();
+    }
+
+    private void showErrorMessage(String errorMsg) {
+        JOptionPane.showMessageDialog(parent, errorMsg, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
