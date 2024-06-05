@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
-<!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
 <presentation>
-<showtitle>Test Presentation</showtitle>
-<slide>
-<title>Test Slide</title>
-</slide>
+    <showtitle>Your presentation title here</showtitle>
+    <slide>
+        <title>Your slide title here</title>
+        <item kind="text" level="1">This is a text item.</item>
+        <item kind="image" level="1">Path to your image</item>
+    </slide>
 </presentation>
