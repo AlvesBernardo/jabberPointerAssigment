@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Microsoft\jdk-17.0.10.7-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\berna\AppData\Local\Temp\surefire18349037585670703676\surefirebooter18129532056435490456.jar C:\Users\berna\AppData\Local\Temp\surefire18349037585670703676 2024-06-05T16-53-39_024-jvmRun1 surefire2698676607735610939tmp surefire_014499507416567202411tmp"/>
+    <property name="sun.java.command" value="C:\Users\berna\AppData\Local\Temp\surefire11602899316094321850\surefirebooter7043715803456671147.jar C:\Users\berna\AppData\Local\Temp\surefire11602899316094321850 2024-06-05T17-42-48_191-jvmRun1 surefire7276485346549021114tmp surefire_05857115741309787235tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\berna\Documents\University Dokuments\SoftwareQuality\jabberPointerAssigment\target\test-classes;C:\Users\berna\Documents\University Dokuments\SoftwareQuality\jabberPointerAssigment\target\classes;C:\Users\berna\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\berna\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;C:\Users\berna\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\berna\.m2\repository\org\mockito\mockito-core\5.3.1\mockito-core-5.3.1.jar;C:\Users\berna\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\berna\.m2\repository\org\mockito\mockito-junit-jupiter\5.3.1\mockito-junit-jupiter-5.3.1.jar;C:\Users\berna\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\berna\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\berna\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\berna\.m2\repository\org\json\json\20210307\json-20210307.jar;C:\Users\berna\.m2\repository\com\googlecode\json-simple\json-simple\1.1.1\json-simple-1.1.1.jar;C:\Users\berna\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\berna\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Users\berna\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\berna\.m2\repository\net\bytebuddy\byte-buddy\1.14.0\byte-buddy-1.14.0.jar;C:\Users\berna\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.0\byte-buddy-agent-1.14.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\berna\AppData\Local\Temp\surefire18349037585670703676\surefirebooter18129532056435490456.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\berna\AppData\Local\Temp\surefire11602899316094321850\surefirebooter7043715803456671147.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.10+7-LTS"/>

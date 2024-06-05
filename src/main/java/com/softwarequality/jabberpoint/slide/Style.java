@@ -20,13 +20,19 @@ public class Style {
   private final int leading;
 
   public Style(int indent, Color color, int fontSize, int leading) {
+    if (color == null) {
+      throw new IllegalArgumentException("Color cannot be null");
+    }
+    if (fontSize <= 0) {
+      throw new IllegalArgumentException("Font size must be positive");
+    }
+
     this.indent = indent;
     this.color = color;
     this.font = new Font(FONT_NAME, Font.BOLD, fontSize);
     this.fontSize = fontSize;
     this.leading = leading;
   }
-
   public static void createStyles() {
     styles = new Style[STYLE_COUNT];
     for (int i = 0; i < STYLE_COUNT; i++) {

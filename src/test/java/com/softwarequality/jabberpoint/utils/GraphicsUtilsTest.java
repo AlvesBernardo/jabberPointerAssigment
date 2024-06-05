@@ -14,7 +14,8 @@ class GraphicsUtilsTest {
         int x = 10;
         int y = 20;
         float scale = 1.5f;
-        Style style = new Style(5, null, 10, 0);
+        Color color = Color.RED;
+        Style style = new Style(5, color, 10, 0);
 
         Point pen = GraphicsUtils.initializePen(x, y, scale, style);
 
