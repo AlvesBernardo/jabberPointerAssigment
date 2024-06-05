@@ -12,21 +12,21 @@ public class KeyController extends KeyAdapter {
 <span class="fc" id="L12">  private final Map&lt;Integer, Command&gt; keyCommands = new HashMap&lt;&gt;();</span>
 
 <span class="fc" id="L14">  public KeyController(Presentation presentation) {</span>
-<span class="nc" id="L15">    ValidationUtils.checkNotNull(presentation, &quot;Presentation cannot be null.&quot;);</span>
-<span class="nc" id="L16">    initializeCommands(presentation);</span>
-<span class="nc" id="L17">  }</span>
+<span class="fc" id="L15">    ValidationUtils.checkNotNull(presentation, &quot;Presentation cannot be null.&quot;);</span>
+<span class="fc" id="L16">    initializeCommands(presentation);</span>
+<span class="fc" id="L17">  }</span>
 
   private void initializeCommands(Presentation presentation) {
-<span class="nc" id="L20">    keyCommands.put(KeyEvent.VK_PAGE_DOWN, new NextSlideCommand(presentation));</span>
-<span class="nc" id="L21">    keyCommands.put(KeyEvent.VK_DOWN, new NextSlideCommand(presentation));</span>
-<span class="nc" id="L22">    keyCommands.put(KeyEvent.VK_ENTER, new NextSlideCommand(presentation));</span>
-<span class="nc" id="L23">    keyCommands.put((int) '+', new NextSlideCommand(presentation));</span>
-<span class="nc" id="L24">    keyCommands.put(KeyEvent.VK_PAGE_UP, new PrevSlideCommand(presentation));</span>
-<span class="nc" id="L25">    keyCommands.put(KeyEvent.VK_UP, new PrevSlideCommand(presentation));</span>
-<span class="nc" id="L26">    keyCommands.put((int) '-', new PrevSlideCommand(presentation));</span>
-<span class="nc" id="L27">    keyCommands.put((int) 'q', new ExitCommand(presentation));</span>
-<span class="nc" id="L28">    keyCommands.put((int) 'Q', new ExitCommand(presentation));</span>
-<span class="nc" id="L29">  }</span>
+<span class="fc" id="L20">    keyCommands.put(KeyEvent.VK_PAGE_DOWN, new NextSlideCommand(presentation));</span>
+<span class="fc" id="L21">    keyCommands.put(KeyEvent.VK_DOWN, new NextSlideCommand(presentation));</span>
+<span class="fc" id="L22">    keyCommands.put(KeyEvent.VK_ENTER, new NextSlideCommand(presentation));</span>
+<span class="fc" id="L23">    keyCommands.put((int) '+', new NextSlideCommand(presentation));</span>
+<span class="fc" id="L24">    keyCommands.put(KeyEvent.VK_PAGE_UP, new PrevSlideCommand(presentation));</span>
+<span class="fc" id="L25">    keyCommands.put(KeyEvent.VK_UP, new PrevSlideCommand(presentation));</span>
+<span class="fc" id="L26">    keyCommands.put((int) '-', new PrevSlideCommand(presentation));</span>
+<span class="fc" id="L27">    keyCommands.put((int) 'q', new ExitCommand(presentation));</span>
+<span class="fc" id="L28">    keyCommands.put((int) 'Q', new ExitCommand(presentation));</span>
+<span class="fc" id="L29">  }</span>
 
   @Override
   public void keyPressed(KeyEvent keyEvent) {

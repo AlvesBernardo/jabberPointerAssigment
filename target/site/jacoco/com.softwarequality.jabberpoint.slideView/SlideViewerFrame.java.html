@@ -17,25 +17,25 @@ public class SlideViewerFrame extends JFrame {
   private static final String JABTITLE = &quot;Jabberpoint 1.6 - OU&quot;;
 
   public SlideViewerFrame(String title, Presentation presentation) {
-<span class="nc" id="L20">    super(title);</span>
-<span class="nc" id="L21">    ValidationUtils.checkNotNull(presentation, &quot;Missing presentation for SlideViewerFrame&quot;);</span>
-<span class="nc" id="L22">    SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);</span>
-<span class="nc" id="L23">    presentation.setShowView(slideViewerComponent);</span>
-<span class="nc" id="L24">    setupWindow(slideViewerComponent, presentation);</span>
-<span class="nc" id="L25">  }</span>
+<span class="fc" id="L20">    super(title);</span>
+<span class="fc" id="L21">    ValidationUtils.checkNotNull(presentation, &quot;Missing presentation for SlideViewerFrame&quot;);</span>
+<span class="fc" id="L22">    SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);</span>
+<span class="fc" id="L23">    presentation.setShowView(slideViewerComponent);</span>
+<span class="fc" id="L24">    setupWindow(slideViewerComponent, presentation);</span>
+<span class="fc" id="L25">  }</span>
 
   public void setupWindow(SlideViewerComponent slideViewerComponent, Presentation presentation) {
-<span class="nc" id="L28">    setTitle(JABTITLE);</span>
-<span class="nc" id="L29">    addWindowListener(new WindowAdapter() {</span>
+<span class="fc" id="L28">    setTitle(JABTITLE);</span>
+<span class="fc" id="L29">    addWindowListener(new WindowAdapter() {</span>
       public void windowClosing(WindowEvent e) {
 <span class="nc" id="L31">        System.exit(0);</span>
 <span class="nc" id="L32">      }</span>
     });
-<span class="nc" id="L34">    getContentPane().add(slideViewerComponent);</span>
-<span class="nc" id="L35">    addKeyListener(new KeyController(presentation));</span>
-<span class="nc" id="L36">    setMenuBar(new MenuController(this, presentation));</span>
-<span class="nc" id="L37">    setSize(new Dimension(WIDTH, HEIGHT));</span>
-<span class="nc" id="L38">    setVisible(true);</span>
-<span class="nc" id="L39">  }</span>
+<span class="fc" id="L34">    getContentPane().add(slideViewerComponent);</span>
+<span class="fc" id="L35">    addKeyListener(new KeyController(presentation));</span>
+<span class="fc" id="L36">    setMenuBar(new MenuController(this, presentation));</span>
+<span class="fc" id="L37">    setSize(new Dimension(WIDTH, HEIGHT));</span>
+<span class="fc" id="L38">    setVisible(true);</span>
+<span class="fc" id="L39">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

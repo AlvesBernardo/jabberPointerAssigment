@@ -20,12 +20,29 @@ public class SaveCommand extends AbstractCommand {
         this.constants = constants;
     }
 
+    public Frame getParent() {
+        return parent;
+    }
+
+    public Accessor getAccessor() {
+        return accessor;
+    }
+
+    public Constants getConstants() {
+        return constants;
+    }
+
+
     @Override
     public void execute() {
         try {
             accessor.saveFile(presentation, constants.getValue("SAVEFILE"));
         } catch (IOException exc) {
-            JOptionPane.showMessageDialog(parent, constants.getValue("IOEX") + exc, constants.getValue("SAVEERR"), JOptionPane.ERROR_MESSAGE);
+            displayErrorMessage(exc);
         }
+    }
+
+    public void displayErrorMessage(Exception exc) {
+        JOptionPane.showMessageDialog(parent, constants.getValue("IOEX") + exc, constants.getValue("SAVEERR"), JOptionPane.ERROR_MESSAGE);
     }
 }

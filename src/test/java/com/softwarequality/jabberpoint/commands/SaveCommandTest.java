@@ -1,60 +1,73 @@
-//package com.softwarequality.jabberpoint.commands;
-//
-//import com.softwarequality.jabberpoint.presentation.Presentation;
-//import com.softwarequality.jabberpoint.Accessor;
-//import com.softwarequality.jabberpoint.Constants;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import static org.mockito.Mockito.*;
-//
-//import javax.swing.*;
-//import java.awt.*;
-//import java.io.IOException;
-//
-//public class SaveCommandTest {
-//	@Mock
-//	Accessor accessor;
-//
-//	@Mock
-//	Constants constants;
-//
-//	@Mock
-//	Presentation presentation;
-//
-//	@Mock
-//	MessageDialog messageDialog;
-//
-//	@Mock
-//	SaveCommand saveCommand;
-//
-//	@BeforeEach
-//	public void setUp() throws IOException {
-//		MockitoAnnotations.openMocks(this);
-//		saveCommand = new SaveCommand(presentation, messageDialog, accessor, constants);
-//	}
-//
-//	@Test
-//	public void testSaveCommandExecuteWithoutException() throws IOException {
-//		// setup
-//		String path = "SAVEFILE";
-//		when(constants.getValue("SAVEFILE")).thenReturn(path);
-//		saveCommand.execute();
-//		verify(accessor, times(1)).saveFile(presentation, path);
-//	}
-//
-//	@Test
-//	public void testSaveCommandExecuteWithIOException() throws IOException {
-//		String path = "SAVEFILE";
-//		when(constants.getValue("SAVEFILE")).thenReturn(path);
-//		String error = "An IO error occurred.";
-//		doThrow(new IOException(error)).when(accessor).saveFile(presentation, path);
-//
-//		saveCommand.execute();
-//
-//		verify(accessor, times(1)).saveFile(presentation, path);
-//		verify(messageDialog, times(1)).showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
-//	}
-//}
-//}
+package com.softwarequality.jabberpoint.commands;
+
+import com.softwarequality.jabberpoint.presentation.Presentation;
+import com.softwarequality.jabberpoint.Accessor;
+import com.softwarequality.jabberpoint.Constants;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.awt.*;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+public class SaveCommandTest {
+    @Mock
+    private Presentation mockPresentation;
+    @Mock
+    private Frame mockFrame;
+    @Mock
+    private Accessor mockAccessor;
+    @Mock
+    private Constants mockConstants;
+
+    private SaveCommand commandUnderTest;
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        when(mockConstants.getValue(anyString())).thenReturn("Some value");
+        commandUnderTest = new SaveCommand(mockPresentation, mockFrame, mockAccessor, mockConstants);
+    }
+
+    @Test
+    public void execute_shouldSaveFileSuccessfully() throws IOException {
+        commandUnderTest.execute();
+        verify(mockAccessor, times(1)).saveFile(mockPresentation, "Some value");
+    }
+
+    @Test
+    public void testExecute_whenExceptionOccurs_shouldShowErrorMessage() {
+        SaveCommand spyCommand = spy(commandUnderTest);
+        doNothing().when(spyCommand).displayErrorMessage(any(Exception.class));
+
+        try {
+            doThrow(IOException.class).when(mockAccessor).saveFile(any(Presentation.class), anyString());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        spyCommand.execute();
+
+        verify(spyCommand).displayErrorMessage(any(Exception.class));
+    }
+
+    @Test
+    public void testGetParent_ShouldReturnCorrectFrames() {
+        assertEquals(mockFrame, commandUnderTest.getParent());
+    }
+
+    @Test
+    public void testGetAccessor_ShouldReturnCorrectAccessor() {
+        assertEquals(mockAccessor, commandUnderTest.getAccessor());
+    }
+
+    @Test
+    public void testGetConstants_ShouldReturnCorrectConstants() {
+        assertEquals(mockConstants, commandUnderTest.getConstants());
+    }
+}

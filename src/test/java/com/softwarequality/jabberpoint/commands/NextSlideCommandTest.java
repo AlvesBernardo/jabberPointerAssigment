@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NextSlideCommandTest {
 
+
+
     @Test
     void testExecute() {
         // Create a mock Presentation instance
