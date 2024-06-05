@@ -25,13 +25,13 @@ public class BitmapItem extends SlideItem {
 <span class="fc" id="L25">  }</span>
 
   public BufferedImage getBufferedImage() {
-<span class="nc" id="L28">    return bufferedImage;</span>
+<span class="fc" id="L28">    return bufferedImage;</span>
   }
 
   public void setBufferedImage(BufferedImage bufferedImage) {
-<span class="nc" id="L32">    ValidationUtils.checkNotNull(bufferedImage, &quot;BufferedImage cannot be null&quot;);</span>
-<span class="nc" id="L33">    this.bufferedImage = bufferedImage;</span>
-<span class="nc" id="L34">  }</span>
+<span class="fc" id="L32">    ValidationUtils.checkNotNull(bufferedImage, &quot;BufferedImage cannot be null&quot;);</span>
+<span class="fc" id="L33">    this.bufferedImage = bufferedImage;</span>
+<span class="fc" id="L34">  }</span>
 
   public String getImageName() {
 <span class="fc" id="L37">    return imageName;</span>
@@ -55,19 +55,19 @@ public class BitmapItem extends SlideItem {
 
   @Override
   public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
-<span class="nc" id="L58">    validateParameters(graphics, observer, style);</span>
-<span class="nc" id="L59">    int width = x + (int) (style.getIndent() * scale);</span>
-<span class="nc" id="L60">    int height = y + (int) (style.getLeading() * scale);</span>
+<span class="fc" id="L58">    validateParameters(graphics, observer, style);</span>
+<span class="fc" id="L59">    int width = x + (int) (style.getIndent() * scale);</span>
+<span class="fc" id="L60">    int height = y + (int) (style.getLeading() * scale);</span>
 
-<span class="nc" id="L62">    graphics.drawImage(</span>
+<span class="fc" id="L62">    graphics.drawImage(</span>
             bufferedImage,
             width,
             height,
-<span class="nc" id="L66">            (int) (bufferedImage.getWidth(observer) * scale),</span>
-<span class="nc" id="L67">            (int) (bufferedImage.getHeight(observer) * scale),</span>
+<span class="fc" id="L66">            (int) (bufferedImage.getWidth(observer) * scale),</span>
+<span class="fc" id="L67">            (int) (bufferedImage.getHeight(observer) * scale),</span>
             observer
     );
-<span class="nc" id="L70">  }</span>
+<span class="fc" id="L70">  }</span>
 
   @Override
   public String getText() {
@@ -88,9 +88,9 @@ public class BitmapItem extends SlideItem {
 <span class="fc" id="L88">  }</span>
 
   private void validateParameters(Graphics graphics, ImageObserver observer, Style style) {
-<span class="nc" id="L91">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
-<span class="nc" id="L92">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
-<span class="nc" id="L93">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
-<span class="nc" id="L94">  }</span>
+<span class="fc" id="L91">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+<span class="fc" id="L92">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
+<span class="fc" id="L93">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="fc" id="L94">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

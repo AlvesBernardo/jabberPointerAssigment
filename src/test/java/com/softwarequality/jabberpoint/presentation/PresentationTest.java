@@ -13,17 +13,14 @@ class PresentationTest {
     private Slide slide2;
 
     @BeforeEach
-    public void setUp() {    presentation = new Presentation();
+    public void setUp() {
+        presentation = new Presentation();
 
         SlideBuilder slideBuilder = new SlideBuilder();
 
-        slide1 = slideBuilder
-                .withTitle("Test title 1")
-                .build();
+        slide1 = slideBuilder.withTitle("Test title 1").build();
 
-        slide2 = slideBuilder
-                .withTitle("Test title 2")
-                .build();
+        slide2 = slideBuilder.withTitle("Test title 2").build();
 
         presentation.appendSlide(slide1);
         presentation.appendSlide(slide2);
@@ -76,12 +73,11 @@ class PresentationTest {
     @Test
     public void testAppendSlide() {
         SlideBuilder slideBuilder = new SlideBuilder();
-        Slide slide3 = slideBuilder
-                .withTitle("Test title 3")
-                .build();
+        Slide slide3 = slideBuilder.withTitle("Test title 3").build();
         presentation.appendSlide(slide3);
         assertEquals(3, presentation.getSize());
     }
+
     @Test
     public void testGetSlide() {
         assertSame(slide2, presentation.getSlide(1));
@@ -93,5 +89,4 @@ class PresentationTest {
         assertSame(slide2, presentation.getCurrentSlide());
     }
 
-    // Testing `exit` method is not included, as it exits the application
 }

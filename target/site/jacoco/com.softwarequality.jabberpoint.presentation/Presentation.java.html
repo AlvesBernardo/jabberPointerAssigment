@@ -35,8 +35,8 @@ public class Presentation {
 <span class="fc" id="L35">    }</span>
 
     public void setShowView(SlideViewerComponent slideViewerComponent) {
-<span class="nc" id="L38">        this.slideViewComponent = slideViewerComponent;</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L38">        this.slideViewComponent = slideViewerComponent;</span>
+<span class="fc" id="L39">    }</span>
 
     public int getSlideNumber() {
 <span class="fc" id="L42">        return currentSlideNumber;</span>
@@ -44,8 +44,8 @@ public class Presentation {
 
     public void setSlideNumber(int number) {
 <span class="fc" id="L46">        currentSlideNumber = number;</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (slideViewComponent != null) {</span>
-<span class="nc" id="L48">            slideViewComponent.update(this, getCurrentSlide());</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (slideViewComponent != null) {</span>
+<span class="fc" id="L48">            slideViewComponent.update(this, getCurrentSlide());</span>
         }
 <span class="fc" id="L50">    }</span>
 

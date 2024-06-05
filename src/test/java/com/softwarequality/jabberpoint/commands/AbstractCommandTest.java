@@ -11,7 +11,6 @@ public class AbstractCommandTest
 	@Test
 	public void testConstructorWithNonNullPresentation() {
 		Presentation presentation = new Presentation();
-
 		AbstractCommand abstractCommand = new TestCommand(presentation);
 
 		assertNotNull(abstractCommand);

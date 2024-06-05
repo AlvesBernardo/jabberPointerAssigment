@@ -8,11 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -35,22 +33,11 @@ public class OpenCommandTest {
         MockitoAnnotations.openMocks(this);
         when(mockConstants.getValue(anyString())).thenReturn("Some string");
 
-        // Use an actual frame but set it invisible
         parentFrame = new Frame();
         parentFrame.setVisible(false);
 
-        commandUnderTest = new OpenCommand(
-                mockPresentation,
-                parentFrame,
-                mockAccessor,
-                mockConstants
-        );
-        commandUnderTest2 = new OpenCommand(
-                mockPresentation,
-                mockFrame,
-                mockAccessor,
-                mockConstants
-        );
+        commandUnderTest = new OpenCommand(mockPresentation, parentFrame, mockAccessor, mockConstants);
+        commandUnderTest2 = new OpenCommand(mockPresentation, mockFrame, mockAccessor, mockConstants);
     }
 
     @Test

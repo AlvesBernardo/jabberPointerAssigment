@@ -1,22 +1,17 @@
 package com.softwarequality.jabberpoint.commands;
 
 import org.junit.jupiter.api.Test;
-import javax.swing.JFrame;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.swing.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AboutBoxTest {
 
-	@Test
-	public void testShow() {
-		// Given
-		JFrame parentFrame = new JFrame();
-
-		// When
-		AboutBox.show(parentFrame);
-
-		// Then
-		// No exception should be thrown
-		assertTrue(true);
-	}
+    @Test
+    public void testShow() {
+        JFrame parentFrame = new JFrame();
+        AboutBox.show(parentFrame);
+        assertTrue(true);
+    }
 }

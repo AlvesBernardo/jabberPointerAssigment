@@ -42,11 +42,11 @@ import java.util.List;
 
     @Override
     public void loadFile(Presentation presentation, String filename) throws IOException {
-<span class="nc" id="L45">        ValidationUtils.checkNotNull(presentation, &quot;Missing presentation in loadFile&quot;);</span>
-<span class="nc" id="L46">        ValidationUtils.checkNotNull(filename, &quot;Missing filename in loadFile&quot;);</span>
+<span class="fc" id="L45">        ValidationUtils.checkNotNull(presentation, &quot;Missing presentation in loadFile&quot;);</span>
+<span class="fc" id="L46">        ValidationUtils.checkNotNull(filename, &quot;Missing filename in loadFile&quot;);</span>
 
         try {
-<span class="nc" id="L49">            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span>
+<span class="fc" id="L49">            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span>
 <span class="nc" id="L50">            Document document = builder.parse(new File(filename));</span>
 <span class="nc" id="L51">            Element doc = document.getDocumentElement();</span>
 <span class="nc" id="L52">            presentation.setTitle(getTitle(doc, SHOWTITLE));</span>
@@ -65,8 +65,8 @@ import java.util.List;
 <span class="nc" id="L65">                Slide slide = slideBuilder.build();</span>
 <span class="nc" id="L66">                presentation.appendSlide(slide);</span>
             }
-<span class="nc" id="L68">        } catch (ParserConfigurationException | SAXException | IOException e) {</span>
-<span class="nc" id="L69">            throw new IOException(&quot;Error loading file: &quot; + filename, e);</span>
+<span class="fc" id="L68">        } catch (ParserConfigurationException | SAXException | IOException e) {</span>
+<span class="fc" id="L69">            throw new IOException(&quot;Error loading file: &quot; + filename, e);</span>
 <span class="nc" id="L70">        } catch (ImageLoadingException e) {</span>
 <span class="nc" id="L71">            throw new RuntimeException(e);</span>
 <span class="nc" id="L72">        }</span>
@@ -95,17 +95,17 @@ import java.util.List;
 
     @Override
     public void saveFile(Presentation presentation, String filename) throws IOException {
-<span class="nc" id="L98">        ValidationUtils.checkNotNull(presentation, &quot;Cannot save presentation if nothing is passed&quot;);</span>
-<span class="nc" id="L99">        ValidationUtils.checkNotNull(filename, &quot;Missing file name to save&quot;);</span>
+<span class="fc" id="L98">        ValidationUtils.checkNotNull(presentation, &quot;Cannot save presentation if nothing is passed&quot;);</span>
+<span class="fc" id="L99">        ValidationUtils.checkNotNull(filename, &quot;Missing file name to save&quot;);</span>
 
-<span class="nc" id="L101">        try (PrintWriter out = new PrintWriter(new FileWriter(filename))) {</span>
-<span class="nc" id="L102">            out.println(&quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;&quot;);</span>
-<span class="nc" id="L103">            out.println(&quot;&lt;!DOCTYPE presentation SYSTEM \&quot;jabberpoint.dtd\&quot;&gt;&quot;);</span>
-<span class="nc" id="L104">            out.println(&quot;&lt;presentation&gt;&quot;);</span>
-<span class="nc" id="L105">            out.print(&quot;&lt;showtitle&gt;&quot;);</span>
-<span class="nc" id="L106">            out.print(presentation.getTitle());</span>
-<span class="nc" id="L107">            out.println(&quot;&lt;/showtitle&gt;&quot;);</span>
-<span class="nc bnc" id="L108" title="All 2 branches missed.">            for (int slideNumber = 0; slideNumber &lt; presentation.getSize(); slideNumber++) {</span>
+<span class="fc" id="L101">        try (PrintWriter out = new PrintWriter(new FileWriter(filename))) {</span>
+<span class="fc" id="L102">            out.println(&quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;&quot;);</span>
+<span class="fc" id="L103">            out.println(&quot;&lt;!DOCTYPE presentation SYSTEM \&quot;jabberpoint.dtd\&quot;&gt;&quot;);</span>
+<span class="fc" id="L104">            out.println(&quot;&lt;presentation&gt;&quot;);</span>
+<span class="fc" id="L105">            out.print(&quot;&lt;showtitle&gt;&quot;);</span>
+<span class="fc" id="L106">            out.print(presentation.getTitle());</span>
+<span class="fc" id="L107">            out.println(&quot;&lt;/showtitle&gt;&quot;);</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">            for (int slideNumber = 0; slideNumber &lt; presentation.getSize(); slideNumber++) {</span>
 <span class="nc" id="L109">                Slide slide = presentation.getSlide(slideNumber);</span>
 <span class="nc" id="L110">                out.println(&quot;&lt;slide&gt;&quot;);</span>
 <span class="nc" id="L111">                out.println(&quot;&lt;title&gt;&quot; + slide.getTitle() + &quot;&lt;/title&gt;&quot;);</span>
@@ -125,8 +125,8 @@ import java.util.List;
 <span class="nc" id="L125">                }</span>
 <span class="nc" id="L126">                out.println(&quot;&lt;/slide&gt;&quot;);</span>
             }
-<span class="nc" id="L128">            out.println(&quot;&lt;/presentation&gt;&quot;);</span>
+<span class="fc" id="L128">            out.println(&quot;&lt;/presentation&gt;&quot;);</span>
         }
-<span class="nc" id="L130">    }</span>
+<span class="fc" id="L130">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

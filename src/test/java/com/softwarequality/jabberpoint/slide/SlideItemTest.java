@@ -18,6 +18,7 @@ class SlideItemTest {
             public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style) {
                 return new Rectangle(); // Default implementation for test purposes
             }
+
             @Override
             public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
                 //Default implementation for test purposes
@@ -46,7 +47,6 @@ class SlideItemTest {
 
             @Override
             public String getText() {
-                // default implementation for test purposes
                 return "Test slide item";
             }
         };
@@ -54,15 +54,15 @@ class SlideItemTest {
         assertTrue(this.slideItem.getSlideComponents().contains(testSlideComponent));
     }
 
-	@Test
-	void givenNullSlideComponentWhenAddComponentThenThrowException() {
-		assertThrows(IllegalArgumentException.class, () -> this.slideItem.addComponent(null));
-	}
+    @Test
+    void givenNullSlideComponentWhenAddComponentThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> this.slideItem.addComponent(null));
+    }
 
-	@Test
-	void givenNullSlideComponentWhenRemoveThenThrowException() {
-		assertThrows(IllegalArgumentException.class, () -> this.slideItem.removeComponent(null));
-	}
+    @Test
+    void givenNullSlideComponentWhenRemoveThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> this.slideItem.removeComponent(null));
+    }
 
     @Test
     void givenLevelWhenSetLevelThenSlideLevelIsSet() {

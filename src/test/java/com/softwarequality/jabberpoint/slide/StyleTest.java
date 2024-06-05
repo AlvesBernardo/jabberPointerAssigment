@@ -13,9 +13,8 @@ class StyleTest {
 
 	@BeforeEach
 	void setUp() {
-		// call createStyles() to populate the styles array
 		Style.createStyles();
-		style = Style.getStyle(1); // get the style for level 1
+		style = Style.getStyle(1);
 	}
 
 	@Test

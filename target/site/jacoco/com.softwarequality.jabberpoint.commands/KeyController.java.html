@@ -30,10 +30,10 @@ public class KeyController extends KeyAdapter {
 
   @Override
   public void keyPressed(KeyEvent keyEvent) {
-<span class="nc" id="L33">    Command command = keyCommands.get(keyEvent.getKeyCode());</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">    if (command != null) {</span>
-<span class="nc" id="L35">      command.execute();</span>
+<span class="fc" id="L33">    Command command = keyCommands.get(keyEvent.getKeyCode());</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">    if (command != null) {</span>
+<span class="fc" id="L35">      command.execute();</span>
     }
-<span class="nc" id="L37">  }</span>
+<span class="fc" id="L37">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

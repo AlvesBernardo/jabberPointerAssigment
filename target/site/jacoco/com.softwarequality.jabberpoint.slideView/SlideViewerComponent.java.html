@@ -97,15 +97,15 @@ public class SlideViewerComponent extends JComponent {
 <span class="fc" id="L97">    graphics.setColor(BGCOLOR);</span>
 <span class="fc" id="L98">    graphics.fillRect(0, 0, getSize().width, getSize().height);</span>
 
-<span class="pc bpc" id="L100" title="2 of 4 branches missed.">    if (presentation.getSlideNumber() &lt; 0 || slide == null) {</span>
+<span class="fc bfc" id="L100" title="All 4 branches covered.">    if (presentation.getSlideNumber() &lt; 0 || slide == null) {</span>
 <span class="fc" id="L101">      return;</span>
     }
 
-<span class="nc" id="L104">    graphics.setFont(labelFont);</span>
-<span class="nc" id="L105">    graphics.setColor(COLOR);</span>
-<span class="nc" id="L106">    graphics.drawString(&quot;Slide &quot; + (1 + presentation.getSlideNumber()) + &quot; of &quot; + presentation.getSize(), XPOS, YPOS);</span>
-<span class="nc" id="L107">    Rectangle area = new Rectangle(0, YPOS, getWidth(), getHeight() - YPOS);</span>
-<span class="nc" id="L108">    slide.draw(graphics, area, this);</span>
-<span class="nc" id="L109">  }</span>
+<span class="fc" id="L104">    graphics.setFont(labelFont);</span>
+<span class="fc" id="L105">    graphics.setColor(COLOR);</span>
+<span class="fc" id="L106">    graphics.drawString(&quot;Slide &quot; + (1 + presentation.getSlideNumber()) + &quot; of &quot; + presentation.getSize(), XPOS, YPOS);</span>
+<span class="fc" id="L107">    Rectangle area = new Rectangle(0, YPOS, getWidth(), getHeight() - YPOS);</span>
+<span class="fc" id="L108">    slide.draw(graphics, area, this);</span>
+<span class="fc" id="L109">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

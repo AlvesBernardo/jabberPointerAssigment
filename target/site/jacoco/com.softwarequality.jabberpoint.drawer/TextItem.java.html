@@ -34,28 +34,28 @@ public class TextItem extends SlideItem {
 <span class="fc" id="L34">  }</span>
 
   public AttributedString getAttributedString(Style style, float scale) {
-<span class="nc" id="L37">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
-<span class="nc" id="L38">    AttributedString attrStr = new AttributedString(getText());</span>
-<span class="nc" id="L39">    attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());</span>
-<span class="nc" id="L40">    return attrStr;</span>
+<span class="fc" id="L37">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="fc" id="L38">    AttributedString attrStr = new AttributedString(getText());</span>
+<span class="fc" id="L39">    attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());</span>
+<span class="fc" id="L40">    return attrStr;</span>
   }
 
   @Override
   public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style style) {
-<span class="nc" id="L45">    validateParameters(graphics, observer, style);</span>
-<span class="nc" id="L46">    List&lt;TextLayout&gt; layouts = getLayouts(graphics, style, scale);</span>
-<span class="nc" id="L47">    return calculateBoundingBox(layouts, style, scale);</span>
+<span class="fc" id="L45">    validateParameters(graphics, observer, style);</span>
+<span class="fc" id="L46">    List&lt;TextLayout&gt; layouts = getLayouts(graphics, style, scale);</span>
+<span class="fc" id="L47">    return calculateBoundingBox(layouts, style, scale);</span>
   }
 
   private Rectangle calculateBoundingBox(List&lt;TextLayout&gt; layouts, Style style, float scale) {
-<span class="nc" id="L51">    int xsize = 0, ysize = (int) (style.getLeading() * scale);</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">    for (TextLayout layout : layouts) {</span>
-<span class="nc" id="L53">      Rectangle2D bounds = layout.getBounds();</span>
-<span class="nc" id="L54">      xsize = Math.max(xsize, (int) bounds.getWidth());</span>
-<span class="nc" id="L55">      ysize += (int) bounds.getHeight();</span>
-<span class="nc" id="L56">      ysize += (int) (layout.getLeading() + layout.getDescent());</span>
-<span class="nc" id="L57">    }</span>
-<span class="nc" id="L58">    return new Rectangle((int) (style.getIndent() * scale), 0, xsize, ysize);</span>
+<span class="fc" id="L51">    int xsize = 0, ysize = (int) (style.getLeading() * scale);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    for (TextLayout layout : layouts) {</span>
+<span class="fc" id="L53">      Rectangle2D bounds = layout.getBounds();</span>
+<span class="fc" id="L54">      xsize = Math.max(xsize, (int) bounds.getWidth());</span>
+<span class="fc" id="L55">      ysize += (int) bounds.getHeight();</span>
+<span class="fc" id="L56">      ysize += (int) (layout.getLeading() + layout.getDescent());</span>
+<span class="fc" id="L57">    }</span>
+<span class="fc" id="L58">    return new Rectangle((int) (style.getIndent() * scale), 0, xsize, ysize);</span>
   }
 
   @Override
@@ -66,19 +66,19 @@ public class TextItem extends SlideItem {
 <span class="nc" id="L66">  }</span>
 
   public List&lt;TextLayout&gt; getLayouts(Graphics graphics, Style style, float scale) {
-<span class="nc" id="L69">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+<span class="fc" id="L69">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
 
-<span class="nc" id="L71">    List&lt;TextLayout&gt; layouts = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L72">    AttributedString attrStr = getAttributedString(style, scale);</span>
-<span class="nc" id="L73">    Graphics2D g2d = (Graphics2D) graphics;</span>
-<span class="nc" id="L74">    FontRenderContext frc = g2d.getFontRenderContext();</span>
-<span class="nc" id="L75">    LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);</span>
-<span class="nc" id="L76">    float wrappingWidth = (SlideConstants.WIDTH - style.getIndent()) * scale;</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">    while (measurer.getPosition() &lt; getText().length()) {</span>
-<span class="nc" id="L78">      TextLayout layout = measurer.nextLayout(wrappingWidth);</span>
-<span class="nc" id="L79">      layouts.add(layout);</span>
-<span class="nc" id="L80">    }</span>
-<span class="nc" id="L81">    return layouts;</span>
+<span class="fc" id="L71">    List&lt;TextLayout&gt; layouts = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L72">    AttributedString attrStr = getAttributedString(style, scale);</span>
+<span class="fc" id="L73">    Graphics2D g2d = (Graphics2D) graphics;</span>
+<span class="fc" id="L74">    FontRenderContext frc = g2d.getFontRenderContext();</span>
+<span class="fc" id="L75">    LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);</span>
+<span class="fc" id="L76">    float wrappingWidth = (SlideConstants.WIDTH - style.getIndent()) * scale;</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">    while (measurer.getPosition() &lt; getText().length()) {</span>
+<span class="fc" id="L78">      TextLayout layout = measurer.nextLayout(wrappingWidth);</span>
+<span class="fc" id="L79">      layouts.add(layout);</span>
+<span class="fc" id="L80">    }</span>
+<span class="fc" id="L81">    return layouts;</span>
   }
 
   @Override
@@ -87,9 +87,9 @@ public class TextItem extends SlideItem {
   }
 
   private void validateParameters(Graphics graphics, ImageObserver observer, Style style) {
-<span class="nc" id="L90">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
-<span class="nc" id="L91">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
-<span class="nc" id="L92">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
-<span class="nc" id="L93">  }</span>
+<span class="fc" id="L90">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+<span class="fc" id="L91">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
+<span class="fc" id="L92">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="fc" id="L93">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

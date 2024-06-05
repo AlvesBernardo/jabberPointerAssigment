@@ -1,10 +1,7 @@
 package com.softwarequality.jabberpoint.slide;
 
-import com.softwarequality.jabberpoint.slide.Slide;
-import com.softwarequality.jabberpoint.slide.SlideBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.softwarequality.jabberpoint.slide.SlideItem;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -19,11 +16,10 @@ class SlideBuilderTest {
         this.slideBuilder = new SlideBuilder();
     }
 
-	@Test
-	void givenNullTitleWhenWithTitleThenThrowException() {
-		assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.withTitle(null));
-	}
-
+    @Test
+    void givenNullTitleWhenWithTitleThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.withTitle(null));
+    }
 
     @Test
     void givenTitleWhenWithTitleThenSlideTitleIsSet() {
@@ -33,10 +29,10 @@ class SlideBuilderTest {
         assertEquals(testTitle, slide.getTitle());
     }
 
-	@Test
-	void givenNullSlideItemWhenAppendItemThenThrowException() {
-		assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.appendItem(null));
-	}
+    @Test
+    void givenNullSlideItemWhenAppendItemThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.appendItem(null));
+    }
 
     @Test
     void givenSlideItemWhenAppendItemThenSlideItemIsAdded() {

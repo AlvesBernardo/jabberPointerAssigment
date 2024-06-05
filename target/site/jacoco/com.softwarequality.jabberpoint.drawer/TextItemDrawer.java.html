@@ -19,23 +19,23 @@ public class TextItemDrawer implements Drawer {
 
   @Override
   public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
-<span class="nc" id="L22">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
-<span class="nc" id="L23">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
-<span class="nc" id="L24">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
+<span class="fc" id="L22">    ValidationUtils.checkNotNull(graphics, &quot;Graphics cannot be null&quot;);</span>
+<span class="fc" id="L23">    ValidationUtils.checkNotNull(style, &quot;Style cannot be null&quot;);</span>
+<span class="fc" id="L24">    ValidationUtils.checkNotNull(observer, &quot;Observer cannot be null&quot;);</span>
 
-<span class="nc" id="L26">    List&lt;TextLayout&gt; layouts = textItem.getLayouts(graphics, style, scale);</span>
-<span class="nc" id="L27">    drawLayouts(x, y, scale, (Graphics2D) graphics, style, layouts);</span>
-<span class="nc" id="L28">  }</span>
+<span class="fc" id="L26">    List&lt;TextLayout&gt; layouts = textItem.getLayouts(graphics, style, scale);</span>
+<span class="fc" id="L27">    drawLayouts(x, y, scale, (Graphics2D) graphics, style, layouts);</span>
+<span class="fc" id="L28">  }</span>
 
   static void drawLayouts(int x, int y, float scale, Graphics2D graphics, Style style, List&lt;TextLayout&gt; layouts) {
-<span class="nc" id="L31">    Point pen = GraphicsUtils.initializePen(x, y, scale, style);</span>
-<span class="nc" id="L32">    graphics.setColor(style.getColor());</span>
+<span class="fc" id="L31">    Point pen = GraphicsUtils.initializePen(x, y, scale, style);</span>
+<span class="fc" id="L32">    graphics.setColor(style.getColor());</span>
 
-<span class="nc bnc" id="L34" title="All 2 branches missed.">    for (TextLayout layout : layouts) {</span>
-<span class="nc" id="L35">      pen.y += (int) layout.getAscent();</span>
-<span class="nc" id="L36">      layout.draw(graphics, pen.x, pen.y);</span>
-<span class="nc" id="L37">      pen.y += (int) layout.getDescent();</span>
-<span class="nc" id="L38">    }</span>
-<span class="nc" id="L39">  }</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">    for (TextLayout layout : layouts) {</span>
+<span class="fc" id="L35">      pen.y += (int) layout.getAscent();</span>
+<span class="fc" id="L36">      layout.draw(graphics, pen.x, pen.y);</span>
+<span class="fc" id="L37">      pen.y += (int) layout.getDescent();</span>
+<span class="fc" id="L38">    }</span>
+<span class="fc" id="L39">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -2,14 +2,14 @@ package com.softwarequality.jabberpoint.slideView;
 
 import com.softwarequality.jabberpoint.presentation.Presentation;
 import com.softwarequality.jabberpoint.slide.Slide;
-import com.softwarequality.jabberpoint.slideView.SlideViewerComponent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 
 class SlideViewerComponentTest {
 
@@ -22,20 +22,17 @@ class SlideViewerComponentTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize SlideViewerComponent with mock objects
         component = new SlideViewerComponent(presentation, frame);
     }
 
     @Test
     void constructor_nullPresentation_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new SlideViewerComponent(null, frame));
+        assertThrows(IllegalArgumentException.class, () -> new SlideViewerComponent(null, frame));
     }
 
     @Test
     void constructor_nullFrame_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new SlideViewerComponent(presentation, null));
+        assertThrows(IllegalArgumentException.class, () -> new SlideViewerComponent(presentation, null));
     }
 
     @Test
@@ -46,8 +43,7 @@ class SlideViewerComponentTest {
 
     @Test
     void setSlide_null_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () ->
-                component.setSlide(null));
+        assertThrows(IllegalArgumentException.class, () -> component.setSlide(null));
     }
 
     @Test

@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class AccessorTest {
 
     @Test
     public void testGetDemoAccessorReturnsDemoPresentationInstance() {
         Accessor accessor = Accessor.getDemoAccessor();
-        assertTrue(accessor instanceof DemoPresentation);
+        assertInstanceOf(DemoPresentation.class, accessor);
     }
 
     @Test
@@ -28,6 +28,7 @@ public class AccessorTest {
             Assertions.fail("Failed to load file", e);
         }
     }
+
     @Test
     void testSaveFileThrowsException() {
         Accessor accessor = Accessor.getDemoAccessor();
