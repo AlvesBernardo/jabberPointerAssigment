@@ -33,3 +33,8 @@ We have also provided a Image with a timestamp so you can see when we noticed th
 ## Usefull command
 Jacoco: To make a new test report type the following command  mvn test jacoco:report
 Sometimes it can be usefully to run mvn clean or mvn clean install -U
+
+
+## Resit
+For the resit the team corrected their class diagram, fixed the testing and deleted dulpicate code.
+
