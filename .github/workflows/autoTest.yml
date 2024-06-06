@@ -21,6 +21,8 @@ jobs:
           java-version: '17'
           cache: maven
 
+      - name: Display Java version
+        run: java -version
 
       - name: Build with Maven
         run: mvn  package --file pom.xml
@@ -30,3 +32,6 @@ jobs:
 
       - name: Test with Maven
         run: mvn -B test --file pom.xml
+
+      - name: List dependencies
+        run: mvn dependency:tree --file pom.xml
