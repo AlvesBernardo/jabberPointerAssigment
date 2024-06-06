@@ -34,6 +34,7 @@ public class SlideViewerComponent extends JComponent {
     setPresentation(presentation);
     labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
     setFrame(frame);
+    new ComponentSlideObserver(this);
   }
 
   public Slide getSlide() {
@@ -43,6 +44,7 @@ public class SlideViewerComponent extends JComponent {
   public void setSlide(Slide slide) {
     ValidationUtils.checkNotNull(slide, "Missing slide in slide view component");
     this.slide = slide;
+    this.observable.notifyObservers(slide);
   }
 
   public void setPresentation(Presentation presentation) {

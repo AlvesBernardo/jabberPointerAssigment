@@ -13,6 +13,6 @@ public class ComponentSlideObserver implements CustomObserver<Slide> {
 
     @Override
     public void update(Slide slide) {
-        System.out.println("Slide updated: " + slide);
+        System.out.println("Slide updated: " + slide.getTitle());
     }
 }
