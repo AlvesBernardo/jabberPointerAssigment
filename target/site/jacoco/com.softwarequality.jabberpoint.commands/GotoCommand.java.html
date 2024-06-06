@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GotoCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MehdiBernardo</a> &gt; <a href="index.source.html" class="el_package">com.softwarequality.jabberpoint.commands</a> &gt; <span class="el_source">GotoCommand.java</span></div><h1>GotoCommand.java</h1><pre class="source lang-java linenums">package com.softwarequality.jabberpoint.commands;
+
+import com.softwarequality.jabberpoint.presentation.Presentation;
+import com.softwarequality.jabberpoint.Constants;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class GotoCommand extends AbstractCommand {
+    private final Frame parent;
+    private final Constants constants;
+
+    public GotoCommand(Presentation presentation, Frame parent, Constants constants) {
+<span class="fc" id="L14">        super(presentation);</span>
+<span class="fc" id="L15">        this.parent = parent;</span>
+<span class="fc" id="L16">        this.constants = constants;</span>
+<span class="fc" id="L17">    }</span>
+
+    @Override
+    public void execute() {
+<span class="fc" id="L21">        String pageNumberStr = requestPageInput();</span>
+
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if(!isPageNumberValid(pageNumberStr)) {</span>
+<span class="fc" id="L24">            showErrorMessage(&quot;Please enter a valid number.&quot;);</span>
+<span class="fc" id="L25">            return;</span>
+        }
+
+<span class="fc" id="L28">        int pageNumber = Integer.parseInt(pageNumberStr);</span>
+
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if(!isPageWithinRange(pageNumber)) {</span>
+<span class="fc" id="L31">            showErrorMessage(&quot;Invalid slide number. Please enter a number between 1 and &quot; + presentation.getSize() + &quot;.&quot;);</span>
+<span class="fc" id="L32">            return;</span>
+        }
+
+<span class="fc" id="L35">        presentation.setSlideNumber(pageNumber - 1);</span>
+<span class="fc" id="L36">    }</span>
+
+    private String requestPageInput() {
+<span class="fc" id="L39">        return JOptionPane.showInputDialog(parent, constants.getValue(&quot;PAGENR&quot;));</span>
+    }
+
+    private boolean isPageNumberValid(String pageNumberStr) {
+<span class="fc" id="L43">        return pageNumberStr.matches(&quot;\\d+&quot;);</span>
+    }
+
+    private boolean isPageWithinRange(int pageNumber) {
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">        return pageNumber &gt; 0 &amp;&amp; pageNumber &lt;= presentation.getSize();</span>
+    }
+
+    private void showErrorMessage(String errorMsg) {
+<span class="fc" id="L51">        JOptionPane.showMessageDialog(parent, errorMsg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

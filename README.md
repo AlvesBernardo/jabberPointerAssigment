@@ -2,7 +2,8 @@
 Follow the below instructions to setup the project in your local development environment.
 ## Prerequisites
 Make sure the following software is installed on your machine:
-Java 17 or higher. You can download Java from Oracle's website.
+Java 17 is the needed Java version due to testing. Since we used mockito to do mock testing it can only run till java 17.
+Code can be ran on higher java version, but **TESTING** can only be ran on JAVA 17 !!!!.
 Maven 3.8.1 (or above). Follow this Google search link to find relevant resources for installing Maven.
 IntelliJ IDEA (preferably 2024.1, Ultimate Edition).
 You can verify your Java and Maven installations by running these commands in your terminal:
@@ -24,3 +25,16 @@ After installing all the dependencies, build the project by opening the terminal
 mvn clean install
 # Deployed Application
 The application's executable JAR file has been uploaded to Google Cloud Services. Please ensure to have the appropriate permissions or credentials to access the application.
+## Test Report
+The team used Jacoco to see how much of the code they have coverd. A total of 76% was covered per jacoco. 
+You can find that report in target/sites. The team also send a zip of the folder. To make sure you can open it. 
+We have also provided a Image with a timestamp so you can see when we noticed the latest test report. 
+
+## Usefull command
+Jacoco: To make a new test report type the following command  mvn test jacoco:report
+Sometimes it can be usefully to run mvn clean or mvn clean install -U
+
+
+## Resit
+For the resit the team corrected their class diagram, fixed the testing and deleted dulpicate code.
+

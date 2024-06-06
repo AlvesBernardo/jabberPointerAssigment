@@ -3,10 +3,10 @@ package com.softwarequality.jabberpoint.slide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.awt.*;
 import java.awt.image.ImageObserver;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class SlideImplementationTest {
     private SlideImplementation slideImplementation;
@@ -67,5 +67,4 @@ class SlideImplementationTest {
         assertTrue(this.slideImplementation.getSlideComponents().contains(testSlideComponent));
     }
 
-    // Write more tests for other public methods in SlideImplementation
 }

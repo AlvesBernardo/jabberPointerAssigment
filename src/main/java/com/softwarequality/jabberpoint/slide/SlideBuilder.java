@@ -1,5 +1,7 @@
 package com.softwarequality.jabberpoint.slide;
 
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+
 public class SlideBuilder {
   private final SlideImplementation slide;
 
@@ -8,17 +10,13 @@ public class SlideBuilder {
   }
 
   public SlideBuilder withTitle(String title) {
-    if (title == null) {
-      throw new IllegalStateException("Missing title in slide builder");
-    }
+    ValidationUtils.checkNotNull(title, "Missing title in slide builder");
     this.slide.setTitle(title);
     return this;
   }
 
   public SlideBuilder appendItem(SlideItem slideItem) {
-    if (slideItem == null) {
-      throw new IllegalStateException("Missing slideItem in slide builder");
-    }
+    ValidationUtils.checkNotNull(slideItem, "Missing slideItem in slide builder");
     this.slide.appendItem(slideItem);
     return this;
   }

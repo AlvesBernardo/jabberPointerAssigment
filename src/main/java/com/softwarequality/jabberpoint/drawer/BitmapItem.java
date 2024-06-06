@@ -1,8 +1,10 @@
 package com.softwarequality.jabberpoint.drawer;
 
-import com.softwarequality.jabberpoint.ImageLoadingException;
+import com.softwarequality.jabberpoint.utils.ImageLoadingException;
 import com.softwarequality.jabberpoint.slide.SlideItem;
 import com.softwarequality.jabberpoint.slide.Style;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -11,8 +13,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class BitmapItem extends SlideItem {
-  protected static final String FILE_NOT_FOUND_MESSAGE = "File ";
-  protected static final String FILE_NOT_FOUND_SUFFIX = " not found";
+  private static final String FILE_NOT_FOUND_MESSAGE = "File ";
+  private static final String FILE_NOT_FOUND_SUFFIX = " not found";
   private BufferedImage bufferedImage;
   private String imageName;
 
@@ -22,76 +24,49 @@ public class BitmapItem extends SlideItem {
     loadImage();
   }
 
-  public BitmapItem() {
-    super(0);
-    try {
-      this.loadImage();
-    } catch (ImageLoadingException e) {
-      e.printStackTrace();
-    }
-  }
-
   public BufferedImage getBufferedImage() {
-    return this.bufferedImage;
+    return bufferedImage;
   }
 
   public void setBufferedImage(BufferedImage bufferedImage) {
-    if (bufferedImage == null) {
-      throw new IllegalArgumentException("Missing buffered image in bitmap");
-    }
+    ValidationUtils.checkNotNull(bufferedImage, "BufferedImage cannot be null");
     this.bufferedImage = bufferedImage;
   }
 
   public String getImageName() {
-    return this.imageName;
+    return imageName;
   }
 
   public void setImageName(String imageName) {
-    if (imageName == null) {
-      throw new IllegalArgumentException("Missing image name in bitMap");
-    }
+    ValidationUtils.checkNotNull(imageName, "Image name cannot be null");
     this.imageName = imageName;
   }
 
-  public Rectangle getBoundingBox(
-          Graphics graphics, ImageObserver observer, float scale, Style style) {
-    if (graphics == null) {
-      throw new RuntimeException("Missing graphic in draw or BitMap");
-    }
-    if (style == null) {
-      throw new RuntimeException("Missing style in draw or BitMap");
-    }
-    if (observer == null) {
-      throw new RuntimeException("Missing observer in draw or BitMap");
-    }
-
+  @Override
+  public Rectangle getBoundingBox(Graphics graphics, ImageObserver observer, float scale, Style style) {
+    validateParameters(graphics, observer, style);
     return new Rectangle(
             (int) (style.getIndent() * scale),
             0,
             (int) (bufferedImage.getWidth(observer) * scale),
-            (int) (style.getLeading() * scale) + (int) (bufferedImage.getHeight(observer) * scale));
+            (int) (style.getLeading() * scale) + (int) (bufferedImage.getHeight(observer) * scale)
+    );
   }
 
-  public void draw(
-          int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
-    if (graphics == null) {
-      throw new RuntimeException("Missing graphic in draw or BitMap Drawer");
-    }
-    if (style == null) {
-      throw new RuntimeException("Missing style in draw or BitMap Drawer");
-    }
-    if (observer == null) {
-      throw new RuntimeException("Missing observer in draw or BitMap Drawer");
-    }
+  @Override
+  public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver observer) {
+    validateParameters(graphics, observer, style);
     int width = x + (int) (style.getIndent() * scale);
     int height = y + (int) (style.getLeading() * scale);
+
     graphics.drawImage(
             bufferedImage,
             width,
             height,
             (int) (bufferedImage.getWidth(observer) * scale),
             (int) (bufferedImage.getHeight(observer) * scale),
-            observer);
+            observer
+    );
   }
 
   @Override
@@ -104,16 +79,17 @@ public class BitmapItem extends SlideItem {
     return "BitmapItem[" + getLevel() + "," + imageName + "]";
   }
 
-  public BufferedImage getImage() {
-    return this.bufferedImage;
-  }
-
   private void loadImage() throws ImageLoadingException {
     try {
       bufferedImage = ImageIO.read(new File(imageName));
     } catch (IOException e) {
-      throw new ImageLoadingException(
-              FILE_NOT_FOUND_MESSAGE + imageName + FILE_NOT_FOUND_SUFFIX, e);
+      throw new ImageLoadingException(FILE_NOT_FOUND_MESSAGE + imageName + FILE_NOT_FOUND_SUFFIX, e);
     }
+  }
+
+  private void validateParameters(Graphics graphics, ImageObserver observer, Style style) {
+    ValidationUtils.checkNotNull(graphics, "Graphics cannot be null");
+    ValidationUtils.checkNotNull(observer, "Observer cannot be null");
+    ValidationUtils.checkNotNull(style, "Style cannot be null");
   }
 }

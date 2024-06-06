@@ -1,10 +1,7 @@
 package com.softwarequality.jabberpoint.slide;
 
-import com.softwarequality.jabberpoint.slide.Slide;
-import com.softwarequality.jabberpoint.slide.SlideBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.softwarequality.jabberpoint.slide.SlideItem;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -21,7 +18,7 @@ class SlideBuilderTest {
 
     @Test
     void givenNullTitleWhenWithTitleThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideBuilder.withTitle(null));
+        assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.withTitle(null));
     }
 
     @Test
@@ -34,7 +31,7 @@ class SlideBuilderTest {
 
     @Test
     void givenNullSlideItemWhenAppendItemThenThrowException() {
-        assertThrows(IllegalStateException.class, () -> this.slideBuilder.appendItem(null));
+        assertThrows(IllegalArgumentException.class, () -> this.slideBuilder.appendItem(null));
     }
 
     @Test

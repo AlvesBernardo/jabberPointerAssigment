@@ -1,12 +1,14 @@
 package com.softwarequality.jabberpoint.slideView;
 
-import com.softwarequality.jabberpoint.keyController.KeyController;
-import com.softwarequality.jabberpoint.menuControl.MenuController;
-import com.softwarequality.jabberpoint.presentation.PresentationFacade;
+import com.softwarequality.jabberpoint.commands.KeyController;
+import com.softwarequality.jabberpoint.commands.MenuController;
+import com.softwarequality.jabberpoint.presentation.Presentation;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.*;
 
 public class SlideViewerFrame extends JFrame {
   public static final int WIDTH = 1200;
@@ -14,26 +16,24 @@ public class SlideViewerFrame extends JFrame {
   private static final long serialVersionUID = 3227L;
   private static final String JABTITLE = "Jabberpoint 1.6 - OU";
 
-  public SlideViewerFrame(String title, PresentationFacade presentationFacade) {
+  public SlideViewerFrame(String title, Presentation presentation) {
     super(title);
-    SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentationFacade, this);
-    presentationFacade.setShowView(slideViewerComponent);
-    setupWindow(slideViewerComponent, presentationFacade);
+    ValidationUtils.checkNotNull(presentation, "Missing presentation for SlideViewerFrame");
+    SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
+    presentation.setShowView(slideViewerComponent);
+    setupWindow(slideViewerComponent, presentation);
   }
 
-
-  public void setupWindow(
-      SlideViewerComponent slideViewerComponent, PresentationFacade presentationFacade) {
+  public void setupWindow(SlideViewerComponent slideViewerComponent, Presentation presentation) {
     setTitle(JABTITLE);
-    addWindowListener(
-        new WindowAdapter() {
-          public void windowClosing(WindowEvent e) {
-            System.exit(0);
-          }
-        });
+    addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        System.exit(0);
+      }
+    });
     getContentPane().add(slideViewerComponent);
-    addKeyListener(new KeyController(presentationFacade));
-    setMenuBar(new MenuController(this, presentationFacade));
+    addKeyListener(new KeyController(presentation));
+    setMenuBar(new MenuController(this, presentation));
     setSize(new Dimension(WIDTH, HEIGHT));
     setVisible(true);
   }
