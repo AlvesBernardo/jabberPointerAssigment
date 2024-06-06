@@ -21,6 +21,12 @@ jobs:
           java-version: '17'
           cache: maven
 
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Run tests with xvfb
+        run: xvfb-run -a mvn -B test --file pom.xml
+
       - name: Display Java version
         run: java -version
 
