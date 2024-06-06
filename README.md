@@ -4,6 +4,7 @@ Follow the below instructions to setup the project in your local development env
 Make sure the following software is installed on your machine:
 Java 17 is the needed Java version due to testing. Since we used mockito to do mock testing it can only run till java 17.
 Code can be ran on higher java version, but **TESTING** can only be ran on JAVA 17 !!!!.
+MAVEN IS A MUST HAVE
 Maven 3.8.1 (or above). Follow this Google search link to find relevant resources for installing Maven.
 IntelliJ IDEA (preferably 2024.1, Ultimate Edition).
 You can verify your Java and Maven installations by running these commands in your terminal:
