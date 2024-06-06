@@ -1,6 +1,7 @@
 package com.softwarequality.jabberpoint.drawer;
 
 import com.softwarequality.jabberpoint.slide.Style;
+
 import java.awt.*;
 import java.awt.image.ImageObserver;
 

@@ -9,10 +9,6 @@ class TextItemDrawerTest {
 
     private TextItemDrawer textItemDrawer;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void ConstructorThrowError() {
         assertThrows(IllegalArgumentException.class, () -> {

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SlideViewerComponent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MehdiBernardo</a> &gt; <a href="index.source.html" class="el_package">com.softwarequality.jabberpoint.slideView</a> &gt; <span class="el_source">SlideViewerComponent.java</span></div><h1>SlideViewerComponent.java</h1><pre class="source lang-java linenums">package com.softwarequality.jabberpoint.slideView;
+
+import com.softwarequality.jabberpoint.presentation.Presentation;
+import com.softwarequality.jabberpoint.slide.Slide;
+import com.softwarequality.jabberpoint.slide.SlideConstants;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+import com.softwarequality.jabberpoint.utils.CustomObservable;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class SlideViewerComponent extends JComponent {
+  private static final long serialVersionUID = 227L;
+<span class="fc" id="L14">  private static final Color BGCOLOR = Color.white;</span>
+<span class="fc" id="L15">  private static final Color COLOR = Color.black;</span>
+  private static final String FONTNAME = &quot;Dialog&quot;;
+  private static final int FONTSTYLE = Font.BOLD;
+  private static final int FONTHEIGHT = 10;
+  private static final int XPOS = 1100;
+  private static final int YPOS = 20;
+
+<span class="fc" id="L22">  private final CustomObservable&lt;Slide&gt; observable = new CustomObservable&lt;&gt;();</span>
+
+  private Slide slide;
+  private Font labelFont;
+  private Presentation presentation;
+  private JFrame frame;
+
+<span class="fc" id="L29">  public SlideViewerComponent(Presentation presentation, JFrame frame) {</span>
+<span class="fc" id="L30">    ValidationUtils.checkNotNull(presentation, &quot;Missing presentation in slide view component&quot;);</span>
+<span class="fc" id="L31">    ValidationUtils.checkNotNull(frame, &quot;Missing frame in slide view component&quot;);</span>
+
+<span class="fc" id="L33">    setBackground(BGCOLOR);</span>
+<span class="fc" id="L34">    setPresentation(presentation);</span>
+<span class="fc" id="L35">    labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);</span>
+<span class="fc" id="L36">    setFrame(frame);</span>
+<span class="fc" id="L37">    new ComponentSlideObserver(this);</span>
+<span class="fc" id="L38">  }</span>
+
+  public Slide getSlide() {
+<span class="fc" id="L41">    return this.slide;</span>
+  }
+
+  public void setSlide(Slide slide) {
+<span class="fc" id="L45">    ValidationUtils.checkNotNull(slide, &quot;Missing slide in slide view component&quot;);</span>
+<span class="fc" id="L46">    this.slide = slide;</span>
+<span class="fc" id="L47">    this.observable.notifyObservers(slide);</span>
+<span class="fc" id="L48">  }</span>
+
+  public void setPresentation(Presentation presentation) {
+<span class="fc" id="L51">    ValidationUtils.checkNotNull(presentation, &quot;Missing presentation in slide view component&quot;);</span>
+<span class="fc" id="L52">    this.presentation = presentation;</span>
+<span class="fc" id="L53">  }</span>
+
+  public JFrame getFrame() {
+<span class="fc" id="L56">    return this.frame;</span>
+  }
+
+  public void setFrame(JFrame frame) {
+<span class="fc" id="L60">    ValidationUtils.checkNotNull(frame, &quot;Missing frame in slide view component&quot;);</span>
+<span class="fc" id="L61">    this.frame = frame;</span>
+<span class="fc" id="L62">  }</span>
+
+  public CustomObservable&lt;Slide&gt; getObservable() {
+<span class="fc" id="L65">    return this.observable;</span>
+  }
+
+  @Override
+  public Dimension getPreferredSize() {
+<span class="nc" id="L70">    return new Dimension(SlideConstants.WIDTH, SlideConstants.HEIGHT);</span>
+  }
+
+  public Presentation getPresentation() {
+<span class="fc" id="L74">    return presentation;</span>
+  }
+
+  public void update(Presentation presentation, Slide data) {
+<span class="fc" id="L78">    ValidationUtils.checkNotNull(presentation, &quot;Missing presentation in slide view component&quot;);</span>
+
+<span class="fc" id="L80">    this.presentation = presentation;</span>
+<span class="fc" id="L81">    this.slide = data;</span>
+<span class="fc" id="L82">    this.observable.notifyObservers(slide);</span>
+<span class="fc" id="L83">    repaint();</span>
+<span class="fc" id="L84">    frame.setTitle(presentation.getTitle());</span>
+<span class="fc" id="L85">  }</span>
+
+  @Override
+  protected void paintComponent(Graphics graphics) {
+<span class="fc" id="L89">    super.paintComponent(graphics);</span>
+
+<span class="fc" id="L91">    ValidationUtils.checkNotNull(graphics, &quot;Missing graphics in component&quot;);</span>
+
+<span class="fc" id="L93">    graphics.setColor(BGCOLOR);</span>
+<span class="fc" id="L94">    graphics.fillRect(0, 0, getSize().width, getSize().height);</span>
+
+<span class="fc bfc" id="L96" title="All 4 branches covered.">    if (presentation.getSlideNumber() &lt; 0 || slide == null) {</span>
+<span class="fc" id="L97">      return;</span>
+    }
+
+<span class="fc" id="L100">    graphics.setFont(labelFont);</span>
+<span class="fc" id="L101">    graphics.setColor(COLOR);</span>
+<span class="fc" id="L102">    graphics.drawString(&quot;Slide &quot; + (1 + presentation.getSlideNumber()) + &quot; of &quot; + presentation.getSize(), XPOS, YPOS);</span>
+<span class="fc" id="L103">    Rectangle area = new Rectangle(0, YPOS, getWidth(), getHeight() - YPOS);</span>
+<span class="fc" id="L104">    slide.draw(graphics, area, this);</span>
+<span class="fc" id="L105">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

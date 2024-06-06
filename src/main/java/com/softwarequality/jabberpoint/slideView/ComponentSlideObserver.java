@@ -1,24 +1,18 @@
 package com.softwarequality.jabberpoint.slideView;
 
-import com.softwarequality.jabberpoint.presentation.PresentationFacade;
 import com.softwarequality.jabberpoint.slide.Slide;
+import com.softwarequality.jabberpoint.utils.ValidationUtils;
+import com.softwarequality.jabberpoint.utils.CustomObserver;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class ComponentSlideObserver {
-
-    private final SlideViewerComponent slideViewerComponent;
+public class ComponentSlideObserver implements CustomObserver<Slide> {
 
     public ComponentSlideObserver(SlideViewerComponent slideViewerComponent) {
-        if (slideViewerComponent == null) {
-            throw new IllegalStateException("Missing slide viewer component in observer");
-        }
-        this.slideViewerComponent = slideViewerComponent;
+        ValidationUtils.checkNotNull(slideViewerComponent, "Missing slide viewer component in observer");
+        slideViewerComponent.getObservable().addObserver(this);
     }
 
-    public void accept(Slide newSlide) {
-        PresentationFacade presentation = slideViewerComponent.getPresentation();
-        slideViewerComponent.update(presentation, newSlide);
+    @Override
+    public void update(Slide slide) {
+        System.out.println("Slide updated: " + slide.getTitle());
     }
 }
