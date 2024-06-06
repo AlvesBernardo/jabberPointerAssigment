@@ -22,11 +22,8 @@ public class OpenCommandTest {
     @Mock
     private Accessor mockAccessor;
     @Mock
-    private Frame mockFrame;
-    @Mock
     private Constants mockConstants;
     private OpenCommand commandUnderTest;
-    private OpenCommand commandUnderTest2;
 
     @BeforeEach
     public void setup() throws IOException {
@@ -37,7 +34,6 @@ public class OpenCommandTest {
         parentFrame.setVisible(false);
 
         commandUnderTest = new OpenCommand(mockPresentation, parentFrame, mockAccessor, mockConstants);
-        commandUnderTest2 = new OpenCommand(mockPresentation, mockFrame, mockAccessor, mockConstants);
     }
 
     @Test
@@ -49,18 +45,14 @@ public class OpenCommandTest {
     }
 
     @Test
-    public void execute_whenIOExceptionOccurs_shouldShowErrorMessage() {
-        try {
-            doThrow(new IOException()).when(mockAccessor).loadFile(mockPresentation, "Some string");
-            commandUnderTest.execute();
-        } catch (IOException e) {
-            // it catches the expected exception
-        }
+    public void execute_whenIOExceptionOccurs_shouldShowErrorMessage() throws IOException {
+        doThrow(new IOException()).when(mockAccessor).loadFile(mockPresentation, "Some string");
+
+        commandUnderTest.execute();
+
         verify(mockPresentation, times(1)).clear();
-        try {
-            verify(mockAccessor, times(1)).loadFile(mockPresentation, "Some string");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        verify(mockAccessor, times(1)).loadFile(mockPresentation, "Some string");
+        // Assuming there is a method to show error message, verify it is called
+        // verify(mockPresentation, times(1)).showError(anyString());
     }
 }

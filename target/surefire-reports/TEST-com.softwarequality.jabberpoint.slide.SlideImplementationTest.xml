@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Microsoft\jdk-17.0.10.7-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\berna\AppData\Local\Temp\surefire7382569922411990448\surefirebooter6079795789327303332.jar C:\Users\berna\AppData\Local\Temp\surefire7382569922411990448 2024-06-05T22-05-55_927-jvmRun1 surefire16900013297324008579tmp surefire_013497009472018366574tmp"/>
+    <property name="sun.java.command" value="C:\Users\berna\AppData\Local\Temp\surefire10285610403557214834\surefirebooter8547601534909209278.jar C:\Users\berna\AppData\Local\Temp\surefire10285610403557214834 2024-06-06T14-58-30_526-jvmRun1 surefire5830159024533789178tmp surefire_03627703732143414071tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\berna\Documents\University Dokuments\SoftwareQuality\jabberPointerAssigment\target\test-classes;C:\Users\berna\Documents\University Dokuments\SoftwareQuality\jabberPointerAssigment\target\classes;C:\Users\berna\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\berna\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;C:\Users\berna\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\berna\.m2\repository\org\mockito\mockito-core\5.3.1\mockito-core-5.3.1.jar;C:\Users\berna\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\berna\.m2\repository\org\mockito\mockito-junit-jupiter\5.3.1\mockito-junit-jupiter-5.3.1.jar;C:\Users\berna\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\berna\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\berna\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\berna\.m2\repository\org\json\json\20210307\json-20210307.jar;C:\Users\berna\.m2\repository\com\googlecode\json-simple\json-simple\1.1.1\json-simple-1.1.1.jar;C:\Users\berna\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\berna\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Users\berna\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\berna\.m2\repository\net\bytebuddy\byte-buddy\1.14.0\byte-buddy-1.14.0.jar;C:\Users\berna\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.0\byte-buddy-agent-1.14.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\berna\AppData\Local\Temp\surefire7382569922411990448\surefirebooter6079795789327303332.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\berna\AppData\Local\Temp\surefire10285610403557214834\surefirebooter8547601534909209278.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.10+7-LTS"/>
@@ -59,5 +59,5 @@
   </properties>
   <testcase name="givenTitleWhenSetTitleThenSlideTitleIsSet" classname="com.softwarequality.jabberpoint.slide.SlideImplementationTest" time="0"/>
   <testcase name="givenSlideComponentWhenAppendItemThenSlideComponentIsAdded" classname="com.softwarequality.jabberpoint.slide.SlideImplementationTest" time="0"/>
-  <testcase name="givenNullSlideItemWhenAppendItemThenThrowException" classname="com.softwarequality.jabberpoint.slide.SlideImplementationTest" time="0"/>
+  <testcase name="givenNullSlideItemWhenAppendItemThenThrowException" classname="com.softwarequality.jabberpoint.slide.SlideImplementationTest" time="0.001"/>
 </testsuite>
