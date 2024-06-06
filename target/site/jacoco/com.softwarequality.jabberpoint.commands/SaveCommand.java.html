@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SaveCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MehdiBernardo</a> &gt; <a href="index.source.html" class="el_package">com.softwarequality.jabberpoint.commands</a> &gt; <span class="el_source">SaveCommand.java</span></div><h1>SaveCommand.java</h1><pre class="source lang-java linenums">package com.softwarequality.jabberpoint.commands;
+
+import com.softwarequality.jabberpoint.presentation.Presentation;
+import com.softwarequality.jabberpoint.Accessor;
+import com.softwarequality.jabberpoint.Constants;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+
+public class SaveCommand extends AbstractCommand {
+    private final Frame parent;
+    private final Accessor accessor;
+    private final Constants constants;
+
+    public SaveCommand(Presentation presentation, Frame parent, Accessor accessor, Constants constants) {
+<span class="fc" id="L17">        super(presentation);</span>
+<span class="fc" id="L18">        this.parent = parent;</span>
+<span class="fc" id="L19">        this.accessor = accessor;</span>
+<span class="fc" id="L20">        this.constants = constants;</span>
+<span class="fc" id="L21">    }</span>
+
+    public Frame getParent() {
+<span class="fc" id="L24">        return parent;</span>
+    }
+
+    public Accessor getAccessor() {
+<span class="fc" id="L28">        return accessor;</span>
+    }
+
+    public Constants getConstants() {
+<span class="fc" id="L32">        return constants;</span>
+    }
+
+
+    @Override
+    public void execute() {
+        try {
+<span class="fc" id="L39">            accessor.saveFile(presentation, constants.getValue(&quot;SAVEFILE&quot;));</span>
+<span class="fc" id="L40">        } catch (IOException exc) {</span>
+<span class="fc" id="L41">            displayErrorMessage(exc);</span>
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">    }</span>
+
+    public void displayErrorMessage(Exception exc) {
+<span class="nc" id="L46">        JOptionPane.showMessageDialog(parent, constants.getValue(&quot;IOEX&quot;) + exc, constants.getValue(&quot;SAVEERR&quot;), JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L47">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
