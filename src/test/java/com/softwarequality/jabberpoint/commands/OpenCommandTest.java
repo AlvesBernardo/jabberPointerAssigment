@@ -4,7 +4,6 @@ import com.softwarequality.jabberpoint.Accessor;
 import com.softwarequality.jabberpoint.Constants;
 import com.softwarequality.jabberpoint.presentation.Presentation;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,7 +14,7 @@ import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-@Disabled
+
 public class OpenCommandTest {
     @Mock
     private Presentation mockPresentation;
