@@ -27,6 +27,9 @@ jobs:
       - name: Run tests with xvfb
         run: xvfb-run -a mvn -B test --file pom.xml
 
+      - name: Test with Maven (detailed)
+        run: mvn -B test -e --file pom.xml
+
       - name: Display Java version
         run: java -version
 
@@ -41,3 +44,6 @@ jobs:
 
       - name: List dependencies
         run: mvn dependency:tree --file pom.xml
+
+      - name: Clear Maven Cache
+        run: mvn clean --file pom.xml
