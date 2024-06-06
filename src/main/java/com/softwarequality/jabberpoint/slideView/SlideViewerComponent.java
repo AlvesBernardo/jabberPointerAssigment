@@ -4,10 +4,10 @@ import com.softwarequality.jabberpoint.presentation.Presentation;
 import com.softwarequality.jabberpoint.slide.Slide;
 import com.softwarequality.jabberpoint.slide.SlideConstants;
 import com.softwarequality.jabberpoint.utils.ValidationUtils;
+import com.softwarequality.jabberpoint.utils.CustomObservable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Observable;
 
 public class SlideViewerComponent extends JComponent {
   private static final long serialVersionUID = 227L;
@@ -19,28 +19,23 @@ public class SlideViewerComponent extends JComponent {
   private static final int XPOS = 1100;
   private static final int YPOS = 20;
 
-  private final Observable observable = new Observable() {
-    @Override
-    public void notifyObservers() {
-      setChanged();
-      super.notifyObservers();
-    }
-  };
+  private final CustomObservable<Slide> observable = new CustomObservable<>();
 
   private Slide slide;
   private Font labelFont;
   private Presentation presentation;
   private JFrame frame;
 
-    public SlideViewerComponent(Presentation presentation, JFrame frame) {
-      ValidationUtils.checkNotNull(presentation, "Missing presentation in slide view component");
-      ValidationUtils.checkNotNull(frame, "Missing frame in slide view component");
+  public SlideViewerComponent(Presentation presentation, JFrame frame) {
+    ValidationUtils.checkNotNull(presentation, "Missing presentation in slide view component");
+    ValidationUtils.checkNotNull(frame, "Missing frame in slide view component");
 
-      setBackground(BGCOLOR);
-      setPresentation(presentation);
-      labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
-      setFrame(frame);
-    }
+    setBackground(BGCOLOR);
+    setPresentation(presentation);
+    labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
+    setFrame(frame);
+    new ComponentSlideObserver(this);
+  }
 
   public Slide getSlide() {
     return this.slide;
@@ -49,6 +44,7 @@ public class SlideViewerComponent extends JComponent {
   public void setSlide(Slide slide) {
     ValidationUtils.checkNotNull(slide, "Missing slide in slide view component");
     this.slide = slide;
+    this.observable.notifyObservers(slide);
   }
 
   public void setPresentation(Presentation presentation) {
@@ -65,7 +61,7 @@ public class SlideViewerComponent extends JComponent {
     this.frame = frame;
   }
 
-  public Observable getObservable() {
+  public CustomObservable<Slide> getObservable() {
     return this.observable;
   }
 
